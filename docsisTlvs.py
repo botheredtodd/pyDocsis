@@ -130,7 +130,7 @@ DocsisTlvs["24"]["subTlvs"] = []
 DocsisTlvs["25"] = {}
 DocsisTlvs["25"]["description"] = "DsServiceFlow"
 DocsisTlvs["25"]["hex"] = "19"
-DocsisTlvs["25"]["valueType"] = "00"
+DocsisTlvs["25"]["valueType"] = "s"
 DocsisTlvs["25"]["subTlvs"] = []
 
 DocsisTlvs["26"] = {}
@@ -151,7 +151,29 @@ DocsisTlvs["29"]["hex"] = "1d"
 DocsisTlvs["29"]["valueType"] = "uchar"
 DocsisTlvs["29"]["subTlvs"] = []
 
+DocsisTlvs["33"] = {}
+DocsisTlvs["33"]["description"] = "CoSignerCVCData"
+DocsisTlvs["33"]["hex"] = "21"
+DocsisTlvs["33"]["valueType"] = "hexstr"
+DocsisTlvs["33"]["subTlvs"] = []
 
+DocsisTlvs["43"] = {}
+DocsisTlvs["43"]["description"] = "VendorSpecific"
+DocsisTlvs["43"]["hex"] = "2b"
+DocsisTlvs["43"]["valueType"] = "s"
+DocsisTlvs["43"]["subTlvs"] = []
+
+DocsisTlvs["60"] = {}
+DocsisTlvs["60"]["description"] = "UpstreamDropPacketClassification"
+DocsisTlvs["60"]["hex"] = "3c"
+DocsisTlvs["60"]["valueType"] = "s"
+DocsisTlvs["60"]["subTlvs"] = []
+
+DocsisTlvs["202"] = {}
+DocsisTlvs["202"]["description"] = "eRouter"
+DocsisTlvs["202"]["hex"] = "ca"
+DocsisTlvs["202"]["valueType"] = "s"
+DocsisTlvs["202"]["subTlvs"] = []
 
 ### tlv4
 d4subs = {}
@@ -474,3 +496,74 @@ d5subs["46"]["valueType"] = "uchar"
 d5subs["46"]["subTlvs"] = []
 
 DocsisTlvs["05"]["subTlvs"] = d5subs
+
+d17subs = {}
+DocsisTlvs["17"]["subTlvs"] = d17subs
+
+d22subs = {}
+d22subs["01"] = "22.1 ClassifierRef"
+d22subs["03"] = "22.3 ServiceFlowRef"
+d22subs["05"] = "25.5 RulePriority"
+d22subs["06"] = "22.6 ActivationState"
+d22subs["09"] = "22.9 IpPacketClassifier"
+d22_9subs = {}
+d22_9subs["01"] = "22.9.1 IpTos"
+d22_9subs["02"] = "22.9.2 IpProto"
+d22_9subs["03"] = "22.9.3 IpSrcAddr"
+d22_9subs["07"] = "22.9.7 SrcPortStart"
+d22_9subs["08"] = "22.9.8 SrcPortEnd"
+d22_9subs["09"] = "22.9.9 DstPortStart"
+d22_9subs["0a"] = "22.9.10 DstPortEnd"
+d22subs["09"]["subTlvs"] = d22_9subs
+DocsisTlvs["22"]["subTlvs"] = d22subs
+
+d23subs = {}
+d23subs["01"] = "23.1 ClassifierRef"
+d23subs["03"] = "23.3 ServiceFlowRef"
+d23subs["05"] = "23.5 RulePriority"
+d23subs["06"] = "23.6 ActivationState"
+d23subs["09"] = "23.9 IpPacketClassifier"
+d23_9subs["01"] = "23.9.1 IpTos"
+d23_9subs["02"] = "23.9.2 IpProto"
+d23_9subs["03"] = "23.9.3 IpSrcAddr"
+d23_9subs["04"] = "23.9.4 IpSrcMask"
+d23_9subs["07"] = "23.9.7 SrcPortStart"
+d23_9subs["08"] = "23.9.8 SrcPortEnd"
+d23_9subs["09"] = "23.9.9 DstPortStart"
+d23_9subs["0a"] = "23.9.10 DstPortEnd"
+d23subs["09"]["subTlvs"] = d23_9subs
+DocsisTlvs["23"]["subTlvs"] = d23subs
+
+d24subs = {}
+d24subs["01"] = "24.1 UsServiceFlowRef"
+d24subs["06"] = "24.6 QosParamSetType"
+d24subs["07"] = "24.7 TrafficPriority"
+d24subs["08"] = "24.8 MaxRateSustained"
+d24subs["09"] = "24.9 MaxTrafficBurst"
+d24subs["0a"] = "24.10 MinReservedRate"
+d24subs["0b"] = "24.11 MinResPacketSize"
+d24subs["0c"] = "24.12 ActQosParamsTimeout"
+d24subs["0d"] = "24.13 AdmQosParamsTimeout"
+d24subs["0e"] = "24.14 MaxConcatenatedBurst"
+d24subs["0f"] = "24.15 SchedulingType"
+d24subs["10"] = "24.16 RequestOrTxPolicy"
+d24subs["11"] = "24.17 NominalPollInterval"
+d24subs["12"] = "24.18 ActQosParamsTimeout"
+DocsisTlvs["24"]["subTlvs"] = d24subs
+
+d25subs = {}
+d25subs["01"] = "24.1 UsServiceFlowRef"
+d25subs["06"] = "24.6 QosParamSetType"
+d25subs["07"] = "24.7 TrafficPriority"
+d25subs["08"] = "24.8 MaxRateSustained"
+d25subs["09"] = "24.9 MaxTrafficBurst"
+d25subs["0a"] = "24.10 MinReservedRate"
+d25subs["0b"] = "24.11 MinResPacketSize"
+d25subs["0c"] = "24.12 ActQosParamsTimeout"
+d25subs["0d"] = "24.13 AdmQosParamsTimeout"
+d25subs["0e"] = "24.14 MaxConcatenatedBurst"
+d25subs["0f"] = "24.15 SchedulingType"
+d25subs["10"] = "24.16 RequestOrTxPolicy"
+d25subs["11"] = "24.17 NominalPollInterval"
+d25subs["12"] = "24.18 ActQosParamsTimeout"
+DocsisTlvs["25"]["subTlvs"] = d25subs
