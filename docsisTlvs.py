@@ -5,31 +5,74 @@ DocsisTlvs["00"] = {}
 DocsisTlvs["00"]["description"] = "/* Pad */"
 DocsisTlvs["00"]["hex"] = "00"
 DocsisTlvs["00"]["valueType"] = "00"
-DocsisTlvs["00"]["subTlvs"] = []
+DocsisTlvs["00"]["subTlvs"] = {}
 
 DocsisTlvs["01"] = {}
 DocsisTlvs["01"]["description"] = "DownstreamFrequency"
 DocsisTlvs["01"]["hex"] = "01"
 DocsisTlvs["01"]["valueType"] = "uint"
-DocsisTlvs["01"]["subTlvs"] = []
+DocsisTlvs["01"]["subTlvs"] = {}
 
 DocsisTlvs["02"] = {}
 DocsisTlvs["02"]["description"] = "UpstreamChannelId"
 DocsisTlvs["02"]["hex"] = "02"
 DocsisTlvs["02"]["valueType"] = "uchar"
-DocsisTlvs["02"]["subTlvs"] = []
+DocsisTlvs["02"]["subTlvs"] = {}
 
 DocsisTlvs["03"] = {}
 DocsisTlvs["03"]["description"] = "NetworkAccess"
 DocsisTlvs["03"]["hex"] = "03"
 DocsisTlvs["03"]["valueType"] = "uchar"
-DocsisTlvs["03"]["subTlvs"] = []
+DocsisTlvs["03"]["subTlvs"] = {}
 
 DocsisTlvs["04"] = {}
 DocsisTlvs["04"]["description"] = "ClassOfService"
 DocsisTlvs["04"]["hex"] = "04"
 DocsisTlvs["04"]["valueType"] = "s"
-DocsisTlvs["04"]["subTlvs"] = []
+DocsisTlvs["04"]["subTlvs"] = {}
+
+DocsisTlvs["04"]["subTlvs"]["01"] = {}
+DocsisTlvs["04"]["subTlvs"]["01"]["description"] = "ClassID"
+DocsisTlvs["04"]["subTlvs"]["01"]["hex"] = "01"
+DocsisTlvs["04"]["subTlvs"]["01"]["valueType"] = "uchar"
+DocsisTlvs["04"]["subTlvs"]["01"]["subTlvs"] = []
+
+DocsisTlvs["04"]["subTlvs"]["02"] = {}
+DocsisTlvs["04"]["subTlvs"]["02"]["description"] = "MaxRateDown"
+DocsisTlvs["04"]["subTlvs"]["02"]["hex"] = "02"
+DocsisTlvs["04"]["subTlvs"]["02"]["valueType"] = "uint"
+DocsisTlvs["04"]["subTlvs"]["02"]["subTlvs"] = []
+
+DocsisTlvs["04"]["subTlvs"]["03"] = {}
+DocsisTlvs["04"]["subTlvs"]["03"]["description"] = "MaxRateUp"
+DocsisTlvs["04"]["subTlvs"]["03"]["hex"] = "03"
+DocsisTlvs["04"]["subTlvs"]["03"]["valueType"] = "uint"
+DocsisTlvs["04"]["subTlvs"]["03"]["subTlvs"] = []
+
+DocsisTlvs["04"]["subTlvs"]["04"] = {}
+DocsisTlvs["04"]["subTlvs"]["04"]["description"] = "PriorityUp"
+DocsisTlvs["04"]["subTlvs"]["04"]["hex"] = "04"
+DocsisTlvs["04"]["subTlvs"]["04"]["valueType"] = "uchar"
+DocsisTlvs["04"]["subTlvs"]["04"]["subTlvs"] = []
+
+DocsisTlvs["04"]["subTlvs"]["05"] = {}
+DocsisTlvs["04"]["subTlvs"]["05"]["description"] = "GuaranteedUp"
+DocsisTlvs["04"]["subTlvs"]["05"]["hex"] = "05"
+DocsisTlvs["04"]["subTlvs"]["05"]["valueType"] = "uint"
+DocsisTlvs["04"]["subTlvs"]["05"]["subTlvs"] = []
+
+DocsisTlvs["04"]["subTlvs"]["06"] = {}
+DocsisTlvs["04"]["subTlvs"]["06"]["description"] = "MaxBurstUp"
+DocsisTlvs["04"]["subTlvs"]["06"]["hex"] = "06"
+DocsisTlvs["04"]["subTlvs"]["06"]["valueType"] = "ushort"
+DocsisTlvs["04"]["subTlvs"]["06"]["subTlvs"] = []
+
+DocsisTlvs["04"]["subTlvs"]["07"] = {}
+DocsisTlvs["04"]["subTlvs"]["07"]["description"] = "PrivacyEnable"
+DocsisTlvs["04"]["subTlvs"]["07"]["hex"] = "07"
+DocsisTlvs["04"]["subTlvs"]["07"]["valueType"] = "uchar"
+DocsisTlvs["04"]["subTlvs"]["07"]["subTlvs"] = []
+
 
 DocsisTlvs["05"] = {}
 DocsisTlvs["05"]["description"] = "ModemCapabilities"
