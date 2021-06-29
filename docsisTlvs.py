@@ -38,64 +38,119 @@ DocsisTlvs["05"]["valueType"] = "s"
 DocsisTlvs["05"]["subTlvs"] = []
 
 DocsisTlvs["06"] = {}
-DocsisTlvs["06"]["description"] = "/* Pad */"
+DocsisTlvs["06"]["description"] = "CmMic"
 DocsisTlvs["06"]["hex"] = "06"
 DocsisTlvs["06"]["valueType"] = "00"
 DocsisTlvs["06"]["subTlvs"] = []
 
 DocsisTlvs["07"] = {}
-DocsisTlvs["07"]["description"] = "/* Pad */"
+DocsisTlvs["07"]["description"] = "CmtsMic"
 DocsisTlvs["07"]["hex"] = "07"
 DocsisTlvs["07"]["valueType"] = "00"
 DocsisTlvs["07"]["subTlvs"] = []
 
-DocsisTlvs["08"] = {}
-DocsisTlvs["08"]["description"] = "/* Pad */"
-DocsisTlvs["08"]["hex"] = "08"
-DocsisTlvs["08"]["valueType"] = "00"
-DocsisTlvs["08"]["subTlvs"] = []
-
 DocsisTlvs["09"] = {}
-DocsisTlvs["09"]["description"] = "/* Pad */"
+DocsisTlvs["09"]["description"] = "SwUpgradeFilename"
 DocsisTlvs["09"]["hex"] = "09"
-DocsisTlvs["09"]["valueType"] = "00"
+DocsisTlvs["09"]["valueType"] = "string"
 DocsisTlvs["09"]["subTlvs"] = []
 
 DocsisTlvs["10"] = {}
-DocsisTlvs["10"]["description"] = "/* Pad */"
+DocsisTlvs["10"]["description"] = "SnmpWriteControl"
 DocsisTlvs["10"]["hex"] = "0a"
 DocsisTlvs["10"]["valueType"] = "00"
 DocsisTlvs["10"]["subTlvs"] = []
 
 DocsisTlvs["11"] = {}
-DocsisTlvs["11"]["description"] = "/* Pad */"
+DocsisTlvs["11"]["description"] = "SnmpMibObject"
 DocsisTlvs["11"]["hex"] = "0b"
 DocsisTlvs["11"]["valueType"] = "00"
 DocsisTlvs["11"]["subTlvs"] = []
 
 DocsisTlvs["12"] = {}
-DocsisTlvs["12"]["description"] = "/* Pad */"
+DocsisTlvs["12"]["description"] = "ModemIPAddress"
 DocsisTlvs["12"]["hex"] = "0c"
-DocsisTlvs["12"]["valueType"] = "00"
+DocsisTlvs["12"]["valueType"] = "ip"
 DocsisTlvs["12"]["subTlvs"] = []
 
-DocsisTlvs["13"] = {}
-DocsisTlvs["13"]["description"] = "/* Pad */"
-DocsisTlvs["13"]["hex"] = "0d"
-DocsisTlvs["13"]["valueType"] = "00"
-DocsisTlvs["13"]["subTlvs"] = []
-
 DocsisTlvs["14"] = {}
-DocsisTlvs["14"]["description"] = "/* Pad */"
+DocsisTlvs["14"]["description"] = "CpeMacAddress"
 DocsisTlvs["14"]["hex"] = "0e"
-DocsisTlvs["14"]["valueType"] = "00"
+DocsisTlvs["14"]["valueType"] = "ether"
 DocsisTlvs["14"]["subTlvs"] = []
 
-DocsisTlvs["15"] = {}
-DocsisTlvs["15"]["description"] = "/* Pad */"
-DocsisTlvs["15"]["hex"] = "0f"
-DocsisTlvs["15"]["valueType"] = "00"
-DocsisTlvs["15"]["subTlvs"] = []
+DocsisTlvs["17"] = {}
+DocsisTlvs["17"]["description"] = "BaselinePrivacy"
+DocsisTlvs["17"]["hex"] = "11"
+DocsisTlvs["17"]["valueType"] = "s"
+DocsisTlvs["17"]["subTlvs"] = []
+
+DocsisTlvs["18"] = {}
+DocsisTlvs["18"]["description"] = "MaxCPE"
+DocsisTlvs["18"]["hex"] = "12"
+DocsisTlvs["18"]["valueType"] = "uchar"
+DocsisTlvs["18"]["subTlvs"] = []
+
+DocsisTlvs["19"] = {}
+DocsisTlvs["19"]["description"] = "TftpTimestamp"
+DocsisTlvs["19"]["hex"] = "13"
+DocsisTlvs["19"]["valueType"] = "uint"
+DocsisTlvs["19"]["subTlvs"] = []
+
+DocsisTlvs["20"] = {}
+DocsisTlvs["20"]["description"] = "TftpModemAddress"
+DocsisTlvs["20"]["hex"] = "14"
+DocsisTlvs["20"]["valueType"] = "ip"
+DocsisTlvs["20"]["subTlvs"] = []
+
+DocsisTlvs["21"] = {}
+DocsisTlvs["21"]["description"] = "SwUpgradeServer"
+DocsisTlvs["21"]["hex"] = "15"
+DocsisTlvs["21"]["valueType"] = "ip"
+DocsisTlvs["21"]["subTlvs"] = []
+
+DocsisTlvs["22"] = {}
+DocsisTlvs["22"]["description"] = "UsPacketClass"
+DocsisTlvs["22"]["hex"] = "16"
+DocsisTlvs["22"]["valueType"] = "s"
+DocsisTlvs["22"]["subTlvs"] = []
+
+DocsisTlvs["23"] = {}
+DocsisTlvs["23"]["description"] = "DsPacketClass"
+DocsisTlvs["23"]["hex"] = "17"
+DocsisTlvs["23"]["valueType"] = "s"
+DocsisTlvs["23"]["subTlvs"] = []
+
+DocsisTlvs["24"] = {}
+DocsisTlvs["24"]["description"] = "UsServiceFlow"
+DocsisTlvs["24"]["hex"] = "18"
+DocsisTlvs["24"]["valueType"] = "s"
+DocsisTlvs["24"]["subTlvs"] = []
+
+DocsisTlvs["25"] = {}
+DocsisTlvs["25"]["description"] = "DsServiceFlow"
+DocsisTlvs["25"]["hex"] = "19"
+DocsisTlvs["25"]["valueType"] = "00"
+DocsisTlvs["25"]["subTlvs"] = []
+
+DocsisTlvs["26"] = {}
+DocsisTlvs["26"]["description"] = "PHS"
+DocsisTlvs["26"]["hex"] = "1a"
+DocsisTlvs["26"]["valueType"] = "s"
+DocsisTlvs["26"]["subTlvs"] = []
+
+DocsisTlvs["28"] = {}
+DocsisTlvs["28"]["description"] = "MaxClassifiers"
+DocsisTlvs["28"]["hex"] = "1c"
+DocsisTlvs["28"]["valueType"] = "ushort"
+DocsisTlvs["28"]["subTlvs"] = []
+
+DocsisTlvs["29"] = {}
+DocsisTlvs["29"]["description"] = "GlobalPrivacyEnable"
+DocsisTlvs["29"]["hex"] = "1d"
+DocsisTlvs["29"]["valueType"] = "uchar"
+DocsisTlvs["29"]["subTlvs"] = []
+
 
 
 ### tlv4
@@ -192,237 +247,230 @@ d5subs["07"]["subTlvs"] = []
 
 d5subs["08"] = {}
 d5subs["08"]["description"] = "UpstreamSIDSupport"
-d5subs["08"]["hex"] = "01"
+d5subs["08"]["hex"] = "08"
 d5subs["08"]["valueType"] = "uchar"
 d5subs["08"]["subTlvs"] = []
-#todo: continue from here!
+
 d5subs["09"] = {}
-d5subs["09"]["description"] = "MaxRateDown"
-d5subs["09"]["hex"] = "02"
-d5subs["09"]["valueType"] = "uint"
+d5subs["09"]["description"] = "OptionalFilteringSupport"
+d5subs["09"]["hex"] = "09"
+d5subs["09"]["valueType"] = "uchar"
 d5subs["09"]["subTlvs"] = []
 
 d5subs["10"] = {}
-d5subs["10"]["description"] = "MaxRateUp"
-d5subs["10"]["hex"] = "03"
-d5subs["10"]["valueType"] = "uint"
+d5subs["10"]["description"] = "TransmitPreEqualizerTapsPerModulationInterval"
+d5subs["10"]["hex"] = "0a"
+d5subs["10"]["valueType"] = "uchar"
 d5subs["10"]["subTlvs"] = []
 
 d5subs["11"] = {}
-d5subs["11"]["description"] = "PriorityUp"
-d5subs["11"]["hex"] = "04"
+d5subs["11"]["description"] = "NumberofTransmitEqualizerTaps"
+d5subs["11"]["hex"] = "0b"
 d5subs["11"]["valueType"] = "uchar"
 d5subs["11"]["subTlvs"] = []
 
 d5subs["12"] = {}
-d5subs["12"]["description"] = "GuaranteedUp"
-d5subs["12"]["hex"] = "05"
+d5subs["12"]["description"] = "DCCSupport"
+d5subs["12"]["hex"] = "0c"
 d5subs["12"]["valueType"] = "uint"
 d5subs["12"]["subTlvs"] = []
 
 d5subs["13"] = {}
-d5subs["13"]["description"] = "MaxBurstUp"
-d5subs["13"]["hex"] = "06"
+d5subs["13"]["description"] = "IPFiltersSupport"
+d5subs["13"]["hex"] = "0d"
 d5subs["13"]["valueType"] = "ushort"
 d5subs["13"]["subTlvs"] = []
 
 d5subs["14"] = {}
-d5subs["14"]["description"] = "PrivacyEnable"
-d5subs["14"]["hex"] = "07"
-d5subs["14"]["valueType"] = "uchar"
+d5subs["14"]["description"] = "LLCFiltersSupport"
+d5subs["14"]["hex"] = "0e"
+d5subs["14"]["valueType"] = "ushort"
 d5subs["14"]["subTlvs"] = []
 
 d5subs["15"] = {}
-d5subs["15"]["description"] = "ClassID"
-d5subs["15"]["hex"] = "01"
+d5subs["15"]["description"] = "ExpandedUnicastSIDSpace"
+d5subs["15"]["hex"] = "0f"
 d5subs["15"]["valueType"] = "uchar"
 d5subs["15"]["subTlvs"] = []
 
 d5subs["16"] = {}
-d5subs["16"]["description"] = "MaxRateDown"
-d5subs["16"]["hex"] = "02"
-d5subs["16"]["valueType"] = "uint"
+d5subs["16"]["description"] = "RangingHoldOffSupport"
+d5subs["16"]["hex"] = "10"
+d5subs["16"]["valueType"] = "hexstr"
 d5subs["16"]["subTlvs"] = []
 
 d5subs["17"] = {}
-d5subs["17"]["description"] = "MaxRateUp"
-d5subs["17"]["hex"] = "03"
-d5subs["17"]["valueType"] = "uint"
+d5subs["17"]["description"] = "L2VPNCapability"
+d5subs["17"]["hex"] = "11"
+d5subs["17"]["valueType"] = "uchar"
 d5subs["17"]["subTlvs"] = []
 
 d5subs["18"] = {}
-d5subs["18"]["description"] = "PriorityUp"
-d5subs["18"]["hex"] = "04"
-d5subs["18"]["valueType"] = "uchar"
+d5subs["18"]["description"] = "L2VPNeSAFEHostCapability"
+d5subs["18"]["hex"] = "12"
+d5subs["18"]["valueType"] = "hexstr"
 d5subs["18"]["subTlvs"] = []
 
 d5subs["19"] = {}
-d5subs["19"]["description"] = "GuaranteedUp"
-d5subs["19"]["hex"] = "05"
-d5subs["19"]["valueType"] = "uint"
+d5subs["19"]["description"] = "DUTFilteringSupport"
+d5subs["19"]["hex"] = "13"
+d5subs["19"]["valueType"] = "uchar"
 d5subs["19"]["subTlvs"] = []
 
 d5subs["20"] = {}
-d5subs["20"]["description"] = "MaxBurstUp"
-d5subs["20"]["hex"] = "06"
-d5subs["20"]["valueType"] = "ushort"
+d5subs["20"]["description"] = "UpstreamFrequencyRangeSupport"
+d5subs["20"]["hex"] = "14"
+d5subs["20"]["valueType"] = "uchar"
 d5subs["20"]["subTlvs"] = []
 
 d5subs["21"] = {}
-d5subs["21"]["description"] = "PrivacyEnable"
-d5subs["21"]["hex"] = "07"
+d5subs["21"]["description"] = "UpstreamSymbolRateSupport"
+d5subs["21"]["hex"] = "15"
 d5subs["21"]["valueType"] = "uchar"
 d5subs["21"]["subTlvs"] = []
-
+#todo: keep going from here
 d5subs["22"] = {}
-d5subs["22"]["description"] = "ClassID"
+d5subs["22"]["description"] = "SelectableActiveCodeMode2Support"
 d5subs["22"]["hex"] = "01"
 d5subs["22"]["valueType"] = "uchar"
 d5subs["22"]["subTlvs"] = []
 
 d5subs["23"] = {}
-d5subs["23"]["description"] = "MaxRateDown"
+d5subs["23"]["description"] = "CodeHoppingMode2Support"
 d5subs["23"]["hex"] = "02"
-d5subs["23"]["valueType"] = "uint"
+d5subs["23"]["valueType"] = "uchar"
 d5subs["23"]["subTlvs"] = []
 
 d5subs["24"] = {}
-d5subs["24"]["description"] = "MaxRateUp"
+d5subs["24"]["description"] = "MultipleTransmitChannelSupport"
 d5subs["24"]["hex"] = "03"
-d5subs["24"]["valueType"] = "uint"
+d5subs["24"]["valueType"] = "uchar"
 d5subs["24"]["subTlvs"] = []
 
 d5subs["25"] = {}
-d5subs["25"]["description"] = "PriorityUp"
+d5subs["25"]["description"] = "M512MspsUpstreamTransmitChannel"
 d5subs["25"]["hex"] = "04"
 d5subs["25"]["valueType"] = "uchar"
 d5subs["25"]["subTlvs"] = []
 
 d5subs["26"] = {}
-d5subs["26"]["description"] = "GuaranteedUp"
+d5subs["26"]["description"] = "M256MspsUpstreamTransmitChannel"
 d5subs["26"]["hex"] = "05"
-d5subs["26"]["valueType"] = "uint"
+d5subs["26"]["valueType"] = "uchar"
 d5subs["26"]["subTlvs"] = []
 
 d5subs["27"] = {}
-d5subs["27"]["description"] = "MaxBurstUp"
+d5subs["27"]["description"] = "TotalSIDClusterSupport"
 d5subs["27"]["hex"] = "06"
-d5subs["27"]["valueType"] = "ushort"
+d5subs["27"]["valueType"] = "uchar"
 d5subs["27"]["subTlvs"] = []
 
 d5subs["28"] = {}
-d5subs["28"]["description"] = "PrivacyEnable"
+d5subs["28"]["description"] = "SIDClustersPerServiceFlow"
 d5subs["28"]["hex"] = "07"
 d5subs["28"]["valueType"] = "uchar"
 d5subs["28"]["subTlvs"] = []
 
 d5subs["29"] = {}
-d5subs["29"]["description"] = "ClassID"
+d5subs["29"]["description"] = "MultipleReceiveChannelSupport"
 d5subs["29"]["hex"] = "01"
 d5subs["29"]["valueType"] = "uchar"
 d5subs["29"]["subTlvs"] = []
 
 d5subs["30"] = {}
-d5subs["30"]["description"] = "MaxRateDown"
+d5subs["30"]["description"] = "TotalDownstreamServiceIDSupport"
 d5subs["30"]["hex"] = "02"
-d5subs["30"]["valueType"] = "uint"
+d5subs["30"]["valueType"] = "uchar"
 d5subs["30"]["subTlvs"] = []
 
 d5subs["31"] = {}
-d5subs["31"]["description"] = "MaxRateUp"
+d5subs["31"]["description"] = "ResequencingDownstreamServiceID"
 d5subs["31"]["hex"] = "03"
-d5subs["31"]["valueType"] = "uint"
+d5subs["31"]["valueType"] = "uchar"
 d5subs["31"]["subTlvs"] = []
 
 d5subs["32"] = {}
-d5subs["32"]["description"] = "PriorityUp"
+d5subs["32"]["description"] = "MulticastDownstreamServiceID"
 d5subs["32"]["hex"] = "04"
 d5subs["32"]["valueType"] = "uchar"
 d5subs["32"]["subTlvs"] = []
 
 d5subs["33"] = {}
-d5subs["33"]["description"] = "GuaranteedUp"
+d5subs["33"]["description"] = "MulticastDSIDForwarding"
 d5subs["33"]["hex"] = "05"
-d5subs["33"]["valueType"] = "uint"
+d5subs["33"]["valueType"] = "uchar"
 d5subs["33"]["subTlvs"] = []
 
 d5subs["34"] = {}
-d5subs["34"]["description"] = "MaxBurstUp"
+d5subs["34"]["description"] = "FrameControlTypeForwarding"
 d5subs["34"]["hex"] = "06"
-d5subs["34"]["valueType"] = "ushort"
+d5subs["34"]["valueType"] = "uchar"
 d5subs["34"]["subTlvs"] = []
 
 d5subs["35"] = {}
-d5subs["35"]["description"] = "PrivacyEnable"
+d5subs["35"]["description"] = "DPVCapability"
 d5subs["35"]["hex"] = "07"
 d5subs["35"]["valueType"] = "uchar"
 d5subs["35"]["subTlvs"] = []
 
 d5subs["36"] = {}
-d5subs["36"]["description"] = "ClassID"
+d5subs["36"]["description"] = "UnsolicitedGrantServiceSupport"
 d5subs["36"]["hex"] = "01"
 d5subs["36"]["valueType"] = "uchar"
 d5subs["36"]["subTlvs"] = []
 
 d5subs["37"] = {}
-d5subs["37"]["description"] = "MaxRateDown"
+d5subs["37"]["description"] = "MAPandUCDReceiptSupport"
 d5subs["37"]["hex"] = "02"
-d5subs["37"]["valueType"] = "uint"
+d5subs["37"]["valueType"] = "uchar"
 d5subs["37"]["subTlvs"] = []
 
 d5subs["38"] = {}
-d5subs["38"]["description"] = "MaxRateUp"
+d5subs["38"]["description"] = "UpstreamDropClassifierSupport"
 d5subs["38"]["hex"] = "03"
-d5subs["38"]["valueType"] = "uint"
+d5subs["38"]["valueType"] = "ushort"
 d5subs["38"]["subTlvs"] = []
 
 d5subs["39"] = {}
-d5subs["39"]["description"] = "PriorityUp"
+d5subs["39"]["description"] = "IPv6Support"
 d5subs["39"]["hex"] = "04"
 d5subs["39"]["valueType"] = "uchar"
 d5subs["39"]["subTlvs"] = []
 
 d5subs["40"] = {}
-d5subs["40"]["description"] = "GuaranteedUp"
+d5subs["40"]["description"] = "ExtendedUpstreamTransmitPower"
 d5subs["40"]["hex"] = "05"
-d5subs["40"]["valueType"] = "uint"
+d5subs["40"]["valueType"] = "uchar"
 d5subs["40"]["subTlvs"] = []
 
 d5subs["41"] = {}
-d5subs["41"]["description"] = "MaxBurstUp"
+d5subs["41"]["description"] = "MPLSClassificationSupport"
 d5subs["41"]["hex"] = "06"
-d5subs["41"]["valueType"] = "ushort"
+d5subs["41"]["valueType"] = "hexstr"
 d5subs["41"]["subTlvs"] = []
 
 d5subs["42"] = {}
-d5subs["42"]["description"] = "PrivacyEnable"
+d5subs["42"]["description"] = "DONUCapabilitiesEncoding"
 d5subs["42"]["hex"] = "07"
-d5subs["42"]["valueType"] = "uchar"
+d5subs["42"]["valueType"] = "hexstr"
 d5subs["42"]["subTlvs"] = []
 
-d5subs["43"] = {}
-d5subs["43"]["description"] = "PriorityUp"
-d5subs["43"]["hex"] = "04"
-d5subs["43"]["valueType"] = "uchar"
-d5subs["43"]["subTlvs"] = []
-
 d5subs["44"] = {}
-d5subs["44"]["description"] = "GuaranteedUp"
+d5subs["44"]["description"] = "EnergyManagementCapabilities"
 d5subs["44"]["hex"] = "05"
-d5subs["44"]["valueType"] = "uint"
+d5subs["44"]["valueType"] = "hexstr"
 d5subs["44"]["subTlvs"] = []
 
 d5subs["45"] = {}
-d5subs["45"]["description"] = "MaxBurstUp"
+d5subs["45"]["description"] = "CDOCSISCapabilityEncoding"
 d5subs["45"]["hex"] = "06"
-d5subs["45"]["valueType"] = "ushort"
+d5subs["45"]["valueType"] = "hexstr"
 d5subs["45"]["subTlvs"] = []
 
 d5subs["46"] = {}
-d5subs["46"]["description"] = "PrivacyEnable"
+d5subs["46"]["description"] = "CMSTATUSACK"
 d5subs["46"]["hex"] = "07"
 d5subs["46"]["valueType"] = "uchar"
 d5subs["46"]["subTlvs"] = []
-
 
 DocsisTlvs["05"]["subTlvs"] = d5subs
