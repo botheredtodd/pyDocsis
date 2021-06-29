@@ -165,37 +165,37 @@ d5subs["03"]["description"] = "FragmentationSupport"
 d5subs["03"]["hex"] = "03"
 d5subs["03"]["valueType"] = "uchar"
 d5subs["03"]["subTlvs"] = []
-#todo: continue from here!
+
 d5subs["04"] = {}
-d5subs["04"]["description"] = "PriorityUp"
+d5subs["04"]["description"] = "PHSSupport"
 d5subs["04"]["hex"] = "04"
 d5subs["04"]["valueType"] = "uchar"
 d5subs["04"]["subTlvs"] = []
 
 d5subs["05"] = {}
-d5subs["05"]["description"] = "GuaranteedUp"
+d5subs["05"]["description"] = "IGMPSupport"
 d5subs["05"]["hex"] = "05"
-d5subs["05"]["valueType"] = "uint"
+d5subs["05"]["valueType"] = "uchar"
 d5subs["05"]["subTlvs"] = []
 
 d5subs["06"] = {}
-d5subs["06"]["description"] = "MaxBurstUp"
+d5subs["06"]["description"] = "BaselinePrivacySupport"
 d5subs["06"]["hex"] = "06"
-d5subs["06"]["valueType"] = "ushort"
+d5subs["06"]["valueType"] = "uchar"
 d5subs["06"]["subTlvs"] = []
 
 d5subs["07"] = {}
-d5subs["07"]["description"] = "PrivacyEnable"
+d5subs["07"]["description"] = "DownstreamSAIDSupport"
 d5subs["07"]["hex"] = "07"
 d5subs["07"]["valueType"] = "uchar"
 d5subs["07"]["subTlvs"] = []
 
 d5subs["08"] = {}
-d5subs["08"]["description"] = "ClassID"
+d5subs["08"]["description"] = "UpstreamSIDSupport"
 d5subs["08"]["hex"] = "01"
 d5subs["08"]["valueType"] = "uchar"
 d5subs["08"]["subTlvs"] = []
-
+#todo: continue from here!
 d5subs["09"] = {}
 d5subs["09"]["description"] = "MaxRateDown"
 d5subs["09"]["hex"] = "02"
