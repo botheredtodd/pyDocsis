@@ -501,11 +501,36 @@ d17subs = {}
 DocsisTlvs["17"]["subTlvs"] = d17subs
 
 d22subs = {}
-d22subs["01"] = "22.1 ClassifierRef"
-d22subs["03"] = "22.3 ServiceFlowRef"
-d22subs["05"] = "25.5 RulePriority"
-d22subs["06"] = "22.6 ActivationState"
+d22subs["01"] = {}
+d22subs["01"]["description"] = "ClassifierRef"
+d22subs["01"]["hex"] = "01"
+d22subs["01"]["valueType"] = "uchar"
+d22subs["01"]["subTlvs"] = []
+
+d22subs["03"] = {}
+d22subs["03"]["description"] = "ServiceFlowRef"
+d22subs["03"]["hex"] = "03"
+d22subs["03"]["valueType"] = "ushort"
+d22subs["03"]["subTlvs"] = []
+
+d22subs["05"] = {}
+d22subs["05"]["description"] = "RulePriority"
+d22subs["05"]["hex"] = "05"
+d22subs["05"]["valueType"] = "uchar"
+d22subs["05"]["subTlvs"] = []
+
+d22subs["06"] = {}
+d22subs["06"]["description"] = "ActivationState"
+d22subs["06"]["hex"] = "06"
+d22subs["06"]["valueType"] = "uchar"
+d22subs["06"]["subTlvs"] = []
+
 d22subs["09"] = "22.9 IpPacketClassifier"
+d22subs["06"]["description"] = "ActivationState"
+d22subs["06"]["hex"] = "06"
+d22subs["06"]["valueType"] = "uchar"
+d22subs["06"]["subTlvs"] = []
+
 d22_9subs = {}
 d22_9subs["01"] = "22.9.1 IpTos"
 d22_9subs["02"] = "22.9.2 IpProto"
