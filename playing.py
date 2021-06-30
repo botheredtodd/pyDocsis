@@ -37,7 +37,7 @@ tlvs["00"] = "TLV 0 Spacer"
 #file.close()
 
 tlv = TLV(tlvs)
-f = open("sdcm.cfg", "rb")
+f = open("cm.cfg", "rb")
 content = f.read()
 n = 2
 bobbert = [binascii.hexlify(content).decode('UTF-8')[i:i+n] for i in range(0, len(binascii.hexlify(content).decode('UTF-8')), n)]
