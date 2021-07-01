@@ -1,5 +1,6 @@
 from docsisTlvs import DocsisTlvs
 import binascii
+import codecs
 
 class cmConfig(object):
 	def __init__(self ):
@@ -64,7 +65,11 @@ class cmConfig(object):
 								parsed_data = [tag, subts]
 								tlvs.append(parsed_data)
 							else:
-								parsed_data = [tag, value]
+								if "str" in tags[tag]["datatype"]:	
+									if "encode_strzero" in tags[tag]["datatype"]:
+										value = value[:-2]
+									value = codecs.decode(value, "hex")
+								parsed_data = [tag,  tags[tag]["description"], tags[tag]["datatype"] , value]
 								tlvs.append(parsed_data)
 							i = value_end_position
 						tag_found = True
