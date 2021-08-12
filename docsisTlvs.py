@@ -362,6 +362,12 @@ DocsisTlvs["07"]["hex"] = "07"
 DocsisTlvs["07"]["datatype"] = "(decode_md5)"
 DocsisTlvs["07"]["subTlvs"] = {}
 
+DocsisTlvs["08"] = {}
+DocsisTlvs["08"]["description"] = "Unknown"
+DocsisTlvs["08"]["hex"] = "08"
+DocsisTlvs["08"]["datatype"] = "unknown"
+DocsisTlvs["08"]["subTlvs"] = {}
+
 DocsisTlvs["09"] = {}
 DocsisTlvs["09"]["description"] = "SwUpgradeFilename"
 DocsisTlvs["09"]["hex"] = "09"
@@ -8403,6 +8409,13 @@ DocsisTlvs["82"]["description"] = "CoSignerCVCChain"
 DocsisTlvs["82"]["hex"] = "52"
 DocsisTlvs["82"]["datatype"] = "(encode_hexstr)"
 DocsisTlvs["82"]["subTlvs"] = {}
+
+
+DocsisTlvs["161"] = {}
+DocsisTlvs["161"]["description"] = "unknown"
+DocsisTlvs["161"]["hex"] = "A1"
+DocsisTlvs["161"]["datatype"] = "unknown"
+DocsisTlvs["161"]["subTlvs"] = {}
 
 DocsisTlvs["202"] = {}
 DocsisTlvs["202"]["description"] = "eRouter"

@@ -2,6 +2,48 @@ from docsisTlvs import DocsisTlvs
 import binascii
 import codecs
 
+
+
+class TLV:
+	def __init__(self, **args):
+		if "tag" in args.keys():
+			self.tag = args["tag"]
+		else:
+			self.tag= ""
+		if "datatype" in args.keys():
+			self.datatype = args["datatype"]
+		else:
+			self.datatype = ""
+		if "value" in args.keys():
+			self.value = args["value"]
+		else:
+			self.value = ""
+		if "subTLVs" in args.keys():
+			self.subTLVs = args["subTLVs"]
+		else:
+			self.subTLVs = []
+	def encode(self, tags = {}):
+		if tags == {}:
+			tags = DocsisTlvs
+		tlv_string = ''
+		htag = tags[self.tag]["hex"]
+		tvalue = self.value
+		print(htag)
+		print(tvalue)
+		for st in self.subTLVs:
+			tvalue += st.encode(tags[self.tag]["subTlvs"])
+		if divmod(len(tvalue), 2)[1] == 1:
+			print(htag)
+			print(tvalue)
+			print(divmod(len(tvalue), 2))
+			raise ValueError('Invalid value length - the length must be even')
+		sl = int(len(tvalue) / 2)
+		ss = str(sl)
+		if len(ss) % 2 != 0:
+			ss = "0" + ss
+		tlv_string += tlv_string + htag.upper() + ss + tvalue.upper()
+		return tlv_string	
+
 class cmConfig(object):
 	def __init__(self ):
 		self.tlvs = []
@@ -28,7 +70,7 @@ class cmConfig(object):
 			print(tlv_string)
 		i = 0
 		if len(tags.keys()) == 0:
-			print("Loading keys form docsis file")
+			print("Loading keys from docsis file")
 			tags = self.tags
 		while i < len(tlv_string): 
 			tag_found = False
@@ -63,14 +105,15 @@ class cmConfig(object):
 								subts = self.parse(value, tags[tag]["subTlvs"])
 								# print("up")
 								parsed_data = [tag, subts]
-								tlvs.append(parsed_data)
+								tlvs.append(TLV(tag = tag, subTLVs = subts))
+								#tlvs.append(parsed_data)
 							else:
-								if "str" in tags[tag]["datatype"]:	
-									if "encode_strzero" in tags[tag]["datatype"]:
-										value = value[:-2]
-									value = codecs.decode(value, "hex")
-								parsed_data = [tag,  tags[tag]["description"], tags[tag]["datatype"] , value]
-								tlvs.append(parsed_data)
+								#if "str" in tags[tag]["datatype"]:	
+								#	if "encode_strzero" in tags[tag]["datatype"]:
+								#		value = value[:-2]
+								#	value = codecs.decode(value, "hex")
+								#parsed_data = [tag,  tags[tag]["description"], tags[tag]["datatype"] , value]
+								tlvs.append(TLV(tag = tag, value = value))
 							i = value_end_position
 						tag_found = True
 			if not tag_found:
@@ -79,11 +122,27 @@ class cmConfig(object):
 				msg = 'Unknown tag found: ' + tlv_string[i:i+10]
 				raise ValueError(msg)
 		return tlvs
+	def encode(self):
+		stuff = '' #'0x'
+		for tag in self.tlvs:
+			stuff += tag.encode()
+		print(stuff)
+		if self.configFilePath != "":
+			f = open(self.configFilePath, "wb")
+			f.write(binascii.unhexlify(stuff))
+			f.close
+		
 if __name__ == '__main__':
 	cm = cmConfig()
 	cm.generateStringFromFile("cm.cfg")
 	cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
-	print("########")
-	for t in cm.tlvs:
-		print(t)
+	cm.configFilePath = "cm2.cfg"
+	cm.encode()
+	#print("########")
+	#for t in cm.tlvs:
+	#	print(t.tag)
+	#	print(t.value)
+	#	for tt in t.subTLVs:
+	#		print(tt.tag)
+	#		print(tt.value)
 	
