@@ -2,6 +2,19 @@ from docsisTlvs import DocsisTlvs
 import binascii
 import codecs
 
+def hexify(number):
+	"""
+	Convert integer to hex string representation, e.g. 12 to '0C'
+	"""
+	if number < 0:
+		raise ValueError('Invalid number to hexify - must be positive')
+
+	result = hex(int(number)).replace('0x', '').upper()
+	if divmod(len(result), 2)[1] == 1:
+		# Padding
+		result = '0{}'.format(result)
+	return result
+
 
 
 class TLV:
@@ -37,11 +50,8 @@ class TLV:
 			print(tvalue)
 			print(divmod(len(tvalue), 2))
 			raise ValueError('Invalid value length - the length must be even')
-		sl = int(len(tvalue) / 2)
-		ss = str(sl)
-		if len(ss) % 2 != 0:
-			ss = "0" + ss
-		tlv_string += tlv_string + htag.upper() + ss + tvalue.upper()
+
+		tlv_string += tlv_string + htag.upper() + hexify(len(tvalue) / 2) +tvalue.upper()
 		return tlv_string	
 
 class cmConfig(object):
@@ -76,7 +86,7 @@ class cmConfig(object):
 			tag_found = False
 			tag_length = 2
 			for tag in tags.keys():
-					hv = hex(int(tag)).replace('0x', '')
+					hv = tags[tag]["hex"] #hex(int(tag)).replace('0x', '')
 					if len(hv) == 1:
 						hv = "0" + hv
 					if tlv_string[i:i+tag_length] == hv:
@@ -126,6 +136,7 @@ class cmConfig(object):
 		stuff = '' #'0x'
 		for tag in self.tlvs:
 			stuff += tag.encode()
+		#stuff = stuff.encode('UTF-8')
 		print(stuff)
 		if self.configFilePath != "":
 			f = open(self.configFilePath, "wb")
