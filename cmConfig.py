@@ -28,8 +28,8 @@ class TLV:
 		tlv_string = ''
 		htag = tags[self.tag]["hex"]
 		tvalue = self.value
-		print(htag)
-		print(tvalue)
+		#print(htag)
+		#print(tvalue)
 		for st in self.subTLVs:
 			tvalue += st.encode(tags[self.tag]["subTlvs"])
 		if divmod(len(tvalue), 2)[1] == 1:
@@ -137,6 +137,8 @@ if __name__ == '__main__':
 	cm.generateStringFromFile("cm.cfg")
 	cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
 	cm.configFilePath = "cm2.cfg"
+	print(cm.tlv_string.upper())
+	print()
 	cm.encode()
 	#print("########")
 	#for t in cm.tlvs:
