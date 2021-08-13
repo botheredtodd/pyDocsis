@@ -1,6 +1,7 @@
 from docsisTlvs import DocsisTlvs
 import binascii
 import codecs
+from oidConverter import notation_OID
 
 def hexify(number):
 	"""
@@ -57,16 +58,14 @@ class TLV:
 		tvalue = self.value
 		if "encode_strzero" in tags[self.tag]["datatype"]:
 			tvalue = tvalue[:-2]
+		elif "encode_uint" in tags[self.tag]["datatype"]:
+			return int(self.value, 16)
+			return codecs.decode(tvalue, encoding='hex')
+		elif "encode_ushort" in tags[self.tag]["datatype"]:
+			return int(self.value, 16)
 			return codecs.decode(tvalue, encoding='hex')
 		elif "decode_snmp_object" in tags[self.tag]["datatype"]:
-			print("I have no idea how I am going to do this")
-			tvalue = ""
-			i = 0
-			while i < len(self.value) - 1:
-				tvalue += str(int(self.value[i:i+2], 16))
-				
-				i += 2
-			return tvalue
+			return notation_OID(tvalue)
 		else:
 			return tvalue
 class cmConfig(object):
@@ -173,10 +172,10 @@ if __name__ == '__main__':
 			print(DocsisTlvs[t.tag]["datatype"])
 		print(t.value)
 		print(t.decodedValue(DocsisTlvs))
-		for tt in t.subTLVs:
-			print(tt.tag)
-			if "datatype" in DocsisTlvs[t.tag]["subTlvs"][tt.tag].keys():
-				print(DocsisTlvs[t.tag]["subTlvs"][tt.tag]["datatype"])
-			print(tt.value)
-			print(tt.decodedValue(DocsisTlvs[t.tag]["subTlvs"]))
+		#for tt in t.subTLVs:
+		#	print(tt.tag)
+		#	if "datatype" in DocsisTlvs[t.tag]["subTlvs"][tt.tag].keys():
+		#		print(DocsisTlvs[t.tag]["subTlvs"][tt.tag]["datatype"])
+		#	print(tt.value)
+		#	print(tt.decodedValue(DocsisTlvs[t.tag]["subTlvs"]))
 	
