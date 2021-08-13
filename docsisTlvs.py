@@ -6700,6 +6700,12 @@ DocsisTlvs["43"]["subTlvs"]["12"]["subTlvs"]["04"]["hex"] = "04"
 DocsisTlvs["43"]["subTlvs"]["12"]["subTlvs"]["04"]["datatype"] = "(encode_strzero)"
 DocsisTlvs["43"]["subTlvs"]["12"]["subTlvs"]["04"]["subTlvs"] = {}
 
+DocsisTlvs["43"]["subTlvs"]["65"] = {}
+DocsisTlvs["43"]["subTlvs"]["65"]["description"] = "dunno"
+DocsisTlvs["43"]["subTlvs"]["65"]["hex"] = "41"
+DocsisTlvs["43"]["subTlvs"]["65"]["datatype"] = "(unknown)"
+DocsisTlvs["43"]["subTlvs"]["65"]["subTlvs"] = {}
+
 DocsisTlvs["43"]["subTlvs"]["161"] = {}
 DocsisTlvs["43"]["subTlvs"]["161"]["description"] = "vendor specif"
 DocsisTlvs["43"]["subTlvs"]["161"]["hex"] = "a1"
