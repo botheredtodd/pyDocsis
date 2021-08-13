@@ -53,7 +53,22 @@ class TLV:
 
 		tlv_string += tlv_string + htag.upper() + hexify(len(tvalue) / 2) +tvalue.upper()
 		return tlv_string	
-
+	def decodedValue(self, tags):
+		tvalue = self.value
+		if "encode_strzero" in tags[self.tag]["datatype"]:
+			tvalue = tvalue[:-2]
+			return codecs.decode(tvalue, encoding='hex')
+		elif "decode_snmp_object" in tags[self.tag]["datatype"]:
+			print("I have no idea how I am going to do this")
+			tvalue = ""
+			i = 0
+			while i < len(self.value) - 1:
+				tvalue += str(int(self.value[i:i+2], 16))
+				
+				i += 2
+			return tvalue
+		else:
+			return tvalue
 class cmConfig(object):
 	def __init__(self ):
 		self.tlvs = []
@@ -137,7 +152,7 @@ class cmConfig(object):
 		for tag in self.tlvs:
 			stuff += tag.encode()
 		#stuff = stuff.encode('UTF-8')
-		print(stuff)
+		#print(stuff)
 		if self.configFilePath != "":
 			f = open(self.configFilePath, "wb")
 			f.write(binascii.unhexlify(stuff))
@@ -151,11 +166,17 @@ if __name__ == '__main__':
 	print(cm.tlv_string.upper())
 	print()
 	cm.encode()
-	#print("########")
-	#for t in cm.tlvs:
-	#	print(t.tag)
-	#	print(t.value)
-	#	for tt in t.subTLVs:
-	#		print(tt.tag)
-	#		print(tt.value)
+	print("########")
+	for t in cm.tlvs:
+		print(t.tag)
+		if "datatype" in DocsisTlvs[t.tag].keys():
+			print(DocsisTlvs[t.tag]["datatype"])
+		print(t.value)
+		print(t.decodedValue(DocsisTlvs))
+		for tt in t.subTLVs:
+			print(tt.tag)
+			if "datatype" in DocsisTlvs[t.tag]["subTlvs"][tt.tag].keys():
+				print(DocsisTlvs[t.tag]["subTlvs"][tt.tag]["datatype"])
+			print(tt.value)
+			print(tt.decodedValue(DocsisTlvs[t.tag]["subTlvs"]))
 	
