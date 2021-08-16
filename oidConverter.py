@@ -84,7 +84,7 @@ def unnotation_OID(oidhex_string):
 	# Convert the list with hex data in str format to int format for 
 	# calculations.
 	i = 0
-	for element in range(oidLength): #len(hex_list)):
+	for element in range(len(hex_list)):
 		hex_list[element] = int(hex_list[element],16)
 
 	# Convert the OID to its standard notation. Sourced from code in other 
