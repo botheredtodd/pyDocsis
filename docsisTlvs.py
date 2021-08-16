@@ -8609,3 +8609,8 @@ DocsisTlvs["255"]["datatype"] = "(decode_special)"
 DocsisTlvs["255"]["subTlvs"] = {}
 DocsisTlvs["255"]['hex'] = "ff"
 
+
+if __name__ == '__main__':
+	import json
+	fp = open("outs.json", 'w')
+	json.dump(DocsisTlvs, fp)

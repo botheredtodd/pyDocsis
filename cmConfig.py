@@ -162,17 +162,17 @@ if __name__ == '__main__':
 	cm.generateStringFromFile(sys.argv[1])
 	cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
 	#cm.configFilePath = "cm2.cfg"
-	#print(cm.tlv_string.upper())
+	print(cm.tlv_string.upper())
 	#print()
 	#cm.encode()
 	#print("########")
-	for t in cm.tlvs:
+	#for t in cm.tlvs:
 		#print(t.tag)
 		#if "datatype" in DocsisTlvs[t.tag].keys():
 			#print(DocsisTlvs[t.tag]["datatype"])
-		if DocsisTlvs[t.tag]["datatype"] == "(decode_snmp_object)":
+		#if DocsisTlvs[t.tag]["datatype"] == "(decode_snmp_object)":
 			#print(t.value)
-			print(t.decodedValue(DocsisTlvs))
+			#print(t.decodedValue(DocsisTlvs))
 		#for tt in t.subTLVs:
 		#	print(tt.tag)
 		#	if "datatype" in DocsisTlvs[t.tag]["subTlvs"][tt.tag].keys():
