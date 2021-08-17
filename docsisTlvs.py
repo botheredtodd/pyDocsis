@@ -8611,6 +8611,15 @@ DocsisTlvs["255"]['hex'] = "ff"
 
 
 if __name__ == '__main__':
+	def printSubTLVS(tlv):
+		
 	import json
-	fp = open("outs.json", 'w')
-	json.dump(DocsisTlvs, fp)
+	endbits = "let DOCSIS :[TLVDefinitions] = [\n"
+	#fp = open("outs.json", 'w')
+	#json.dump(DocsisTlvs, fp)
+	for key in DocsisTlvs.keys():
+		endbits += "tlv" + key + ",\n"
+		print("var tlv" + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + DocsisTlvs[key]["datatype"].split("_")[-1][:-1] + ", description: \"" + DocsisTlvs[key]["description"] + "\"")
+	
+	endbits += "]"
+	print(endbits)
