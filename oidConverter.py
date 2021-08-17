@@ -109,7 +109,32 @@ def unnotation_OID(oidhex_string):
 	# print the OID in dot notation.
 	return (OID_str)
 
+## The following two functions are stolen from https://github.com/AstralVX/oidhex_to_dot
+def encode_variable_length_quantity(v:int) -> list:
+	# Break it up in groups of 7 bits starting from the lowest significant bit
+	# For all the other groups of 7 bits than lowest one, set the MSB to 1
+	m = 0x00
+	output = []
+	while v >= 0x80:
+		output.insert(0, (v & 0x7f) | m)
+		v = v >> 7
+		m = 0x80
+	output.insert(0, v | m)
+	return output
 
+def encode_oid_string(oid_str:str) -> tuple:
+	a = [int(x) for x in oid_str.split('.')]
+	oid = [a[0]*40 + a[1]] # First two items are coded by a1*40+a2
+	# A rest is Variable-length_quantity
+	for n in a[2:]:
+		oid.extend(encode_variable_length_quantity(n))
+	oid.insert(0, len(oid)) # Add a Length
+	
+	# Yeah, we seem to be using pid type 0x30
+	oid.insert(0, 0x30) # Add a Type (0x06 for Object Identifier)
+   return oid
+ 
+ 
 #notation_OID('060D2B0621040BA946964812D10905')
 print(notation_OID('301b060f2b06010401a01301030101020305050408efe7e7480de64166'))
 
