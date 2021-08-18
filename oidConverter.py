@@ -132,10 +132,10 @@ def encode_oid_string(oid_str:str) -> tuple:
 	
 	# Yeah, we seem to be using pid type 0x30
 	oid.insert(0, 0x30) # Add a Type (0x06 for Object Identifier)
-   return oid
+	return oid
  
  
 #notation_OID('060D2B0621040BA946964812D10905')
-print(notation_OID('301b060f2b06010401a01301030101020305050408efe7e7480de64166'))
+#print(notation_OID('301b060f2b06010401a01301030101020305050408efe7e7480de64166'))
 
-print(unnotation_OID('1.3.6.15.43.6.1.4.1.4115.1.3.1.1.2.3.5.5.4.8.234484680.13.13121.102'))
+#print(unnotation_OID('1.3.6.15.43.6.1.4.1.4115.1.3.1.1.2.3.5.5.4.8.234484680.13.13121.102'))

@@ -114,20 +114,20 @@ class cmConfig(object):
 						value_start_position = i+tag_length+2
 						value_end_position = i+tag_length+2+value_length*2
 	
-						if value_end_position > len(tlv_string) and hv != "ff" and tag != "00":
+						if value_end_position > len(tlv_string) and hv != "ff" and tag != "00" and tag != "107" and tag != "61" and tag != "97" and tag != "101" and tag != "35" and tag != "10":
 							raise ValueError('Parse error: tag ' + tag + ' declared data of length ' + str(value_length) + ', but actual data length is ' + str(int(len(tlv_string[value_start_position-1:-1])/2)))
 						else:
 							value = tlv_string[value_start_position:value_end_position]
 							if len(tags[tag]["subTlvs"].keys()) > 0:
 								# print("#################")
 								# print(i)
-								#print(tag)
+								print(tag)
 								# print(tags[tag]["subTlvs"].keys())
 								# print(value)
 								# print("#################")
-								#print("down")
+								print("down")
 								subts = self.parse(value, tags[tag]["subTlvs"])
-								#print("up")
+								print("up")
 								parsed_data = [tag, subts]
 								tlvs.append(TLV(tag = tag, subTLVs = subts))
 								#tlvs.append(parsed_data)
@@ -160,9 +160,10 @@ class cmConfig(object):
 if __name__ == '__main__':
 	cm = cmConfig()
 	cm.generateStringFromFile(sys.argv[1])
+	#print(cm.tlv_string)
 	cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
 	#cm.configFilePath = "cm2.cfg"
-	print(cm.tlv_string.upper())
+	#print(cm.tlv_string.upper())
 	#print()
 	#cm.encode()
 	#print("########")
