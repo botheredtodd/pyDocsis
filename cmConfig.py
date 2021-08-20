@@ -121,13 +121,13 @@ class cmConfig(object):
 							if len(tags[tag]["subTlvs"].keys()) > 0:
 								# print("#################")
 								# print(i)
-								print(tag)
+								#print(tag)
 								# print(tags[tag]["subTlvs"].keys())
 								# print(value)
 								# print("#################")
-								print("down")
+								#print("down")
 								subts = self.parse(value, tags[tag]["subTlvs"])
-								print("up")
+								#print("up")
 								parsed_data = [tag, subts]
 								tlvs.append(TLV(tag = tag, subTLVs = subts))
 								#tlvs.append(parsed_data)
@@ -167,17 +167,17 @@ if __name__ == '__main__':
 	#print()
 	#cm.encode()
 	#print("########")
-	#for t in cm.tlvs:
-		#print(t.tag)
-		#if "datatype" in DocsisTlvs[t.tag].keys():
-			#print(DocsisTlvs[t.tag]["datatype"])
+	for t in cm.tlvs:
+		print(t.tag)
+		if "datatype" in DocsisTlvs[t.tag].keys():
+			print(DocsisTlvs[t.tag]["datatype"])
 		#if DocsisTlvs[t.tag]["datatype"] == "(decode_snmp_object)":
 			#print(t.value)
-			#print(t.decodedValue(DocsisTlvs))
+		print(t.decodedValue(DocsisTlvs))
 		#for tt in t.subTLVs:
-		#	print(tt.tag)
+		#	print("  " + tt.tag)
 		#	if "datatype" in DocsisTlvs[t.tag]["subTlvs"][tt.tag].keys():
-		#		print(DocsisTlvs[t.tag]["subTlvs"][tt.tag]["datatype"])
+		#		print("  " + DocsisTlvs[t.tag]["subTlvs"][tt.tag]["datatype"])
 		#	print(tt.value)
-		#	print(tt.decodedValue(DocsisTlvs[t.tag]["subTlvs"]))
+		#	print("  " + tt.decodedValue(DocsisTlvs[t.tag]["subTlvs"]))
 	
