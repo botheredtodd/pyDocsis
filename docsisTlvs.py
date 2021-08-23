@@ -8728,7 +8728,10 @@ DocsisTlvs["255"]['hex'] = "ff"
 if __name__ == '__main__':
 	def printSubTLVS(tlv, parent):
 		for key in tlv:
-			print("var tlv" + parent + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + tlv[key]["datatype"].split("_")[-1][:-1] + ", description: \"" + tlv[key]["description"] + "\")")
+			if tlv[key]["datatype"] == "aggregate":
+				print("var tlv" + parent + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + tlv[key]["datatype"] + ", description: \"" + tlv[key]["description"] + "\")")
+			else:
+				print("let tlv" + parent + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + tlv[key]["datatype"] + ", description: \"" + tlv[key]["description"] + "\")")
 			printSubTLVS(tlv[key]["subTlvs"], parent + key)
 			print("tlv" + parent + ".subTLVs.append(tlv" + parent + key  + ")")
 
@@ -8737,7 +8740,10 @@ if __name__ == '__main__':
 	#json.dump(DocsisTlvs, fp)
 	for key in DocsisTlvs.keys():
 		endbits += "tlv" + key + ",\n"
-		print("var tlv" + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + DocsisTlvs[key]["datatype"].split("_")[-1][:-1] + ", description: \"" + DocsisTlvs[key]["description"] + "\")")
+		if DocsisTlvs[key]["datatype"] == "aggregate":
+			print("var tlv" + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + DocsisTlvs[key]["datatype"] + ", description: \"" + DocsisTlvs[key]["description"] + "\")")
+		else:
+			print("let tlv"  + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + DocsisTlvs[key]["datatype"] + ", description: \"" + DocsisTlvs[key]["description"] + "\")")
 		printSubTLVS(DocsisTlvs[key]["subTlvs"], key)
 	endbits += "]"
 	print(endbits)
