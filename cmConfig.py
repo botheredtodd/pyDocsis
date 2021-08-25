@@ -57,15 +57,15 @@ class TLV:
 		return tlv_string	
 	def decodedValue(self, tags):
 		tvalue = self.value
-		if "encode_strzero" in tags[self.tag]["datatype"]:
+		if "strzero" in tags[self.tag]["datatype"]:
 			tvalue = tvalue[:-2]
 		elif "encode_uint" in tags[self.tag]["datatype"]:
 			return int(self.value, 16)
 			return codecs.decode(tvalue, encoding='hex')
-		elif "encode_ushort" in tags[self.tag]["datatype"]:
+		elif "ushort" in tags[self.tag]["datatype"]:
 			return int(self.value, 16)
 			return codecs.decode(tvalue, encoding='hex')
-		elif "decode_snmp_object" in tags[self.tag]["datatype"]:
+		elif "snmp_object" in tags[self.tag]["datatype"]:
 			return notation_OID(tvalue)
 		else:
 			return tvalue

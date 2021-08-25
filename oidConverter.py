@@ -52,7 +52,7 @@ def notation_OID(oidhex_string):
 			val = 0
 
 	# print the OID in dot notation.
-	return (OID_str)
+	return OID_str
 def unnotation_OID(oidhex_string):
 	"""
 	copied from a few lines up, and mangled.
