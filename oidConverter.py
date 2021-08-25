@@ -1,3 +1,5 @@
+import mibs
+
 def notation_OID(oidhex_string):
 	"""
 	copied from panda_inline4's comment at https://stackoverflow.com/questions/49653398/converting-oid-of-public-key-etc-in-hex-data-to-the-dot-format
@@ -46,14 +48,26 @@ def notation_OID(oidhex_string):
 		x = 2;
 
 	OID_str += str(x)+'.'+str(y)
-
+	del hex_list[0]
 	val = 0
-	for byte in range(2,len(hex_list)):
-		val = ((val<<7) | ((hex_list[byte] & 0x7F)))
-		if (hex_list[byte] & 0x80) != 0x80:
+	while len(hex_list) > 0:
+		val = ((val<<7) | ((hex_list[0] & 0x7F)))
+		if (hex_list[0] & 0x80) != 0x80:
 			OID_str += "."+str(val)
 			val = 0
-
+		if OID_str in mibs.mibs.keys():
+			del hex_list[0]
+			datatype = hex_list[0]
+			del hex_list[0]
+			datalength = int(str(hex_list[0]), 16)
+			del hex_list[0]
+			snmpdata = ""
+			while len(hex_list) > 0:
+				snmpdata += str(hex_list[0])
+				del hex_list[0]
+			OID_str += " Data Type: " + str(datatype) + " Length: " + str(datalength) + " Value: " + snmpdata
+		else:
+			del hex_list[0]
 	# print the OID in dot notation.
 	return OID_str
 def unnotation_OID(oidhex_string):
