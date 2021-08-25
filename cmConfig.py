@@ -172,7 +172,7 @@ if __name__ == '__main__':
 		if "datatype" in DocsisTlvs[t.tag].keys():
 			print(DocsisTlvs[t.tag]["datatype"])
 		#if DocsisTlvs[t.tag]["datatype"] == "(decode_snmp_object)":
-			#print(t.value)
+		#print(t.value)
 		print(t.decodedValue(DocsisTlvs))
 		#for tt in t.subTLVs:
 		#	print("  " + tt.tag)

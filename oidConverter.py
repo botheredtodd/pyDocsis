@@ -10,17 +10,20 @@ def notation_OID(oidhex_string):
 	OID_str = ''
 	for char in range(0,len(oidhex_string),2):
 		hex_list.append(oidhex_string[char]+oidhex_string[char+1])
-
+	
+	print(hex_list)
 	''' I have deleted the first two element of the list as my hex string
 		includes the standard OID tag '06' and the OID length '0D'. 
 		These values are not required for the calculation as i've used 
 		absolute OID and not using any ASN.1 modules. Can be removed if you
 		have only the data part of the OID in hex string. '''
 	if int(hex_list[0], 16) == 48:
-		OID_str += "1.3"
+		OID_str += "" #"1.3"
 	del hex_list[0] # oid tag
 	oidLength = int(hex_list[0], 16)
+	print(oidLength)
 	del hex_list[0] # -- length of oid
+	
 
 	# An empty string to append the value of the OID in standard notation after
 	# processing each element of the list.
@@ -36,16 +39,16 @@ def notation_OID(oidhex_string):
 	# languages and adapted for python.
 
 	# The first two digits of the OID are calculated differently from the rest. 
-	#x = int(hex_list[0] / 40)
-	#y = int(hex_list[0] % 40)
-	#if x > 2:
-	#	y += (x-2)*40
-	#	x = 2;
+	x = int(hex_list[0] / 40)
+	y = int(hex_list[0] % 40)
+	if x > 2:
+		y += (x-2)*40
+		x = 2;
 
-	#OID_str += str(x)+'.'+str(y)
+	OID_str += str(x)+'.'+str(y)
 
 	val = 0
-	for byte in range(0,len(hex_list)):
+	for byte in range(2,len(hex_list)):
 		val = ((val<<7) | ((hex_list[byte] & 0x7F)))
 		if (hex_list[byte] & 0x80) != 0x80:
 			OID_str += "."+str(val)
