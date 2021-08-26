@@ -1,4 +1,6 @@
-import mibs
+oidDataTypes = {}
+oidDataTypes["64"] = "IPAddress"
+oidDataTypes["4"] = "HexString"
 
 def notation_OID(oidhex_string):
 	"""
@@ -13,7 +15,7 @@ def notation_OID(oidhex_string):
 	for char in range(0,len(oidhex_string),2):
 		hex_list.append(oidhex_string[char]+oidhex_string[char+1])
 	
-	print(hex_list)
+	# print(hex_list)
 	''' I have deleted the first two element of the list as my hex string
 		includes the standard OID tag '06' and the OID length '0D'. 
 		These values are not required for the calculation as i've used 
@@ -27,11 +29,10 @@ def notation_OID(oidhex_string):
 	del hex_list[0] # oid tag
 	totalLength = hex_list[0]
 	del hex_list[0] # -- length of oid
-	# The first two digits of the OID are calculated differently from the rest. 
 	noIdea = hex_list[0]
 	del hex_list[0] 
 	oidlength = hex_list[0]
-	print(oidlength)
+	# print(oidlength)
 	del hex_list[0] 
 	
 	x = int(hex_list[0] / 40)
@@ -41,28 +42,7 @@ def notation_OID(oidhex_string):
 		x = 2;
 	OID_str += str(x)+'.'+str(y)
 	del hex_list[0]
-	# An empty string to append the value of the OID in standard notation after
-	# processing each element of the list.
-	
-
-	# Convert the list with hex data in str format to int format for 
-	# calculations.
-	i = 0
-
-	# Convert the OID to its standard notation. Sourced from code in other 
-	# languages and adapted for python.
-
-	# The first two digits of the OID are calculated differently from the rest. 
-	#x = int(hex_list[0] / 40)
-	#y = int(hex_list[0] % 40)
-	#if x > 2:
-	#	y += (x-2)*40
-	#	x = 2;
-	#elif x == 0:
-	#	if oidType != "":
-	#		x = oidType
-	#OID_str += str(x)+'.'+str(y)
-	#del hex_list[0]
+	oidlength -= 1
 	val = 0
 	while len(hex_list) > 0:
 		oidlength -= 1
@@ -77,10 +57,22 @@ def notation_OID(oidhex_string):
 			datalength = int(str(hex_list[0]), 16)
 			del hex_list[0]
 			snmpdata = ""
+			strDataType = str(datatype)
 			while len(hex_list) > 0:
-				snmpdata += str(hex_list[0])
+				if str(datatype) in oidDataTypes.keys():
+					strDataType = oidDataTypes[str(datatype)]
+					if oidDataTypes[str(datatype)] == "IPAddress":
+						snmpdata += str(hex_list[0])
+						if len(hex_list) > 1:
+							snmpdata += "."
+					elif oidDataTypes[str(datatype)] == "HexString":
+						snmpdata += hex(hex_list[0])[2:]
+						if len(hex_list) > 1:
+							snmpdata += " "
+				else:		
+					snmpdata += str(hex_list[0])
 				del hex_list[0]
-			OID_str += " Data Type: " + str(datatype) + " Length: " + str(datalength) + " Value: " + snmpdata
+			OID_str += " Data Type: " + strDataType + " Length: " + str(datalength) + " Value: " + snmpdata
 		else:
 			del hex_list[0]
 			
@@ -168,7 +160,3 @@ def encode_oid_string(oid_str:str) -> tuple:
 	return oid
  
  
-#notation_OID('060D2B0621040BA946964812D10905')
-#print(notation_OID('301b060f2b06010401a01301030101020305050408efe7e7480de64166'))
-
-#print(unnotation_OID('1.3.6.15.43.6.1.4.1.4115.1.3.1.1.2.3.5.5.4.8.234484680.13.13121.102'))
