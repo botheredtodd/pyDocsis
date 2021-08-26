@@ -20,12 +20,21 @@ def notation_OID(oidhex_string):
 		absolute OID and not using any ASN.1 modules. Can be removed if you
 		have only the data part of the OID in hex string. '''
 	if int(hex_list[0], 16) == 48:
-		OID_str += "" #"1.3"
+		OID_str += "1.3"
 	del hex_list[0] # oid tag
-	oidLength = int(hex_list[0], 16)
-	print(oidLength)
+	totalLength = int(hex_list[0], 16)
 	del hex_list[0] # -- length of oid
-	
+	# The first two digits of the OID are calculated differently from the rest. 
+	x = int(hex_list[0] / 40)
+	y = int(hex_list[0] % 40)
+	if x > 2:
+		y += (x-2)*40
+		x = 2;
+	OID_str += str(x)+'.'+str(y)
+	del hex_list[0] # -- length of oid
+	oidlength = int(hex_list[0], 16)
+	print(oidlength)
+	del hex_list[0] # -- length of oid
 
 	# An empty string to append the value of the OID in standard notation after
 	# processing each element of the list.
@@ -34,28 +43,31 @@ def notation_OID(oidhex_string):
 	# Convert the list with hex data in str format to int format for 
 	# calculations.
 	i = 0
-	for element in range(oidLength): #len(hex_list)):
+	for element in range(len(hex_list)):
 		hex_list[element] = int(hex_list[element],16)
 
 	# Convert the OID to its standard notation. Sourced from code in other 
 	# languages and adapted for python.
 
 	# The first two digits of the OID are calculated differently from the rest. 
-	x = int(hex_list[0] / 40)
-	y = int(hex_list[0] % 40)
-	if x > 2:
-		y += (x-2)*40
-		x = 2;
-
-	OID_str += str(x)+'.'+str(y)
-	del hex_list[0]
+	#x = int(hex_list[0] / 40)
+	#y = int(hex_list[0] % 40)
+	#if x > 2:
+	#	y += (x-2)*40
+	#	x = 2;
+	#elif x == 0:
+	#	if oidType != "":
+	#		x = oidType
+	#OID_str += str(x)+'.'+str(y)
+	#del hex_list[0]
 	val = 0
 	while len(hex_list) > 0:
+		oidlength -= 1
 		val = ((val<<7) | ((hex_list[0] & 0x7F)))
 		if (hex_list[0] & 0x80) != 0x80:
 			OID_str += "."+str(val)
 			val = 0
-		if OID_str in mibs.mibs.keys():
+		if oidlength == 0:
 			del hex_list[0]
 			datatype = hex_list[0]
 			del hex_list[0]
@@ -68,6 +80,7 @@ def notation_OID(oidhex_string):
 			OID_str += " Data Type: " + str(datatype) + " Length: " + str(datalength) + " Value: " + snmpdata
 		else:
 			del hex_list[0]
+			
 	# print the OID in dot notation.
 	return OID_str
 def unnotation_OID(oidhex_string):
