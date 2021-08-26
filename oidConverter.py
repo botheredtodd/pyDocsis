@@ -19,23 +19,28 @@ def notation_OID(oidhex_string):
 		These values are not required for the calculation as i've used 
 		absolute OID and not using any ASN.1 modules. Can be removed if you
 		have only the data part of the OID in hex string. '''
-	if int(hex_list[0], 16) == 48:
-		OID_str += "1.3"
+	
+	for element in range(len(hex_list)):
+		hex_list[element] = int(hex_list[element],16)
+	if hex_list[0] == 48:
+		OID_str += "" #"1.3"
 	del hex_list[0] # oid tag
-	totalLength = int(hex_list[0], 16)
+	totalLength = hex_list[0]
 	del hex_list[0] # -- length of oid
 	# The first two digits of the OID are calculated differently from the rest. 
+	noIdea = hex_list[0]
+	del hex_list[0] 
+	oidlength = hex_list[0]
+	print(oidlength)
+	del hex_list[0] 
+	
 	x = int(hex_list[0] / 40)
 	y = int(hex_list[0] % 40)
 	if x > 2:
 		y += (x-2)*40
 		x = 2;
 	OID_str += str(x)+'.'+str(y)
-	del hex_list[0] # -- length of oid
-	oidlength = int(hex_list[0], 16)
-	print(oidlength)
-	del hex_list[0] # -- length of oid
-
+	del hex_list[0]
 	# An empty string to append the value of the OID in standard notation after
 	# processing each element of the list.
 	
@@ -43,8 +48,6 @@ def notation_OID(oidhex_string):
 	# Convert the list with hex data in str format to int format for 
 	# calculations.
 	i = 0
-	for element in range(len(hex_list)):
-		hex_list[element] = int(hex_list[element],16)
 
 	# Convert the OID to its standard notation. Sourced from code in other 
 	# languages and adapted for python.
