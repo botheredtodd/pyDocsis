@@ -67,8 +67,8 @@ def notation_OID(oidhex_string):
 							snmpdata += "."
 					elif oidDataTypes[str(datatype)] == "HexString":
 						snmpdata += hex(hex_list[0])[2:]
-						if len(hex_list) > 1:
-							snmpdata += " "
+						if len(hex_list) == 1:
+							snmpdata = "0x" + snmpdata
 				else:		
 					snmpdata += str(hex_list[0])
 				del hex_list[0]
