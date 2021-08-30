@@ -1,9 +1,13 @@
+import codecs
 
 oidDataTypes = {}
+oidDataTypes["66"] = "UInt32"
 oidDataTypes["64"] = "IPAddress"
+oidDataTypes["5"] = "Null"
 oidDataTypes["4"] = "HexString"
+oidDataTypes["3"] = "BitString"
 oidDataTypes["2"] = "Integer32"
-
+oidDataTypes["1"] = "Boolean"
 
 class mib:
 	def __init__(self):
@@ -70,8 +74,17 @@ class mib:
 							snmpdata += hex(hex_list[0])[2:]
 							if len(hex_list) == 1:
 								snmpdata = "0x" + snmpdata
+						elif oidDataTypes[str(datatype)] == "UInt32":
+							working = ""
+							while len(hex_list) > 1:
+								working += hex(hex_list[0])
+								del hex_list[0]
+								print(working)
+							working += hex(hex_list[0])
+							print("Is " + str(int(working, 16)) + " a number?")
 					else:
-						print("What is the datatype for mibby thingie " + str(datatype))		
+						print("OID is : " + self.oid)
+						print("What is the datatype for mibby thingie " + str(datatype))
 						snmpdata += str(hex_list[0])
 					del hex_list[0]
 				self.dataType = strDataType
