@@ -2,6 +2,7 @@ import codecs
 oidDataTypes = {}
 oidDataTypes["66"] = "UInt32"
 oidDataTypes["64"] = "IPAddress"
+oidDataTypes["6"] = "objectIdentifier"
 oidDataTypes["5"] = "Null"
 oidDataTypes["4"] = "HexString"
 oidDataTypes["3"] = "BitString"
@@ -96,9 +97,12 @@ class mib:
 							if len(hex_list) > 1:
 								snmpdata += "."
 						elif oidDataTypes[str(datatype)] == "HexString":
-							snmpdata += hex(hex_list[0])[2:]
-							if len(hex_list) == 1:
-								snmpdata = "0x" + snmpdata
+							working = ""
+							while len(hex_list) > 1:
+								working += str(hex_list[0])[2:]
+								del hex_list[0]
+							working += str(hex_list[0])[2:]
+							snmpdata = "0x" + working[:-2]
 						elif oidDataTypes[str(datatype)] == "UInt32":
 							working = ""
 							while len(hex_list) > 1:
