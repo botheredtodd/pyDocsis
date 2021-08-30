@@ -1,3 +1,29 @@
+import codecs 
+from mib import mib
+import binascii
+def to_little(val):
+	  little_hex = bytearray.fromhex(val)
+	  little_hex.reverse()
+	  print("Byte array format:", little_hex)
+	
+	  str_little = ''.join(format(x, '02x') for x in little_hex)
+	
+	  return str_little
+	
+def padHex(val, datatype):
+	result = val.replace('0x', '').upper()
+	if divmod(len(result), 2)[1] == 1:
+		# Padding
+		result = '0{}'.format(result)
+	if datatype == "uchar":
+		return result
+	elif datatype == "uint":
+		while len(result) < 8:
+			result = '00{}'.format(result)
+	elif datatype == "ushort":
+		while len(result) < 4:
+			result = '00{}'.format(result)
+	return result
 class TLV:
 	def __init__(self, **args):
 		if "tag" in args.keys():
@@ -16,14 +42,12 @@ class TLV:
 			self.subTLVs = args["subTLVs"]
 		else:
 			self.subTLVs = []
-	def encode(self, tags = {}):
+	def encodeForFile(self, tags = {}):
 		if tags == {}:
 			tags = DocsisTlvs
 		tlv_string = ''
 		htag = tags[self.tag]["hex"]
 		tvalue = self.value
-		#print(htag)
-		#print(tvalue)
 		for st in self.subTLVs:
 			tvalue += st.encode(tags[self.tag]["subTlvs"])
 		if divmod(len(tvalue), 2)[1] == 1:
@@ -32,19 +56,44 @@ class TLV:
 			print(divmod(len(tvalue), 2))
 			raise ValueError('Invalid value length - the length must be even')
 
-		tlv_string += tlv_string + htag.upper() + hexify(len(tvalue) / 2) +tvalue.upper()
+		tlv_string += tlv_string + htag.upper() + hexify(len(tvalue) / 2) + tvalue.upper()
 		return tlv_string	
-	def decodedValue(self, tags):
+	def getValue(self):
 		tvalue = self.value
-		if "strzero" in tags[self.tag]["datatype"]:
-			tvalue = tvalue[:-2]
-		elif "encode_uint" in tags[self.tag]["datatype"]:
+		if self.datatype == "aggregate":
+			return
+		if self.datatype == "uchar":
 			return int(self.value, 16)
-			return codecs.decode(tvalue, encoding='hex')
-		elif "ushort" in tags[self.tag]["datatype"]:
+		elif self.datatype == "uint":
 			return int(self.value, 16)
-			return codecs.decode(tvalue, encoding='hex')
-		elif "snmp_object" in tags[self.tag]["datatype"]:
-			return notation_OID(tvalue)
+			return int(to_little(self.value), 16) #you should never see this, but I am leaving it here for big-endian hassles.
+		elif self.datatype == "ushort":
+			return int(self.value, 16)
+			return int(to_little(self.value), 16) #you should never see this, but I am leaving it here for big-endian hassles.
+		elif self.datatype == "strzero":
+			
+			return codecs.decode(self.value[:-2], "hex").decode()
+		elif self.datatype == "hexstr":
+			return "0x" + self.value
+		elif self.datatype == "snmp_object":
+			m = mib()
+			m.decode(self.value)
+			return(m.oid + " " + m.value)
 		else:
+			print("Write a decoder for " + self.datatype)
 			return tvalue
+	def setValue(self, value):
+		if self.datatype in ["uchar", "ushort", "uint"]:
+			self.value = padHex(str(hex(int(value))), self.datatype)
+		elif self.datatype == "hexstr":
+			self.value =  value.replace('0x', '').upper()
+		elif self.datatype == "strzero":
+			#print(self.value)
+			newval = ""
+			#for ch in value:
+			tmp = binascii.hexlify(value.encode("ascii")).decode()
+			newval += str(tmp)
+					
+			newval += "00"
+			self.value = newval
+
