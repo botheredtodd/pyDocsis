@@ -71,7 +71,6 @@ class TLV:
 			return int(self.value, 16)
 			return int(to_little(self.value), 16) #you should never see this, but I am leaving it here for big-endian hassles.
 		elif self.datatype == "strzero":
-			
 			return codecs.decode(self.value[:-2], "hex").decode()
 		elif self.datatype == "hexstr":
 			return "0x" + self.value

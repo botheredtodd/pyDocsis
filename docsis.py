@@ -106,10 +106,11 @@ if __name__ == '__main__':
 			# print(t.value)
 		#print(t.tag)
 		if t.tag == "11":
-			print(t.value)
+			before = t.value
 			m = t.getValue()
-			print(m.value)
-			print(m.encode())
+			print(m.oid + " " + m.value + " " + m.dataType)
+			print(before)
+			print("    " + m.encode())
 		#if "datatype" in DocsisTlvs[t.tag].keys():
 		#	print(DocsisTlvs[t.tag]["datatype"])
 		#if DocsisTlvs[t.tag]["datatype"] == "(decode_snmp_object)":

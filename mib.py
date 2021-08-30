@@ -1,5 +1,4 @@
 import codecs
-
 oidDataTypes = {}
 oidDataTypes["66"] = "UInt32"
 oidDataTypes["64"] = "IPAddress"
@@ -8,6 +7,32 @@ oidDataTypes["4"] = "HexString"
 oidDataTypes["3"] = "BitString"
 oidDataTypes["2"] = "Integer32"
 oidDataTypes["1"] = "Boolean"
+
+
+	
+## The following two functions are stolen from https://github.com/AstralVX/oidhex_to_dot
+def encode_variable_length_quantity(v:int) -> list:
+	# Break it up in groups of 7 bits starting from the lowest significant bit
+	# For all the other groups of 7 bits than lowest one, set the MSB to 1
+	m = 0x00
+	output = []
+	while v >= 0x80:
+		output.insert(0, (v & 0x7f) | m)
+		v = v >> 7
+		m = 0x80
+	output.insert(0, v | m)
+	return output
+def encode_oid_string(oid_str:str) -> tuple:
+	a = [int(x) for x in oid_str.split('.')]
+	oid = [a[0]*40 + a[1]] # First two items are coded by a1*40+a2
+	# A rest is Variable-length_quantity
+	for n in a[2:]:
+		oid.extend(encode_variable_length_quantity(n))
+	oid.insert(0, len(oid)) # Add a Length
+	
+	# Yeah, we seem to be using pid type 0x30
+	oid.insert(0, 0x30) # Add a Type (0x06 for Object Identifier)
+	return oid
 
 class mib:
 	def __init__(self):
@@ -81,7 +106,8 @@ class mib:
 								del hex_list[0]
 								print(working)
 							working += hex(hex_list[0])
-							print("Is " + str(int(working, 16)) + " a number?")
+							#print("Is " + str(int(working, 16)) + " a number?")
+							snmpdata = str(int(working, 16))
 					else:
 						print("OID is : " + self.oid)
 						print("What is the datatype for mibby thingie " + str(datatype))
@@ -110,9 +136,28 @@ class mib:
 					outBlob = "0" + outBlob
 			outBlob = datalen + outBlob
 			outBlob = str(hex(64))[2:] + outBlob
+		elif self.dataType == "UInt32":
+			outBlob += str(hex(int(self.value)))
+			if len(outBlob) % 2 == 1:
+				outBlob = "0" + outBlob
+			datalen = int(len(outBlob) / 2)
+			outBlob = str(hex(datalen))[2:] + outBlob
+			outBlob = str(hex(66))[2:] + outBlob	
+
 			
 			
-		outBlob = self.oid + outBlob
+			
+		oidBlob = ""
+		for by in encode_oid_string(self.oid):
+			val = str(hex(int(by)))
+			result = val.replace('0x', '').upper()
+			if divmod(len(result), 2)[1] == 1:
+				# Padding
+				result = '0{}'.format(result)
+			oidBlob += result
+		outBlob = oidBlob + outBlob
+		
+		
 		
 		return outBlob
 			
