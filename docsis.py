@@ -97,33 +97,38 @@ if __name__ == '__main__':
 	#print("########")
 	
 	for t in cm.tlvs:
-		if t.datatype in ["uchar", "uint", "ushort", "hexstr"]:
-			bb = t.getValue()
-			print("before")
-			print(t.value)
-			t.setValue(bb)
-			print("after")
-			print(t.value)
+		#if t.datatype in ["uchar", "uint", "ushort", "hexstr"]:
+			# bb = t.getValue()
+			# print("before")
+			# print(t.value)
+			# t.setValue(bb)
+			# print("after")
+			# print(t.value)
 		#print(t.tag)
+		if t.tag == "11":
+			print(t.value)
+			m = t.getValue()
+			print(m.value)
+			print(m.encode())
 		#if "datatype" in DocsisTlvs[t.tag].keys():
 		#	print(DocsisTlvs[t.tag]["datatype"])
 		#if DocsisTlvs[t.tag]["datatype"] == "(decode_snmp_object)":
 		#print(t.datatype)
 		# t.getValue()
 		#print(t.getValue())
-		for tt in t.subTLVs:
+		#for tt in t.subTLVs:
 			#print("  " + tt.tag)
 			#print("  " + tt.datatype)
-			if tt.datatype in ["uchar", "uint", "ushort", "hexstr", "strzero"]:
-				bb = tt.getValue()
-				print("before")
-				print(tt.value)
-				tt.setValue(bb)
-				print("after")
-				print(tt.value)
+			#if tt.datatype in ["uchar", "uint", "ushort", "hexstr", "strzero"]:
+				# bb = tt.getValue()
+				# print("before")
+				# print(tt.value)
+				# tt.setValue(bb)
+				# print("after")
+				# print(tt.value)
 			#if "datatype" in DocsisTlvs[t.tag]["subTlvs"][tt.tag].keys():
 			#	print("  " + DocsisTlvs[t.tag]["subTlvs"][tt.tag]["datatype"])
-			print("  " + str(tt.getValue()))
+			# print("  " + str(tt.getValue()))
 			#tt.getValue()
 		#	print("  " + tt.decodedValue(DocsisTlvs[t.tag]["subTlvs"]))
 	

@@ -78,6 +78,7 @@ class TLV:
 		elif self.datatype == "snmp_object":
 			m = mib()
 			m.decode(self.value)
+			return m
 			return(m.oid + " " + m.value)
 		else:
 			print("Write a decoder for " + self.datatype)

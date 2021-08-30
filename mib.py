@@ -2,6 +2,7 @@
 oidDataTypes = {}
 oidDataTypes["64"] = "IPAddress"
 oidDataTypes["4"] = "HexString"
+oidDataTypes["2"] = "Integer32"
 
 
 class mib:
@@ -60,6 +61,7 @@ class mib:
 				while len(hex_list) > 0:
 					if str(datatype) in oidDataTypes.keys():
 						strDataType = oidDataTypes[str(datatype)]
+						self.dataType = strDataType
 						if oidDataTypes[str(datatype)] == "IPAddress":
 							snmpdata += str(hex_list[0])
 							if len(hex_list) > 1:
@@ -82,4 +84,25 @@ class mib:
 		#print(OID_str)
 	def encode(self):
 		outBlob = ""
+		if self.dataType == "HexString":
+			datalen = int(len(self.value[2:]) / 2)
+			outBlob = outBlob + self.value[2:]
+			outBlob = str(hex(datalen))[2:] + outBlob
+			outBlob = "0" + str(hex(4))[2:] + outBlob 
+		elif self.dataType == "IPAddress":
+			datalen = "04"
+			for s in self.value.split("."):
+				outBlob += str(hex(int(s)))[2:]
+				if len(outBlob) % 2 == 1:
+					outBlob = "0" + outBlob
+			outBlob = datalen + outBlob
+			outBlob = str(hex(64))[2:] + outBlob
+			
+			
+		outBlob = self.oid + outBlob
+		
+		return outBlob
+			
+		
+		
 		
