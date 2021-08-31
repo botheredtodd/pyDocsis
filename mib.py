@@ -99,9 +99,10 @@ class mib:
 						elif oidDataTypes[str(datatype)] == "HexString":
 							working = ""
 							while len(hex_list) > 1:
-								working += str(hex(hex_list[0]))[2:]
-								if len(working) % 2 == 1:
-									working = "0" + working
+								tmp = str(hex(hex_list[0]))[2:]
+								if len(tmp) % 2 == 1:
+									tmp = "0" + tmp
+								working += tmp
 								del hex_list[0]
 							working += str(hex(hex_list[0]))[2:]
 							if len(working) % 2 == 1:
@@ -168,8 +169,12 @@ class mib:
 				result = '0{}'.format(result)
 			oidBlob += result
 		outBlob = oidBlob + outBlob
-		
-		
+		outBlob = "06" + outBlob #OBJECT IDENTIFIER data type
+		outBlob = str(hex(int(len(outBlob) / 2)))[2:] + outBlob
+		if divmod(len(outBlob), 2)[1] == 1:
+			# Padding
+			outBlob = '0{}'.format(outBlob)
+		outBlob = "30" + outBlob #because reasons...
 		
 		return outBlob
 			
