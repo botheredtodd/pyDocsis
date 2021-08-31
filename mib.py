@@ -32,7 +32,7 @@ def encode_oid_string(oid_str:str) -> tuple:
 	oid.insert(0, len(oid)) # Add a Length
 	
 	# Yeah, we seem to be using pid type 0x30
-	oid.insert(0, 0x30) # Add a Type (0x06 for Object Identifier)
+	# oid.insert(0, 0x30) # Add a Type (0x06 for Object Identifier)
 	return oid
 
 class mib:
@@ -99,10 +99,14 @@ class mib:
 						elif oidDataTypes[str(datatype)] == "HexString":
 							working = ""
 							while len(hex_list) > 1:
-								working += str(hex_list[0])[2:]
+								working += str(hex(hex_list[0]))[2:]
+								if len(working) % 2 == 1:
+									working = "0" + working
 								del hex_list[0]
-							working += str(hex_list[0])[2:]
-							snmpdata = "0x" + working[:-2]
+							working += str(hex(hex_list[0]))[2:]
+							if len(working) % 2 == 1:
+								working = "0" + working
+							snmpdata = "0x" + working
 						elif oidDataTypes[str(datatype)] == "UInt32":
 							working = ""
 							while len(hex_list) > 1:
@@ -135,9 +139,13 @@ class mib:
 		elif self.dataType == "IPAddress":
 			datalen = "04"
 			for s in self.value.split("."):
-				outBlob += str(hex(int(s)))[2:]
-				if len(outBlob) % 2 == 1:
-					outBlob = "0" + outBlob
+				# print(s)
+				addr = str(hex(int(s)))[2:]
+				if len(addr) % 2 == 1:
+					addr = "0" + addr
+				outBlob += addr
+				# if len(outBlob) % 2 == 1:
+					# outBlob = "0" + outBlob
 			outBlob = datalen + outBlob
 			outBlob = str(hex(64))[2:] + outBlob
 		elif self.dataType == "UInt32":
