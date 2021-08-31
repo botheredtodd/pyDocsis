@@ -1,6 +1,7 @@
 import codecs 
 from mib import mib
 import binascii
+from docsisTlvs import DocsisTlvs
 def to_little(val):
 	  little_hex = bytearray.fromhex(val)
 	  little_hex.reverse()
@@ -49,14 +50,16 @@ class TLV:
 		htag = tags[self.tag]["hex"]
 		tvalue = self.value
 		for st in self.subTLVs:
-			tvalue += st.encode(tags[self.tag]["subTlvs"])
+			tvalue += st.encodeForFile(tags[self.tag]["subTlvs"])
 		if divmod(len(tvalue), 2)[1] == 1:
 			print(htag)
 			print(tvalue)
 			print(divmod(len(tvalue), 2))
 			raise ValueError('Invalid value length - the length must be even')
-
-		tlv_string += tlv_string + htag.upper() + hexify(len(tvalue) / 2) + tvalue.upper()
+		tlvlen = str(hex(int(len(tvalue) / 2)))[2:]
+		if len(tlvlen) == 1:
+			tlvlen = "0" + tlvlen
+		tlv_string += tlv_string + htag.upper() + tlvlen + tvalue.upper()
 		return tlv_string	
 	def getValue(self):
 		tvalue = self.value

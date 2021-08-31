@@ -50,12 +50,15 @@ class cmConfig(object):
 						value_start_position = i+tag_length+2
 						value_end_position = i+tag_length+2+value_length*2
 	
-						if value_end_position > len(tlv_string) and hv != "ff" and tag != "00" and tag != "107" and tag != "61" and tag != "97" and tag != "101" and tag != "35" and tag != "10":
+						if value_end_position > len(tlv_string) and hv != "ff" and tag != "00" and tag != "107" and tag != "61" and tag != "97" and tag != "101" and tag != "35" and tag != "10" and tag != "106" and tag != "116" and tag != "52" and tag != "48" and tag != "51" and tag != "54" and tag != "102"  and tag != "83" and tag != "118" and tag != "67" and tag != "80":
 							raise ValueError('Parse error: tag ' + tag + ' declared data of length ' + str(value_length) + ', but actual data length is ' + str(int(len(tlv_string[value_start_position-1:-1])/2)))
 						else:
 							value = tlv_string[value_start_position:value_end_position]
 							if len(tags[tag]["subTlvs"].keys()) > 0:
+								#print(tag)
+								#print("down")
 								subts = self.parse(value, tags[tag]["subTlvs"])
+								#print("up")
 								parsed_data = [tag, subts]
 								tlvs.append(TLV(tag = tag, subTLVs = subts, datatype = tags[tag]["datatype"]))
 								#tlvs.append(parsed_data)
@@ -77,7 +80,7 @@ class cmConfig(object):
 	def encode(self):
 		stuff = '' #'0x'
 		for tag in self.tlvs:
-			stuff += tag.encode()
+			stuff += tag.encodeForFile()
 		#stuff = stuff.encode('UTF-8')
 		#print(stuff)
 		if self.configFilePath != "":
@@ -95,22 +98,27 @@ if __name__ == '__main__':
 	#print()
 	#cm.encode()
 	#print("########")
-	
 	for t in cm.tlvs:
-		#if t.datatype in ["uchar", "uint", "ushort", "hexstr"]:
-			# bb = t.getValue()
+		if t.datatype in ["uchar", "uint", "ushort", "hexstr"]:
+			if t.tag == "18":
+				bb = t.getValue()
+				print(bb)
+				t.setValue(bb + 1)
 			# print("before")
-			# print(t.value)
-			# t.setValue(bb)
+			#print(t.value)
+			#t.setValue(bb)
 			# print("after")
-			# print(t.value)
+			#print(t.value)
+		else:
+			if t.datatype not in  ["snmp_object", "aggregate"]:
+				print("Write a decoder for " + t.datatype)
 		#print(t.tag)
-		if t.tag == "11":
-			before = t.value
-			m = t.getValue()
-			print(m.oid + " " + m.value + " " + m.dataType)
-			print(before.upper())
-			print(m.encode())
+		#if t.tag == "11":
+			#before = t.value
+			#m = t.getValue()
+			#print(m.oid + " " + m.value + " " + m.dataType)
+			#print(before.upper())
+			#print(m.encode().upper())
 		#if "datatype" in DocsisTlvs[t.tag].keys():
 		#	print(DocsisTlvs[t.tag]["datatype"])
 		#if DocsisTlvs[t.tag]["datatype"] == "(decode_snmp_object)":
@@ -121,15 +129,18 @@ if __name__ == '__main__':
 			#print("  " + tt.tag)
 			#print("  " + tt.datatype)
 			#if tt.datatype in ["uchar", "uint", "ushort", "hexstr", "strzero"]:
-				# bb = tt.getValue()
+				#bb = tt.getValue()
 				# print("before")
-				# print(tt.value)
-				# tt.setValue(bb)
+				#print(tt.value)
+				#tt.setValue(bb)
 				# print("after")
-				# print(tt.value)
+				#print(tt.value)
+			#else:
+				#if tt.datatype  not in  ["snmp_object", "aggregate"]:
+					#print("Write a decoder for " + tt.datatype)
 			#if "datatype" in DocsisTlvs[t.tag]["subTlvs"][tt.tag].keys():
 			#	print("  " + DocsisTlvs[t.tag]["subTlvs"][tt.tag]["datatype"])
 			# print("  " + str(tt.getValue()))
 			#tt.getValue()
 		#	print("  " + tt.decodedValue(DocsisTlvs[t.tag]["subTlvs"]))
-	
+	cm.encode()

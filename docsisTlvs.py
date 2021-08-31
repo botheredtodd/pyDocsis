@@ -6766,6 +6766,12 @@ DocsisTlvs["45"]["subTlvs"]["02"]["hex"] = "02"
 DocsisTlvs["45"]["subTlvs"]["02"]["datatype"] = "hexstr"
 DocsisTlvs["45"]["subTlvs"]["02"]["subTlvs"] = {}
 
+DocsisTlvs["46"] = {}
+DocsisTlvs["46"]["description"] = "unknown"
+DocsisTlvs["46"]["hex"] = "2e"
+DocsisTlvs["46"]["datatype"] = "unknown"
+DocsisTlvs["46"]["subTlvs"] = {}
+
 DocsisTlvs["48"] = {}
 DocsisTlvs["48"]["description"] = "Receive Channel Profile"
 DocsisTlvs["48"]["hex"] = "30"
@@ -6778,17 +6784,95 @@ DocsisTlvs["48"]["subTlvs"]["01"]["hex"] = "01"
 DocsisTlvs["48"]["subTlvs"]["01"]["datatype"] = "(encode_uchar_list)"
 DocsisTlvs["48"]["subTlvs"]["01"]["subTlvs"] = {}
 
+DocsisTlvs["48"]["subTlvs"]["10"] = {}
+DocsisTlvs["48"]["subTlvs"]["10"]["description"] = "Unknown"
+DocsisTlvs["48"]["subTlvs"]["10"]["hex"] = "0a"
+DocsisTlvs["48"]["subTlvs"]["10"]["datatype"] = "unknown"
+DocsisTlvs["48"]["subTlvs"]["10"]["subTlvs"] = {}
+
+
+DocsisTlvs["48"]["subTlvs"]["14"] = {}
+DocsisTlvs["48"]["subTlvs"]["14"]["description"] = "Unknown"
+DocsisTlvs["48"]["subTlvs"]["14"]["hex"] = "0e"
+DocsisTlvs["48"]["subTlvs"]["14"]["datatype"] = "unknown"
+DocsisTlvs["48"]["subTlvs"]["14"]["subTlvs"] = {}
+
 DocsisTlvs["48"]["subTlvs"]["34"] = {}
 DocsisTlvs["48"]["subTlvs"]["34"]["description"] = "Unknown"
 DocsisTlvs["48"]["subTlvs"]["34"]["hex"] = "22"
-DocsisTlvs["48"]["subTlvs"]["34"]["datatype"] = "(unknown)"
+DocsisTlvs["48"]["subTlvs"]["34"]["datatype"] = "unknown"
 DocsisTlvs["48"]["subTlvs"]["34"]["subTlvs"] = {}
+
+
+DocsisTlvs["48"]["subTlvs"]["48"] = {}
+DocsisTlvs["48"]["subTlvs"]["48"]["description"] = "Unknown"
+DocsisTlvs["48"]["subTlvs"]["48"]["hex"] = "30"
+DocsisTlvs["48"]["subTlvs"]["48"]["datatype"] = "unknown"
+DocsisTlvs["48"]["subTlvs"]["48"]["subTlvs"] = {}
+
+DocsisTlvs["48"]["subTlvs"]["51"] = {}
+DocsisTlvs["48"]["subTlvs"]["51"]["description"] = "Unknown"
+DocsisTlvs["48"]["subTlvs"]["51"]["hex"] = "33"
+DocsisTlvs["48"]["subTlvs"]["51"]["datatype"] = "unknown"
+DocsisTlvs["48"]["subTlvs"]["51"]["subTlvs"] = {}
+
+DocsisTlvs["48"]["subTlvs"]["54"] = {}
+DocsisTlvs["48"]["subTlvs"]["54"]["description"] = "Unknown"
+DocsisTlvs["48"]["subTlvs"]["54"]["hex"] = "36"
+DocsisTlvs["48"]["subTlvs"]["54"]["datatype"] = "unknown"
+DocsisTlvs["48"]["subTlvs"]["54"]["subTlvs"] = {}
+
+DocsisTlvs["48"]["subTlvs"]["80"] = {}
+DocsisTlvs["48"]["subTlvs"]["80"]["description"] = "Unknown"
+DocsisTlvs["48"]["subTlvs"]["80"]["hex"] = "50"
+DocsisTlvs["48"]["subTlvs"]["80"]["datatype"] = "unknown"
+DocsisTlvs["48"]["subTlvs"]["80"]["subTlvs"] = {}
+
+DocsisTlvs["48"]["subTlvs"]["83"] = {}
+DocsisTlvs["48"]["subTlvs"]["83"]["description"] = "Unknown"
+DocsisTlvs["48"]["subTlvs"]["83"]["hex"] = "53"
+DocsisTlvs["48"]["subTlvs"]["83"]["datatype"] = "unknown"
+DocsisTlvs["48"]["subTlvs"]["83"]["subTlvs"] = {}
+
+
 
 DocsisTlvs["48"]["subTlvs"]["97"] = {}
 DocsisTlvs["48"]["subTlvs"]["97"]["description"] = "Unknown"
 DocsisTlvs["48"]["subTlvs"]["97"]["hex"] = "61"
-DocsisTlvs["48"]["subTlvs"]["97"]["datatype"] = "(unknown)"
+DocsisTlvs["48"]["subTlvs"]["97"]["datatype"] = "unknown"
 DocsisTlvs["48"]["subTlvs"]["97"]["subTlvs"] = {}
+
+DocsisTlvs["48"]["subTlvs"]["118"] = {}
+DocsisTlvs["48"]["subTlvs"]["118"]["description"] = "Unknown"
+DocsisTlvs["48"]["subTlvs"]["118"]["hex"] = "76"
+DocsisTlvs["48"]["subTlvs"]["118"]["datatype"] = "unknown"
+DocsisTlvs["48"]["subTlvs"]["118"]["subTlvs"] = {}
+
+
+DocsisTlvs["49"] = {}
+DocsisTlvs["49"]["description"] = "unknown"
+DocsisTlvs["49"]["hex"] = "31"
+DocsisTlvs["49"]["datatype"] = "unknown"
+DocsisTlvs["49"]["subTlvs"] = {}
+
+DocsisTlvs["50"] = {}
+DocsisTlvs["50"]["description"] = "unknown"
+DocsisTlvs["50"]["hex"] = "32"
+DocsisTlvs["50"]["datatype"] = "unknown"
+DocsisTlvs["50"]["subTlvs"] = {}
+
+DocsisTlvs["51"] = {}
+DocsisTlvs["51"]["description"] = "unknown"
+DocsisTlvs["51"]["hex"] = "33"
+DocsisTlvs["51"]["datatype"] = "unknown"
+DocsisTlvs["51"]["subTlvs"] = {}
+
+
+DocsisTlvs["52"] = {}
+DocsisTlvs["52"]["description"] = "unknown"
+DocsisTlvs["52"]["hex"] = "34"
+DocsisTlvs["52"]["datatype"] = "unknown"
+DocsisTlvs["52"]["subTlvs"] = {}
 
 DocsisTlvs["53"] = {}
 DocsisTlvs["53"]["description"] = "SNMPv1v2cCoexistenceConfig"
@@ -6832,6 +6916,12 @@ DocsisTlvs["53"]["subTlvs"]["04"]["hex"] = "04"
 DocsisTlvs["53"]["subTlvs"]["04"]["datatype"] = "string"
 DocsisTlvs["53"]["subTlvs"]["04"]["subTlvs"] = {}
 
+DocsisTlvs["53"]["subTlvs"]["50"] = {}
+DocsisTlvs["53"]["subTlvs"]["50"]["description"] = "SNMPv1v2cAccessViewName"
+DocsisTlvs["53"]["subTlvs"]["50"]["hex"] = "32"
+DocsisTlvs["53"]["subTlvs"]["50"]["datatype"] = "string"
+DocsisTlvs["53"]["subTlvs"]["50"]["subTlvs"] = {}
+
 DocsisTlvs["54"] = {}
 DocsisTlvs["54"]["description"] = "SNMPv3AccessViewConfiguration"
 DocsisTlvs["54"]["hex"] = "36"
@@ -6862,6 +6952,19 @@ DocsisTlvs["54"]["subTlvs"]["04"]["hex"] = "04"
 DocsisTlvs["54"]["subTlvs"]["04"]["datatype"] = "uchar"
 DocsisTlvs["54"]["subTlvs"]["04"]["subTlvs"] = {}
 
+
+DocsisTlvs["54"]["subTlvs"]["52"] = {}
+DocsisTlvs["54"]["subTlvs"]["52"]["description"] = "unknown"
+DocsisTlvs["54"]["subTlvs"]["52"]["hex"] = "34"
+DocsisTlvs["54"]["subTlvs"]["52"]["datatype"] = "unknown"
+DocsisTlvs["54"]["subTlvs"]["52"]["subTlvs"] = {}
+
+DocsisTlvs["54"]["subTlvs"]["54"] = {}
+DocsisTlvs["54"]["subTlvs"]["54"]["description"] = "unknown"
+DocsisTlvs["54"]["subTlvs"]["54"]["hex"] = "36"
+DocsisTlvs["54"]["subTlvs"]["54"]["datatype"] = "unknown"
+DocsisTlvs["54"]["subTlvs"]["54"]["subTlvs"] = {}
+
 DocsisTlvs["55"] = {}
 DocsisTlvs["55"]["description"] = "SNMPCPEAccessControl"
 DocsisTlvs["55"]["hex"] = "37"
@@ -6885,6 +6988,37 @@ DocsisTlvs["56"]["subTlvs"]["02"]["description"] = "CaReceive"
 DocsisTlvs["56"]["subTlvs"]["02"]["hex"] = "02"
 DocsisTlvs["56"]["subTlvs"]["02"]["datatype"] = "uint"
 DocsisTlvs["56"]["subTlvs"]["02"]["subTlvs"] = {}
+
+DocsisTlvs["56"]["subTlvs"]["46"] = {}
+DocsisTlvs["56"]["subTlvs"]["46"]["description"] = "Unknown"
+DocsisTlvs["56"]["subTlvs"]["46"]["hex"] = "2e"
+DocsisTlvs["56"]["subTlvs"]["46"]["datatype"] = "unknown"
+DocsisTlvs["56"]["subTlvs"]["46"]["subTlvs"] = {}
+
+DocsisTlvs["56"]["subTlvs"]["52"] = {}
+DocsisTlvs["56"]["subTlvs"]["52"]["description"] = "Unknown"
+DocsisTlvs["56"]["subTlvs"]["52"]["hex"] = "34"
+DocsisTlvs["56"]["subTlvs"]["52"]["datatype"] = "unknown"
+DocsisTlvs["56"]["subTlvs"]["52"]["subTlvs"] = {}
+
+DocsisTlvs["56"]["subTlvs"]["67"] = {}
+DocsisTlvs["56"]["subTlvs"]["67"]["description"] = "Unknown"
+DocsisTlvs["56"]["subTlvs"]["67"]["hex"] = "43"
+DocsisTlvs["56"]["subTlvs"]["67"]["datatype"] = "unknown"
+DocsisTlvs["56"]["subTlvs"]["67"]["subTlvs"] = {}
+
+DocsisTlvs["56"]["subTlvs"]["102"] = {}
+DocsisTlvs["56"]["subTlvs"]["102"]["description"] = "Unknown"
+DocsisTlvs["56"]["subTlvs"]["102"]["hex"] = "66"
+DocsisTlvs["56"]["subTlvs"]["102"]["datatype"] = "unknown"
+DocsisTlvs["56"]["subTlvs"]["102"]["subTlvs"] = {}
+
+
+DocsisTlvs["57"] = {}
+DocsisTlvs["57"]["description"] = "unknown"
+DocsisTlvs["57"]["hex"] = "39"
+DocsisTlvs["57"]["datatype"] = "unknown"
+DocsisTlvs["57"]["subTlvs"] = {}
 
 DocsisTlvs["58"] = {}
 DocsisTlvs["58"]["description"] = "SwUpgradeServer6"
@@ -8122,6 +8256,12 @@ DocsisTlvs["65"]["subTlvs"]["01"]["hex"] = "01"
 DocsisTlvs["65"]["subTlvs"]["01"]["datatype"] = "uchar"
 DocsisTlvs["65"]["subTlvs"]["01"]["subTlvs"] = {}
 
+DocsisTlvs["65"]["subTlvs"]["116"] = {}
+DocsisTlvs["65"]["subTlvs"]["116"]["description"] = "unknown"
+DocsisTlvs["65"]["subTlvs"]["116"]["hex"] = "74"
+DocsisTlvs["65"]["subTlvs"]["116"]["datatype"] = "unknown"
+DocsisTlvs["65"]["subTlvs"]["116"]["subTlvs"] = {}
+
 DocsisTlvs["66"] = {}
 DocsisTlvs["66"]["description"] = "ManagementEventControl"
 DocsisTlvs["66"]["hex"] = "42"
@@ -8416,6 +8556,12 @@ DocsisTlvs["76"]["hex"] = "4c"
 DocsisTlvs["76"]["datatype"] = "uchar"
 DocsisTlvs["76"]["subTlvs"] = {}
 
+DocsisTlvs["77"] = {}
+DocsisTlvs["77"]["description"] = "unknown"
+DocsisTlvs["77"]["hex"] = "4d"
+DocsisTlvs["77"]["datatype"] = "unknown"
+DocsisTlvs["77"]["subTlvs"] = {}
+
 DocsisTlvs["79"] = {}
 DocsisTlvs["79"]["description"] = "UNIControlEncodings"
 DocsisTlvs["79"]["hex"] = "4f"
@@ -8476,6 +8622,14 @@ DocsisTlvs["79"]["subTlvs"]["09"]["hex"] = "09"
 DocsisTlvs["79"]["subTlvs"]["09"]["datatype"] = "uchar"
 DocsisTlvs["79"]["subTlvs"]["09"]["subTlvs"] = {}
 
+DocsisTlvs["79"]["subTlvs"]["106"] = {}
+DocsisTlvs["79"]["subTlvs"]["106"]["description"] = "unknown"
+DocsisTlvs["79"]["subTlvs"]["106"]["hex"] = "6a"
+DocsisTlvs["79"]["subTlvs"]["106"]["datatype"] = "unknown"
+DocsisTlvs["79"]["subTlvs"]["106"]["subTlvs"] = {}
+
+
+
 DocsisTlvs["81"] = {}
 DocsisTlvs["81"]["description"] = "ManufacturerCVCChain"
 DocsisTlvs["81"]["hex"] = "51"
@@ -8488,11 +8642,41 @@ DocsisTlvs["82"]["hex"] = "52"
 DocsisTlvs["82"]["datatype"] = "hexstr"
 DocsisTlvs["82"]["subTlvs"] = {}
 
+DocsisTlvs["83"] = {}
+DocsisTlvs["83"]["description"] = "unknown"
+DocsisTlvs["83"]["hex"] = "53"
+DocsisTlvs["83"]["datatype"] = "unknown"
+DocsisTlvs["83"]["subTlvs"] = {}
+
+DocsisTlvs["84"] = {}
+DocsisTlvs["84"]["description"] = "unknown"
+DocsisTlvs["84"]["hex"] = "54"
+DocsisTlvs["84"]["datatype"] = "unknown"
+DocsisTlvs["84"]["subTlvs"] = {}
+
 DocsisTlvs["93"] = {}
 DocsisTlvs["93"]["description"] = "Upstream Enhanced HQoS ASF"
 DocsisTlvs["93"]["hex"] = "5d"
 DocsisTlvs["93"]["datatype"] = "(unknown)"
 DocsisTlvs["93"]["subTlvs"] = {}
+
+DocsisTlvs["97"] = {}
+DocsisTlvs["97"]["description"] = "unknown"
+DocsisTlvs["97"]["hex"] = "61"
+DocsisTlvs["97"]["datatype"] = "unknown"
+DocsisTlvs["97"]["subTlvs"] = {}
+
+DocsisTlvs["98"] = {}
+DocsisTlvs["98"]["description"] = "unknown"
+DocsisTlvs["98"]["hex"] = "62"
+DocsisTlvs["98"]["datatype"] = "unknown"
+DocsisTlvs["98"]["subTlvs"] = {}
+
+DocsisTlvs["99"] = {}
+DocsisTlvs["99"]["description"] = "unknown"
+DocsisTlvs["99"]["hex"] = "63"
+DocsisTlvs["99"]["datatype"] = "unknown"
+DocsisTlvs["99"]["subTlvs"] = {}
 
 DocsisTlvs["100"] = {}
 DocsisTlvs["100"]["description"] = "unknown Technicolor crap"
@@ -8506,11 +8690,56 @@ DocsisTlvs["101"]["hex"] = "65"
 DocsisTlvs["101"]["datatype"] = "unknown"
 DocsisTlvs["101"]["subTlvs"] = {}
 
+DocsisTlvs["102"] = {}
+DocsisTlvs["102"]["description"] = "unknown Technicolor crap"
+DocsisTlvs["102"]["hex"] = "66"
+DocsisTlvs["102"]["datatype"] = "unknown"
+DocsisTlvs["102"]["subTlvs"] = {}
+
+
+
 DocsisTlvs["103"] = {}
 DocsisTlvs["103"]["description"] = "unknown Technicolor crap"
 DocsisTlvs["103"]["hex"] = "67"
 DocsisTlvs["103"]["datatype"] = "unknown"
 DocsisTlvs["103"]["subTlvs"] = {}
+
+DocsisTlvs["105"] = {}
+DocsisTlvs["105"]["description"] = "unknown"
+DocsisTlvs["105"]["hex"] = "69"
+DocsisTlvs["105"]["datatype"] = "unknown"
+DocsisTlvs["105"]["subTlvs"] = {}
+
+DocsisTlvs["106"] = {}
+DocsisTlvs["106"]["description"] = "unknown"
+DocsisTlvs["106"]["hex"] = "6a"
+DocsisTlvs["106"]["datatype"] = "unknown"
+DocsisTlvs["106"]["subTlvs"] = {}
+
+DocsisTlvs["108"] = {}
+DocsisTlvs["108"]["description"] = "unknown"
+DocsisTlvs["108"]["hex"] = "6c"
+DocsisTlvs["108"]["datatype"] = "unknown"
+DocsisTlvs["108"]["subTlvs"] = {}
+
+
+DocsisTlvs["110"] = {}
+DocsisTlvs["110"]["description"] = "unknown"
+DocsisTlvs["110"]["hex"] = "6e"
+DocsisTlvs["110"]["datatype"] = "unknown"
+DocsisTlvs["110"]["subTlvs"] = {}
+
+DocsisTlvs["111"] = {}
+DocsisTlvs["111"]["description"] = "unknown"
+DocsisTlvs["111"]["hex"] = "6f"
+DocsisTlvs["111"]["datatype"] = "unknown"
+DocsisTlvs["111"]["subTlvs"] = {}
+
+DocsisTlvs["112"] = {}
+DocsisTlvs["112"]["description"] = "unknown Technicolor crap"
+DocsisTlvs["112"]["hex"] = "70"
+DocsisTlvs["112"]["datatype"] = "unknown"
+DocsisTlvs["112"]["subTlvs"] = {}
 
 DocsisTlvs["114"] = {}
 DocsisTlvs["114"]["description"] = "unknown Technicolor crap"
@@ -8518,17 +8747,35 @@ DocsisTlvs["114"]["hex"] = "72"
 DocsisTlvs["114"]["datatype"] = "unknown"
 DocsisTlvs["114"]["subTlvs"] = {}
 
+DocsisTlvs["115"] = {}
+DocsisTlvs["115"]["description"] = "unknown Technicolor crap"
+DocsisTlvs["115"]["hex"] = "73"
+DocsisTlvs["115"]["datatype"] = "unknown"
+DocsisTlvs["115"]["subTlvs"] = {}
+
 DocsisTlvs["116"] = {}
 DocsisTlvs["116"]["description"] = "unknown Technicolor crap"
 DocsisTlvs["116"]["hex"] = "74"
 DocsisTlvs["116"]["datatype"] = "unknown"
 DocsisTlvs["116"]["subTlvs"] = {}
 
+DocsisTlvs["117"] = {}
+DocsisTlvs["117"]["description"] = "unknown Technicolor crap"
+DocsisTlvs["117"]["hex"] = "75"
+DocsisTlvs["117"]["datatype"] = "unknown"
+DocsisTlvs["117"]["subTlvs"] = {}
+
 DocsisTlvs["118"] = {}
 DocsisTlvs["118"]["description"] = "unknown Technicolor crap"
 DocsisTlvs["118"]["hex"] = "76"
 DocsisTlvs["118"]["datatype"] = "unknown"
 DocsisTlvs["118"]["subTlvs"] = {}
+
+DocsisTlvs["119"] = {}
+DocsisTlvs["119"]["description"] = "unknown Technicolor crap"
+DocsisTlvs["119"]["hex"] = "77"
+DocsisTlvs["119"]["datatype"] = "unknown"
+DocsisTlvs["119"]["subTlvs"] = {}
 
 DocsisTlvs["161"] = {}
 DocsisTlvs["161"]["description"] = "unknown"
@@ -8703,6 +8950,12 @@ DocsisTlvs["202"]["subTlvs"]["54"]["subTlvs"]["04"]["description"] = "SNMPv3Acce
 DocsisTlvs["202"]["subTlvs"]["54"]["subTlvs"]["04"]["hex"] = "04"
 DocsisTlvs["202"]["subTlvs"]["54"]["subTlvs"]["04"]["datatype"] = "uchar"
 DocsisTlvs["202"]["subTlvs"]["54"]["subTlvs"]["04"]["subTlvs"] = {}
+
+DocsisTlvs["217"] = {}
+DocsisTlvs["217"]["description"] = "unknown"
+DocsisTlvs["217"]["hex"] = "d9"
+DocsisTlvs["217"]["datatype"] = "unknown"
+DocsisTlvs["217"]["subTlvs"] = {}
 
 DocsisTlvs["998"] = {}
 DocsisTlvs["998"]["description"] = "GenericTLV"

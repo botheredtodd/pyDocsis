@@ -108,13 +108,22 @@ class mib:
 							if len(working) % 2 == 1:
 								working = "0" + working
 							snmpdata = "0x" + working
+						elif oidDataTypes[str(datatype)] == "Integer32":
+							working = ""
+							while len(hex_list) > 1:
+								working += str(hex(hex_list[0]))[2:]
+								del hex_list[0]
+								#print(working)
+							working += str(hex(hex_list[0]))[2:]
+							#print("Is " + str(int(working, 16)) + " a number?")
+							snmpdata = str(int(working, 16))
 						elif oidDataTypes[str(datatype)] == "UInt32":
 							working = ""
 							while len(hex_list) > 1:
-								working += hex(hex_list[0])
+								working += hex(hex_list[0])[2:]
 								del hex_list[0]
-								print(working)
-							working += hex(hex_list[0])
+								#print(working)
+							working += hex(hex_list[0])[2:]
 							#print("Is " + str(int(working, 16)) + " a number?")
 							snmpdata = str(int(working, 16))
 					else:
@@ -157,7 +166,17 @@ class mib:
 				outBlob = "0" + outBlob
 			datalen = int(len(outBlob) / 2)
 			outBlob = str(hex(datalen))[2:] + outBlob
-			outBlob = str(hex(66))[2:] + outBlob		
+			outBlob = str(hex(66))[2:] + outBlob
+		elif self.dataType == "Integer32":
+			outBlob += str(hex(int(self.value)))[2:]
+			if len(outBlob) % 2 == 1:
+				outBlob = "0" + outBlob
+			datalen = int(len(outBlob) / 2)
+			
+			outBlob = str(hex(datalen))[2:] + outBlob
+			if len(outBlob) % 2 == 1:
+				outBlob = "0" + outBlob
+			outBlob = "0" + str(hex(2))[2:] + outBlob			
 		oidBlob = ""
 		for by in encode_oid_string(self.oid):
 			val = str(hex(int(by)))[2:]
