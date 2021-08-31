@@ -133,9 +133,11 @@ class mib:
 	def encode(self):
 		outBlob = ""
 		if self.dataType == "HexString":
-			datalen = int(len(self.value[2:]) / 2)
+			datalen = str(hex(int(len(self.value[2:]) / 2)))[2:]
+			if len(datalen) == 1:
+				datalen = "0" + datalen
 			outBlob = outBlob + self.value[2:]
-			outBlob = str(hex(datalen))[2:] + outBlob
+			outBlob = datalen + outBlob
 			outBlob = "0" + str(hex(4))[2:] + outBlob 
 		elif self.dataType == "IPAddress":
 			datalen = "04"
@@ -162,7 +164,9 @@ class mib:
 			
 		oidBlob = ""
 		for by in encode_oid_string(self.oid):
-			val = str(hex(int(by)))
+			val = str(hex(int(by)))[2:]
+			if len(val) == 1:
+				val = "0" + val
 			result = val.replace('0x', '').upper()
 			if divmod(len(result), 2)[1] == 1:
 				# Padding
