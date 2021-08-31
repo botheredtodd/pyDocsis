@@ -157,11 +157,7 @@ class mib:
 				outBlob = "0" + outBlob
 			datalen = int(len(outBlob) / 2)
 			outBlob = str(hex(datalen))[2:] + outBlob
-			outBlob = str(hex(66))[2:] + outBlob	
-
-			
-			
-			
+			outBlob = str(hex(66))[2:] + outBlob		
 		oidBlob = ""
 		for by in encode_oid_string(self.oid):
 			val = str(hex(int(by)))[2:]
