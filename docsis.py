@@ -3,6 +3,7 @@ import codecs
 import sys
 from TLV import TLV
 from docsisTlvs import DocsisTlvs
+from MTATlvs import MTATlvs
 from mib import mib
 
 class cmConfig(object):
@@ -55,10 +56,10 @@ class cmConfig(object):
 						else:
 							value = tlv_string[value_start_position:value_end_position]
 							if len(tags[tag]["subTlvs"].keys()) > 0:
-								#print(tag)
-								#print("down")
+								print(tag)
+								print("down")
 								subts = self.parse(value, tags[tag]["subTlvs"])
-								#print("up")
+								print("up")
 								parsed_data = [tag, subts]
 								tlvs.append(TLV(tag = tag, subTLVs = subts, datatype = tags[tag]["datatype"]))
 								#tlvs.append(parsed_data)
@@ -91,6 +92,8 @@ class cmConfig(object):
 if __name__ == '__main__':
 	cm = cmConfig()
 	cm.generateStringFromFile(sys.argv[1])
+	if sys.argv[2] == "MTA":
+		cm.tags = MTATlvs
 	#print(cm.tlv_string)
 	cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
 	#cm.configFilePath = "cm2.cfg"
