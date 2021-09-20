@@ -1,4 +1,6 @@
 import codecs
+import binascii
+from mtaMibs import mibs
 oidDataTypes = {}
 oidDataTypes["103"] = "ipv6FlowLabelMIB"
 oidDataTypes["66"] = "UInt32"
@@ -40,6 +42,7 @@ class mib:
 	def __init__(self):
 		# storing these as strings
 		self.oid = ""
+		self.index = ""
 		self.value = ""
 		self.dataType = ""
 	def decode(self, hexJunk):
@@ -74,12 +77,22 @@ class mib:
 		del hex_list[0]
 		oidlength -= 1
 		val = 0
+		in_index = False
 		while len(hex_list) > 0:
 			oidlength -= 1
 			val = ((val<<7) | ((hex_list[0] & 0x7F)))
-			if (hex_list[0] & 0x80) != 0x80:
-				OID_str += "."+str(val)
-				val = 0
+			if in_index == False:
+				if (hex_list[0] & 0x80) != 0x80:
+					OID_str += "."+str(val)
+					val = 0
+				if OID_str in mibs.keys():
+					in_index = True
+			else:
+				#print(binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')))
+				try:
+					self.index += str(binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')).decode())
+				except:
+					self.index += " " + str(hex_list[0])
 			self.oid = OID_str
 			if oidlength == 0:
 				del hex_list[0]
@@ -100,15 +113,24 @@ class mib:
 						elif oidDataTypes[str(datatype)] == "HexString":
 							working = ""
 							while len(hex_list) > 1:
-								tmp = str(hex(hex_list[0]))[2:]
-								if len(tmp) % 2 == 1:
-									tmp = "0" + tmp
-								working += tmp
+								#print(binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')))
+								try:
+									snmpdata += binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')).decode()
+								except:
+									print(hex_list[0])
+								#tmp = str(hex(hex_list[0]))[2:]
+								#if len(tmp) % 2 == 1:
+								#	tmp = "0" + tmp
+								#working += tmp
 								del hex_list[0]
-							working += str(hex(hex_list[0]))[2:]
-							if len(working) % 2 == 1:
-								working = "0" + working
-							snmpdata = "0x" + working
+							try:
+								snmpdata += binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')).decode()
+							except:
+								print(hex(hex_list[0]))
+							#working += str(hex(hex_list[0]))[2:]
+							#if len(working) % 2 == 1:
+								#working = "0" + working
+							#snmpdata = binascii.unhexlify(working.replace('0x', '')).decode()) 
 						elif oidDataTypes[str(datatype)] == "Integer32":
 							working = ""
 							while len(hex_list) > 1:
@@ -136,8 +158,7 @@ class mib:
 				self.value = snmpdata
 				OID_str += " Data Type: " + strDataType + " Length: " + str(datalength) + " Value: " + snmpdata
 			else:
-				del hex_list[0]
-				
+				del hex_list[0]	
 		# print the OID in dot notation.
 		#print(OID_str)
 	def encode(self):

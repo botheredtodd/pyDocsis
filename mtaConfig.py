@@ -6,6 +6,7 @@ from docsisTlvs import DocsisTlvs
 from MTATlvs import MTATlvs
 from mib import mib
 
+
 class mtaConfig(object):
 	def __init__(self ):
 		self.tlvs = []
@@ -124,7 +125,7 @@ if __name__ == '__main__':
 		#else:
 		#	if t.datatype not in  ["snmp_object", "aggregate"]:
 		#		print("Write a decoder for " + t.datatype)
-		print(t.tag)
+		#print(t.tag)
 		#if t.tag == "11":
 			#before = t.value
 			#m = t.getValue()
@@ -136,12 +137,12 @@ if __name__ == '__main__':
 		if MTATlvs[t.tag]["datatype"] == "snmp_object":
 			print(t.getValue())
 
-		else:
-			print(t.datatype)
+		#else:
+		#	print(t.datatype)
 		# t.getValue()
 		#print(t.getValue())
-		for tt in t.subTLVs:
-			print("  " + tt.tag)
+		#for tt in t.subTLVs:
+		#	print("  " + tt.tag)
 			#print("  " + tt.datatype)
 			#if tt.datatype in ["uchar", "uint", "ushort", "hexstr", "strzero"]:
 				#bb = tt.getValue()
