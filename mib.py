@@ -1,5 +1,6 @@
 import codecs
 oidDataTypes = {}
+oidDataTypes["103"] = "ipv6FlowLabelMIB"
 oidDataTypes["66"] = "UInt32"
 oidDataTypes["64"] = "IPAddress"
 oidDataTypes["6"] = "objectIdentifier"
