@@ -19,6 +19,9 @@ mibs["1.3.6.1.6.3.16.1.5.2.1.6"]["indexes"] = 2
 mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.3.1.1.2"] = {}
 mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.3.1.1.2"]["description"] = "pktcEUERSTDMValue"
 mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.3.1.1.2"]["indexes"] = 1
+mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"] = {}
+mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"]["description"] = "pktcEUERSTAppAdminStat"
+mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"]["indexes"] = 2
 
 #values could be other, volatile, nonVolatile, permanent, readOnly
 
