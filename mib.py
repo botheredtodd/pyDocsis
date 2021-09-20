@@ -2,7 +2,7 @@ import codecs
 import binascii
 from mtaMibs import mibs
 oidDataTypes = {}
-oidDataTypes["103"] = "ipv6FlowLabelMIB"
+oidDataTypes["103"] = "HexString"
 oidDataTypes["66"] = "UInt32"
 oidDataTypes["64"] = "IPAddress"
 oidDataTypes["6"] = "objectIdentifier"
@@ -62,12 +62,26 @@ class mib:
 			OID_str += "" 
 		del hex_list[0] # oid tag
 		totalLength = hex_list[0]
+		
+		if len(hex_list) > 254:
+			print(len(hex_list))
+			del hex_list[0]
+			ttoL = str(hex(hex_list[0])).replace('0x', '') + str(hex(totalLength)).replace('0x', '')
+			print(ttoL)
+			print("Length might just be " + str(int(ttoL, 16)))
+			totalLength = int(ttoL, 16)
 		del hex_list[0] # -- length of oid
 		noIdea = hex_list[0]
+		if len(hex_list) > 254:
+			del hex_list[0]
+			ttoL = str(hex(hex_list[0])).replace('0x', '') + str(hex(noIdea)).replace('0x', '')
+			print(ttoL)
+			print("NO I dea what this might just be " + str(int(ttoL, 16)))
+			noIdea = int(ttoL, 16)
 		del hex_list[0] 
 		oidlength = hex_list[0]
 		del hex_list[0] 
-		
+		#print(hex_list)
 		x = int(hex_list[0] / 40)
 		y = int(hex_list[0] % 40)
 		if x > 2:
@@ -117,7 +131,15 @@ class mib:
 								try:
 									snmpdata += binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')).decode()
 								except:
-									print(hex_list[0])
+									if hex_list[0] == 13:
+										snmpdata += "\n"
+									elif hex_list[0] == 10:
+										snmpdata += ""
+									elif hex_list[0] == 15:
+										snmpdata += "\t"
+									else:
+										snmpdata += "<>"
+										print(hex_list[0])
 								#tmp = str(hex(hex_list[0]))[2:]
 								#if len(tmp) % 2 == 1:
 								#	tmp = "0" + tmp
@@ -126,6 +148,7 @@ class mib:
 							try:
 								snmpdata += binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')).decode()
 							except:
+								snmpdata += "<>"
 								print(hex(hex_list[0]))
 							#working += str(hex(hex_list[0]))[2:]
 							#if len(working) % 2 == 1:
@@ -150,8 +173,8 @@ class mib:
 							#print("Is " + str(int(working, 16)) + " a number?")
 							snmpdata = str(int(working, 16))
 					else:
-						print("OID is : " + self.oid)
-						print("What is the datatype for mibby thingie " + str(datatype))
+						#print("OID is : " + self.oid)
+						#print("What is the datatype for mibby thingie " + str(datatype))
 						snmpdata += str(hex_list[0])
 					del hex_list[0]
 				self.dataType = strDataType

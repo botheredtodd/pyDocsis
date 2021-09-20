@@ -81,7 +81,7 @@ class TLV:
 			m = mib()
 			m.decode(self.value)
 			#return m
-			return(m.oid + " " + m.dataType + " " + m.index + " " + m.value)
+			return(m.oid + " " + m.dataType + " Index:" + m.index + " " + m.value)
 		else:
 			print("Write a decoder for " + self.datatype)
 			return tvalue

@@ -65,6 +65,8 @@ class mtaConfig(object):
 							raise ValueError('Parse error: tag ' + tag + ' declared data of length ' + str(value_length) + ', but actual data length is ' + str(int(len(tlv_string[value_start_position-1:-1])/2)))
 						else:
 							value = tlv_string[value_start_position:value_end_position]
+							#if tag == "64":
+							#	print(value)
 							if len(tags[tag]["subTlvs"].keys()) > 0:
 								print(tag)
 								print("down")
@@ -79,6 +81,7 @@ class mtaConfig(object):
 								#		value = value[:-2]
 								#	value = codecs.decode(value, "hex")
 								#parsed_data = [tag,  tags[tag]["description"], tags[tag]["datatype"] , value]
+								#if tag == "64":
 								tlvs.append(TLV(tag = tag, value = value, datatype = tags[tag]["datatype"]))
 							i = value_end_position
 						tag_found = True
