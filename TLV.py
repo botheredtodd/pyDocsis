@@ -2,6 +2,7 @@ import codecs
 from mib import mib
 import binascii
 from docsisTlvs import DocsisTlvs
+from mtaMibs import mibs
 def to_little(val):
 	  little_hex = bytearray.fromhex(val)
 	  little_hex.reverse()
@@ -81,7 +82,12 @@ class TLV:
 			m = mib()
 			m.decode(self.value)
 			#return m
-			return(m.oid + " " + m.dataType + " Index:" + m.index + " " + m.value)
+			if m.oid not in mibs.keys():
+				return
+				return(m.oid + " " + m.dataType + " Index:" + m.index + " " + m.value)
+			else:
+				#return
+				return(m.oid + " " + m.dataType + " Index:" + m.index + " " + m.value)
 		else:
 			print("Write a decoder for " + self.datatype)
 			return tvalue

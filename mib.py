@@ -1,6 +1,9 @@
 import codecs
 import binascii
 from mtaMibs import mibs
+#import asn1
+
+
 oidDataTypes = {}
 oidDataTypes["103"] = "HexString"
 oidDataTypes["66"] = "UInt32"
@@ -58,26 +61,29 @@ class mib:
 		
 		for element in range(len(hex_list)):
 			hex_list[element] = int(hex_list[element],16)
+		#decoder = asn1.Decoder()
+		#decoder.start(hex_list)
+		#tag, value = decoder.read()
+		#print(tag)
+		#print(value)
+		
 		if hex_list[0] == 48: #this has been 48 for all of the ones I tested
 			OID_str += "" 
 		del hex_list[0] # oid tag
 		totalLength = hex_list[0]
 		
 		if len(hex_list) > 254:
-			print(len(hex_list))
+			#print(len(hex_list))
 			del hex_list[0]
 			ttoL = str(hex(hex_list[0])).replace('0x', '') + str(hex(totalLength)).replace('0x', '')
-			print(ttoL)
-			print("Length might just be " + str(int(ttoL, 16)))
+			#print(ttoL)
+			#print("Length might just be " + str(int(ttoL, 16)))
 			totalLength = int(ttoL, 16)
 		del hex_list[0] # -- length of oid
-		noIdea = hex_list[0]
+		noIdea = hex_list[0] # this *may* always be 6 for our uses, or 103,6 for tlv 64
 		if len(hex_list) > 254:
 			del hex_list[0]
-			ttoL = str(hex(hex_list[0])).replace('0x', '') + str(hex(noIdea)).replace('0x', '')
-			print(ttoL)
-			print("NO I dea what this might just be " + str(int(ttoL, 16)))
-			noIdea = int(ttoL, 16)
+			noIdea = [noIdea, hex_list[0]]
 		del hex_list[0] 
 		oidlength = hex_list[0]
 		del hex_list[0] 
@@ -139,7 +145,7 @@ class mib:
 										snmpdata += "\t"
 									else:
 										snmpdata += "<>"
-										print(hex_list[0])
+										#print(hex_list[0])
 								#tmp = str(hex(hex_list[0]))[2:]
 								#if len(tmp) % 2 == 1:
 								#	tmp = "0" + tmp
@@ -148,8 +154,15 @@ class mib:
 							try:
 								snmpdata += binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')).decode()
 							except:
-								snmpdata += "<>"
-								print(hex(hex_list[0]))
+								if hex_list[0] == 13:
+									snmpdata += "\n"
+								elif hex_list[0] == 10:
+									snmpdata += ""
+								elif hex_list[0] == 15:
+									snmpdata += "\t"
+								else:
+									snmpdata += "<>"
+								#print(hex(hex_list[0]))
 							#working += str(hex(hex_list[0]))[2:]
 							#if len(working) % 2 == 1:
 								#working = "0" + working

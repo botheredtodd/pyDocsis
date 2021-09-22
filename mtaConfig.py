@@ -115,6 +115,7 @@ if __name__ == '__main__':
 	#cm.encode()
 	#print("########")
 	for t in cm.tlvs:
+		#t.getValue()
 		#if t.datatype in ["uchar", "uint", "ushort", "hexstr"]:
 		#	if t.tag == "18":
 		#		bb = t.getValue()
@@ -138,7 +139,9 @@ if __name__ == '__main__':
 		#if "datatype" in DocsisTlvs[t.tag].keys():
 		#	print(DocsisTlvs[t.tag]["datatype"])
 		if MTATlvs[t.tag]["datatype"] == "snmp_object":
-			print(t.getValue())
+			bob = t.getValue()
+			if bob != None:
+				print(t.getValue())
 
 		#else:
 		#	print(t.datatype)

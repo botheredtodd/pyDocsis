@@ -22,8 +22,33 @@ mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.3.1.1.2"]["indexes"] = 1
 mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"] = {}
 mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"]["description"] = "pktcEUERSTAppAdminStat"
 mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"]["indexes"] = 2
+mibs["1.3.6.1.4.1.4115.1.3.3.1.1.1.4.3"] = {}
+mibs["1.3.6.1.4.1.4115.1.3.3.1.1.1.4.3"]["description"] = "arrisMtaVqmEnable"
+mibs["1.3.6.1.4.1.4115.1.3.3.1.1.1.4.3"]["indexes"] = 1
+mibs["1.3.6.1.4.1.4115.1.3.3.1.1.1.4.3"]["values"] = ["disable", "enable"]
+mibs["1.3.6.1.2.1.1.4"] = {}
+mibs["1.3.6.1.2.1.1.4"]["description"] = "sysContact"
+mibs["1.3.6.1.2.1.1.4"]["indexes"] = 1
+mibs["1.3.6.1.4.1.4115.1.3.3.1.3.3.13"] = {}
+mibs["1.3.6.1.4.1.4115.1.3.3.1.3.3.13"]["description"] = "arrisMtaDevPwrSupplyOverTempAlarmThreshold"
+mibs["1.3.6.1.4.1.4115.1.3.3.1.3.3.13"]["indexes"] = 1
+mibs["1.3.6.1.4.1.4115.1.3.3.1.3.3.12"] = {}
+mibs["1.3.6.1.4.1.4115.1.3.3.1.3.3.12"]["description"] = "arrisMtaDevPwrSupplyOverTempAlarmControl"
+mibs["1.3.6.1.4.1.4115.1.3.3.1.3.3.12"]["indexes"] = 1
+mibs["1.3.6.1.4.1.4115.1.3.3.1.3.3.12"]["values"] = ["disable", "enable"]
+mibs["1.3.6.1.4.1.4115.1.3.3.1.2.3.20"] = {}
+mibs["1.3.6.1.4.1.4115.1.3.3.1.2.3.20"]["description"] = "arrisMtaDevEventHideFQDNandIPAdress"
+mibs["1.3.6.1.4.1.4115.1.3.3.1.2.3.20"]["indexes"] = 1
+mibs["1.3.6.1.4.1.4115.1.3.3.1.2.3.20"]["values"] = ["disable", "enable"]
+mibs["1.3.6.1.4.1.4115.1.3.3.1.2.3.46"] = {}
+mibs["1.3.6.1.4.1.4115.1.3.3.1.2.3.46"]["description"] = "arrisMtaDevDhcpSubOpt3Immediate"
+mibs["1.3.6.1.4.1.4115.1.3.3.1.2.3.46"]["indexes"] = 1
+mibs["1.3.6.1.4.1.4115.1.3.3.1.2.3.46"]["values"] = ["off", "on"]
+mibs["1.3.6.1.4.1.4115.1.3.3.1.2.4.3.1.24"] = {}
+mibs["1.3.6.1.4.1.4115.1.3.3.1.2.4.3.1.24"]["description"] = "arrisMtaDevEndPntDialingMethod"
+mibs["1.3.6.1.4.1.4115.1.3.3.1.2.4.3.1.24"]["indexes"] = 1
+mibs["1.3.6.1.4.1.4115.1.3.3.1.2.4.3.1.24"]["values"] = ["tone", "pulse", "toneAndPulse", "pulseWithDTMFRelay", "toneAndPulseWithDTMFRelay"]
 
-#values could be other, volatile, nonVolatile, permanent, readOnly
 
 
 """
