@@ -197,6 +197,8 @@ class mib:
 				del hex_list[0]	
 		# print the OID in dot notation.
 		#print(OID_str)
+		if in_index == False:
+			print(self.oid)
 	def encode(self):
 		outBlob = ""
 		if self.dataType == "HexString":
