@@ -140,8 +140,8 @@ if __name__ == '__main__':
 		#	print(DocsisTlvs[t.tag]["datatype"])
 		if MTATlvs[t.tag]["datatype"] == "snmp_object":
 			bob = t.getValue()
-			#if bob != None:
-			#	print(t.getValue())
+			if bob != None:
+				print(t.getValue())
 
 		#else:
 		#	print(t.datatype)

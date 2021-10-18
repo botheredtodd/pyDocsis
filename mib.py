@@ -186,8 +186,8 @@ class mib:
 							#print("Is " + str(int(working, 16)) + " a number?")
 							snmpdata = str(int(working, 16))
 					else:
-						#print("OID is : " + self.oid)
-						#print("What is the datatype for mibby thingie " + str(datatype))
+						print("OID is : " + self.oid)
+						print("What is the datatype for mibby thingie " + str(datatype))
 						snmpdata += str(hex_list[0])
 					del hex_list[0]
 				self.dataType = strDataType
@@ -198,7 +198,7 @@ class mib:
 		# print the OID in dot notation.
 		#print(OID_str)
 		if in_index == False:
-			print(self.oid)
+			print("Not found:" + self.oid)
 	def encode(self):
 		outBlob = ""
 		if self.dataType == "HexString":

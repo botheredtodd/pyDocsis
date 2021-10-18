@@ -83,11 +83,11 @@ class TLV:
 			m.decode(self.value)
 			#return m
 			if m.oid not in mibs.keys():
-				return
+				#return
 				return(m.oid + " " + m.dataType + " Index:" + m.index + " " + m.value)
 			else:
 				#return
-				return(m.oid + " " + m.dataType + " Index:" + m.index + " " + m.value)
+				return(mibs[m.oid]["description"]+ " " + m.dataType + " Index:" + m.index + " " + m.value)
 		else:
 			print("Write a decoder for " + self.datatype)
 			return tvalue

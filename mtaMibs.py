@@ -4,6 +4,12 @@ mibs["1.3.6.1.2.1.1.4"] = {}
 mibs["1.3.6.1.2.1.1.4"]["description"] = "sysContact"
 mibs["1.3.6.1.2.1.1.4"]["indexes"] = 1
 
+
+mibs["1.3.6.1.2.1.140.1.1.6"] = {}
+mibs["1.3.6.1.2.1.140.1.1.6"]["description"] = "pktcMtaDevEnabled"
+mibs["1.3.6.1.2.1.140.1.1.6"]["indexes"] = 1
+mibs["1.3.6.1.2.1.140.1.1.6"]["values"] = ["false", "true"]
+
 mibs["1.3.6.1.2.1.2.2.1.7"] = {}
 mibs["1.3.6.1.2.1.2.2.1.7"]["description"] = "ifAdminStatus"
 mibs["1.3.6.1.2.1.2.2.1.7"]["indexes"] = 1
@@ -31,13 +37,13 @@ mibs["1.3.6.1.6.3.16.1.5.2.1.6"] = {}
 mibs["1.3.6.1.6.3.16.1.5.2.1.6"]["description"] = "vacmViewTreeFamilyStatus"
 mibs["1.3.6.1.6.3.16.1.5.2.1.6"]["indexes"] = 2
 
-
 mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.3.1.1.2"] = {}
 mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.3.1.1.2"]["description"] = "pktcEUERSTDMValue"
 mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.3.1.1.2"]["indexes"] = 1
-mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"] = {}
-mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"]["description"] = "pktcEUERSTAppAdminStat"
-mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"]["indexes"] = 2
+
+#mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"] = {}
+#mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"]["description"] = "pktcEUERSTAppAdminStat"
+#mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"]["indexes"] = 2
 
 
 mibs["1.3.6.1.4.1.4115.1.3.3.1.1.1.4.3"] = {}
@@ -144,6 +150,57 @@ mibs["1.3.6.1.4.1.4115.1.3.3.1.2.4.3.1.24"] = {}
 mibs["1.3.6.1.4.1.4115.1.3.3.1.2.4.3.1.24"]["description"] = "arrisMtaDevEndPntDialingMethod"
 mibs["1.3.6.1.4.1.4115.1.3.3.1.2.4.3.1.24"]["indexes"] = 1
 mibs["1.3.6.1.4.1.4115.1.3.3.1.2.4.3.1.24"]["values"] = ["tone", "pulse", "toneAndPulse", "pulseWithDTMFRelay", "toneAndPulseWithDTMFRelay"]
+
+mibs["1.3.6.1.4.1.4491.2.2.6.2.1.2.3.1.1"] = {}
+mibs["1.3.6.1.4.1.4491.2.2.6.2.1.2.3.1.1"]["description"] = "pktcEnNcsEndPntLVMgmtPolicy"
+mibs["1.3.6.1.4.1.4491.2.2.6.2.1.2.3.1.1"]["indexes"] = 1
+mibs["1.3.6.1.4.1.4491.2.2.6.2.1.2.3.1.1"]["values"] = ["disable", "voltage_at_all_times","voltage_unless_RF_QAM_absent","voltage_based_on_service_or_timers","voltage_based_on_service"]
+
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.2"] = {}
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.2"]["description"] = "pktcEUERSTAppFeatIndex"
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.2"]["indexes"] = 1
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.2"]["values"] = []
+
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.3"] = {}
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.3"]["description"] = "pktcEUERSTAppFeatID"
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.3"]["indexes"] = 1
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.3"]["values"] = []
+
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.4"] = {}
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.4"]["description"] = "pktcEUERSTAppFeatIndexRef"
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.4"]["indexes"] = 1
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.4"]["values"] = []
+
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"] = {}
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"]["description"] = "pktcEUERSTAppNwActStat"
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"]["indexes"] = 1
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"]["values"] = []
+
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.6"] = {}
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.6"]["description"] = "pktcEUERSTAppNwActStatInfo"
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.6"]["indexes"] = 1
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.6"]["values"] = []
+
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.7"] = {}
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.7"]["description"] = "pktcEUERSTAppEUEActStat"
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.7"]["indexes"] = 1
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.7"]["values"] = []
+
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.8"] = {}
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.8"]["description"] = "pktcEUERSTAppEUEActStatInfo"
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.8"]["indexes"] = 1
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.8"]["values"] = []
+
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.9"] = {}
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.9"]["description"] = "pktcEUERSTAppRowActStatus"
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.9"]["indexes"] = 1
+mibs["3.6.1.4.1.4491.2.2.8.2.1.1.2.1.9"]["values"] = []
+
+mibs["1.3.6.1.4.1.4491.2.2.8.2.1.2.6.4"] = {}
+mibs["1.3.6.1.4.1.4491.2.2.8.2.1.2.6.4"]["description"] = "unknown, maybe time zone info?"
+mibs["1.3.6.1.4.1.4491.2.2.8.2.1.2.6.4"]["indexes"] = 1
+mibs["1.3.6.1.4.1.4491.2.2.8.2.1.2.6.4"]["values"] = []
+
 
 mibs[""] = {}
 mibs[""]["description"] = ""
