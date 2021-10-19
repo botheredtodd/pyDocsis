@@ -10,6 +10,11 @@ mibs["1.3.6.1.2.1.140.1.1.6"]["description"] = "pktcMtaDevEnabled"
 mibs["1.3.6.1.2.1.140.1.1.6"]["indexes"] = 1
 mibs["1.3.6.1.2.1.140.1.1.6"]["values"] = ["false", "true"]
 
+mibs["1.3.6.1.2.1.140.1.2.11"] = {}
+mibs["1.3.6.1.2.1.140.1.2.11"]["description"] = "pktcMtaDevProvConfigHash"
+mibs["1.3.6.1.2.1.140.1.2.11"]["indexes"] = 1
+mibs["1.3.6.1.2.1.140.1.2.11"]["values"] = []
+
 mibs["1.3.6.1.2.1.2.2.1.7"] = {}
 mibs["1.3.6.1.2.1.2.2.1.7"]["description"] = "ifAdminStatus"
 mibs["1.3.6.1.2.1.2.2.1.7"]["indexes"] = 1

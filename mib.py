@@ -1,6 +1,7 @@
 import codecs
 import binascii
 from mtaMibs import mibs
+import hashlib
 #import asn1
 
 
@@ -48,6 +49,7 @@ class mib:
 		self.index = ""
 		self.value = ""
 		self.dataType = ""
+		self.isHashed = False
 	def decode(self, hexJunk):
 		"""
 		based on panda_inline4's comment at https://stackoverflow.com/questions/49653398/converting-oid-of-public-key-etc-in-hex-data-to-the-dot-format
@@ -133,28 +135,33 @@ class mib:
 						elif oidDataTypes[str(datatype)] == "HexString":
 							working = ""
 							while len(hex_list) > 1:
-								#print(binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')))
-								try:
-									snmpdata += binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')).decode()
-								except:
-									if hex_list[0] == 13:
-										snmpdata += "\n"
-									elif hex_list[0] == 10:
-										snmpdata += ""
-									elif hex_list[0] == 15:
-										snmpdata += "\t"
-									else:
-										snmpdata += "<>"
-										#print(hex_list[0])
-								#tmp = str(hex(hex_list[0]))[2:]
-								#if len(tmp) % 2 == 1:
-								#	tmp = "0" + tmp
-								#working += tmp
+								if self.oid == "1.3.6.1.2.1.140.1.2.11" or self.oid == "1.3.6.1.4.1.4115.11.1.52":
+									snmpdata += str(hex(hex_list[0])).replace('0x', '')
+								else:
+									#print(binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')))
+									try:
+										snmpdata += binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')).decode()
+									except:
+										if hex_list[0] == 13:
+											snmpdata += "\n"
+										elif hex_list[0] == 10:
+											snmpdata += ""
+										elif hex_list[0] == 15:
+											snmpdata += "\t"
+										else:
+											snmpdata += "<>"
+											#print(hex_list[0])
+									#tmp = str(hex(hex_list[0]))[2:]
+									#if len(tmp) % 2 == 1:
+									#	tmp = "0" + tmp
+									#working += tmp
 								del hex_list[0]
 							try:
 								snmpdata += binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')).decode()
 							except:
-								if hex_list[0] == 13:
+								if self.oid == "1.3.6.1.2.1.140.1.2.11" or self.oid == "1.3.6.1.4.1.4115.11.1.52":
+									snmpdata += str(hex(hex_list[0])).replace('0x', '')
+								elif hex_list[0] == 13:
 									snmpdata += "\n"
 								elif hex_list[0] == 10:
 									snmpdata += ""
