@@ -60,6 +60,8 @@ class TLV:
 		tlvlen = str(hex(int(len(tvalue) / 2)))[2:]
 		if len(tlvlen) == 1:
 			tlvlen = "0" + tlvlen
+		if len(tlvlen) == 3:
+			tlvlen = "0" + tlvlen
 		tlv_string += tlv_string + htag.upper() + tlvlen + tvalue.upper()
 		return tlv_string	
 	def getValue(self):

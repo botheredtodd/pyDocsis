@@ -5,6 +5,7 @@ from TLV import TLV
 from docsisTlvs import DocsisTlvs
 from MTATlvs import MTATlvs
 from mib import mib
+import hashlib
 
 
 class mtaConfig(object):
@@ -13,14 +14,15 @@ class mtaConfig(object):
 		self.configFilePath = ""
 		self.tlv_string = ""
 		self.tags = MTATlvs
+		self.content = None
 	
 	def generateStringFromFile(self, file = ""):
 		if file != "":
 			self.configFilePath = file
 		if self.configFilePath != "":
 			f = open(self.configFilePath, "rb")
-			content = f.read()
-			self.tlv_string = binascii.hexlify(content).decode('UTF-8')[:]
+			self.content = f.read()
+			self.tlv_string = binascii.hexlify(self.content).decode('UTF-8')[:]
 		else:
 			raise ValueError("Cannot turn a file into a string if there is no file.")
 	def parse(self, tlv_string = "", tags = {}):
@@ -101,7 +103,25 @@ class mtaConfig(object):
 			f = open(self.configFilePath, "wb")
 			f.write(binascii.unhexlify(stuff))
 			f.close
-		
+	def hash(self):
+		stuff = '' #'0x'
+		for tag in self.tlvs:
+			if MTATlvs[tag.tag]["datatype"] == "snmp_object":
+				bob = tag.getValue()
+				if tag.tag == "64":
+					print("here")
+				if "pktcMtaDevProvConfigHash" in bob:
+					print("Already hashed, it would be great if you got: ")
+					print(tag.getValue())
+				else:
+					stuff += tag.encodeForFile()
+					#print(len(stuff))
+			else:
+				stuff += tag.encodeForFile()
+				#print(len(stuff))	
+		#print(stuff)	
+		print(hashlib.sha1(binascii.unhexlify(stuff)).hexdigest())
+	
 if __name__ == '__main__':
 	cm = mtaConfig()
 	cm.generateStringFromFile(sys.argv[1])
@@ -109,12 +129,13 @@ if __name__ == '__main__':
 		cm.tags = MTATlvs
 	#print(cm.tlv_string)
 	cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
+	cm.hash()
 	#cm.configFilePath = "cm2.cfg"
 	#print(cm.tlv_string.upper())
 	#print()
 	#cm.encode()
 	#print("########")
-	for t in cm.tlvs:
+	#for t in cm.tlvs:
 		#t.getValue()
 		#if t.datatype in ["uchar", "uint", "ushort", "hexstr"]:
 		#	if t.tag == "18":
@@ -138,10 +159,10 @@ if __name__ == '__main__':
 			#print(m.encode().upper())
 		#if "datatype" in DocsisTlvs[t.tag].keys():
 		#	print(DocsisTlvs[t.tag]["datatype"])
-		if MTATlvs[t.tag]["datatype"] == "snmp_object":
-			bob = t.getValue()
-			if bob != None:
-				print(t.getValue())
+		# if MTATlvs[t.tag]["datatype"] == "snmp_object":
+		# 	bob = t.getValue()
+		# 	if bob != None:
+		# 		print(t.getValue())
 
 		#else:
 		#	print(t.datatype)

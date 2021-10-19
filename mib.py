@@ -204,13 +204,15 @@ class mib:
 				del hex_list[0]	
 		# print the OID in dot notation.
 		#print(OID_str)
-		if in_index == False:
-			print("Not found:" + self.oid)
+		#if in_index == False:
+		#	print("Not found:" + self.oid)
 	def encode(self):
 		outBlob = ""
 		if self.dataType == "HexString":
 			datalen = str(hex(int(len(self.value[2:]) / 2)))[2:]
 			if len(datalen) == 1:
+				datalen = "0" + datalen
+			if len(datalen) == 3:
 				datalen = "0" + datalen
 			outBlob = outBlob + self.value[2:]
 			outBlob = datalen + outBlob
@@ -256,6 +258,8 @@ class mib:
 			oidBlob += result
 		outBlob = oidBlob + outBlob
 		outBlob = "06" + outBlob #OBJECT IDENTIFIER data type
+		if len(outBlob) > 512:
+			outBlob = "67" + outBlob
 		outBlob = str(hex(int(len(outBlob) / 2)))[2:] + outBlob
 		if divmod(len(outBlob), 2)[1] == 1:
 			# Padding
