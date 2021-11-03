@@ -125,8 +125,7 @@ class mtaConfig(object):
 if __name__ == '__main__':
 	cm = mtaConfig()
 	cm.generateStringFromFile(sys.argv[1])
-	if sys.argv[2] == "MTA":
-		cm.tags = MTATlvs
+	cm.tags = MTATlvs
 	#print(cm.tlv_string)
 	cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
 	cm.hash()
