@@ -8,3 +8,5 @@ TLV stuff started with https://github.com/timgabets/pytlv and built out from the
 #todo
 
 - [ ] so many things...
+
+# Your code has been rated at -3.41/10 :)
