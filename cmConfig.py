@@ -56,10 +56,10 @@ class cmConfig(object):
 						else:
 							value = tlv_string[value_start_position:value_end_position]
 							if len(tags[tag]["subTlvs"].keys()) > 0:
-								print(tag)
-								print("down")
+								#print(tag)
+								#print("down")
 								subts = self.parse(value, tags[tag]["subTlvs"])
-								print("up")
+								#print("up")
 								parsed_data = [tag, subts]
 								tlvs.append(TLV(tag = tag, subTLVs = subts, datatype = tags[tag]["datatype"]))
 								#tlvs.append(parsed_data)
