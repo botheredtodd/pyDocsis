@@ -5,6 +5,8 @@ A python version/update of https://github.com/rlaager/docsis.
 
 TLV stuff started with https://github.com/timgabets/pytlv and built out from there with a lot of frustration and RFCs (the former because of the latter)
 
+Look in the Docs folder for examples.
+
 #todo
 
 - [ ] so many things...
