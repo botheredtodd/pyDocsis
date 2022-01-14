@@ -77,19 +77,19 @@ DocsisTlvs["04"]["subTlvs"]["07"]["subTlvs"] = {}
 DocsisTlvs["04"]["subTlvs"]["15"] = {}
 DocsisTlvs["04"]["subTlvs"]["15"]["description"] = "Technicolor thing"
 DocsisTlvs["04"]["subTlvs"]["15"]["hex"] = "0f"
-DocsisTlvs["04"]["subTlvs"]["15"]["datatype"] = "(unknown)"
+DocsisTlvs["04"]["subTlvs"]["15"]["datatype"] = "unknown"
 DocsisTlvs["04"]["subTlvs"]["15"]["subTlvs"] = {}
 
 DocsisTlvs["04"]["subTlvs"]["61"] = {}
 DocsisTlvs["04"]["subTlvs"]["61"]["description"] = "Technicolor thing"
 DocsisTlvs["04"]["subTlvs"]["61"]["hex"] = "3d"
-DocsisTlvs["04"]["subTlvs"]["61"]["datatype"] = "(unknown)"
+DocsisTlvs["04"]["subTlvs"]["61"]["datatype"] = "unknown"
 DocsisTlvs["04"]["subTlvs"]["61"]["subTlvs"] = {}
 
 DocsisTlvs["04"]["subTlvs"]["103"] = {}
 DocsisTlvs["04"]["subTlvs"]["103"]["description"] = "Technicolor thing"
 DocsisTlvs["04"]["subTlvs"]["103"]["hex"] = "67"
-DocsisTlvs["04"]["subTlvs"]["103"]["datatype"] = "(unknown)"
+DocsisTlvs["04"]["subTlvs"]["103"]["datatype"] = "unknown"
 DocsisTlvs["04"]["subTlvs"]["103"]["subTlvs"] = {}
 
 DocsisTlvs["05"] = {}
@@ -407,13 +407,13 @@ DocsisTlvs["11"]["subTlvs"] = {}
 DocsisTlvs["12"] = {}
 DocsisTlvs["12"]["description"] = "ModemIPAddress"
 DocsisTlvs["12"]["hex"] = "0c"
-DocsisTlvs["12"]["datatype"] = "(encode_ip)"
+DocsisTlvs["12"]["datatype"] = "encode_ip"
 DocsisTlvs["12"]["subTlvs"] = {}
 
 DocsisTlvs["13"] = {}
 DocsisTlvs["13"]["description"] = "Service(s) Not Available Response"
 DocsisTlvs["13"]["hex"] = "0d"
-DocsisTlvs["13"]["datatype"] = "(encode_ip)"
+DocsisTlvs["13"]["datatype"] = "encode_ip"
 DocsisTlvs["13"]["subTlvs"] = {}
 
 DocsisTlvs["14"] = {}
@@ -497,13 +497,13 @@ DocsisTlvs["19"]["subTlvs"] = {}
 DocsisTlvs["20"] = {}
 DocsisTlvs["20"]["description"] = "TftpModemAddress"
 DocsisTlvs["20"]["hex"] = "14"
-DocsisTlvs["20"]["datatype"] = "(encode_ip)"
+DocsisTlvs["20"]["datatype"] = "encode_ip"
 DocsisTlvs["20"]["subTlvs"] = {}
 
 DocsisTlvs["21"] = {}
 DocsisTlvs["21"]["description"] = "SwUpgradeServer"
 DocsisTlvs["21"]["hex"] = "15"
-DocsisTlvs["21"]["datatype"] = "(encode_ip)"
+DocsisTlvs["21"]["datatype"] = "encode_ip"
 DocsisTlvs["21"]["subTlvs"] = {}
 
 DocsisTlvs["22"] = {}
@@ -575,25 +575,25 @@ DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["02"]["subTlvs"] = {}
 DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["03"] = {}
 DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["03"]["description"] = "IpSrcAddr"
 DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["03"]["hex"] = "03"
-DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["03"]["datatype"] = "(encode_ip)"
+DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["03"]["datatype"] = "encode_ip"
 DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["03"]["subTlvs"] = {}
 
 DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["04"] = {}
 DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["04"]["description"] = "IpSrcMask"
 DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["04"]["hex"] = "04"
-DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["04"]["datatype"] = "(encode_ip)"
+DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["04"]["datatype"] = "encode_ip"
 DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["04"]["subTlvs"] = {}
 
 DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["05"] = {}
 DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["05"]["description"] = "IpDstAddr"
 DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["05"]["hex"] = "05"
-DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["05"]["datatype"] = "(encode_ip)"
+DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["05"]["datatype"] = "encode_ip"
 DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["05"]["subTlvs"] = {}
 
 DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["06"] = {}
 DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["06"]["description"] = "IpDstMask"
 DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["06"]["hex"] = "06"
-DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["06"]["datatype"] = "(encode_ip)"
+DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["06"]["datatype"] = "encode_ip"
 DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["06"]["subTlvs"] = {}
 
 DocsisTlvs["22"]["subTlvs"]["09"]["subTlvs"]["07"] = {}
@@ -689,7 +689,7 @@ DocsisTlvs["22"]["subTlvs"]["12"]["subTlvs"]["03"]["subTlvs"] = {}
 DocsisTlvs["22"]["subTlvs"]["12"]["subTlvs"]["04"] = {}
 DocsisTlvs["22"]["subTlvs"]["12"]["subTlvs"]["04"]["description"] = "PcIPv6SourceAddress"
 DocsisTlvs["22"]["subTlvs"]["12"]["subTlvs"]["04"]["hex"] = "04"
-DocsisTlvs["22"]["subTlvs"]["12"]["subTlvs"]["04"]["datatype"] = "(encode_ip6)"
+DocsisTlvs["22"]["subTlvs"]["12"]["subTlvs"]["04"]["datatype"] = "encode_ip"
 DocsisTlvs["22"]["subTlvs"]["12"]["subTlvs"]["04"]["subTlvs"] = {}
 
 DocsisTlvs["22"]["subTlvs"]["12"]["subTlvs"]["05"] = {}
@@ -701,7 +701,7 @@ DocsisTlvs["22"]["subTlvs"]["12"]["subTlvs"]["05"]["subTlvs"] = {}
 DocsisTlvs["22"]["subTlvs"]["12"]["subTlvs"]["06"] = {}
 DocsisTlvs["22"]["subTlvs"]["12"]["subTlvs"]["06"]["description"] = "PcIPv6DestAddress"
 DocsisTlvs["22"]["subTlvs"]["12"]["subTlvs"]["06"]["hex"] = "06"
-DocsisTlvs["22"]["subTlvs"]["12"]["subTlvs"]["06"]["datatype"] = "(encode_ip6)"
+DocsisTlvs["22"]["subTlvs"]["12"]["subTlvs"]["06"]["datatype"] = "encode_ip"
 DocsisTlvs["22"]["subTlvs"]["12"]["subTlvs"]["06"]["subTlvs"] = {}
 
 DocsisTlvs["22"]["subTlvs"]["12"]["subTlvs"]["07"] = {}
@@ -1757,25 +1757,25 @@ DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["02"]["subTlvs"] = {}
 DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["03"] = {}
 DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["03"]["description"] = "IpSrcAddr"
 DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["03"]["hex"] = "03"
-DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["03"]["datatype"] = "(encode_ip)"
+DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["03"]["datatype"] = "encode_ip"
 DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["03"]["subTlvs"] = {}
 
 DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["04"] = {}
 DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["04"]["description"] = "IpSrcMask"
 DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["04"]["hex"] = "04"
-DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["04"]["datatype"] = "(encode_ip)"
+DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["04"]["datatype"] = "encode_ip"
 DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["04"]["subTlvs"] = {}
 
 DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["05"] = {}
 DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["05"]["description"] = "IpDstAddr"
 DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["05"]["hex"] = "05"
-DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["05"]["datatype"] = "(encode_ip)"
+DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["05"]["datatype"] = "encode_ip"
 DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["05"]["subTlvs"] = {}
 
 DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["06"] = {}
 DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["06"]["description"] = "IpDstMask"
 DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["06"]["hex"] = "06"
-DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["06"]["datatype"] = "(encode_ip)"
+DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["06"]["datatype"] = "encode_ip"
 DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["06"]["subTlvs"] = {}
 
 DocsisTlvs["23"]["subTlvs"]["09"]["subTlvs"]["07"] = {}
@@ -1871,7 +1871,7 @@ DocsisTlvs["23"]["subTlvs"]["12"]["subTlvs"]["03"]["subTlvs"] = {}
 DocsisTlvs["23"]["subTlvs"]["12"]["subTlvs"]["04"] = {}
 DocsisTlvs["23"]["subTlvs"]["12"]["subTlvs"]["04"]["description"] = "PcIPv6SourceAddress"
 DocsisTlvs["23"]["subTlvs"]["12"]["subTlvs"]["04"]["hex"] = "04"
-DocsisTlvs["23"]["subTlvs"]["12"]["subTlvs"]["04"]["datatype"] = "(encode_ip6)"
+DocsisTlvs["23"]["subTlvs"]["12"]["subTlvs"]["04"]["datatype"] = "encode_ip"
 DocsisTlvs["23"]["subTlvs"]["12"]["subTlvs"]["04"]["subTlvs"] = {}
 
 DocsisTlvs["23"]["subTlvs"]["12"]["subTlvs"]["05"] = {}
@@ -1883,7 +1883,7 @@ DocsisTlvs["23"]["subTlvs"]["12"]["subTlvs"]["05"]["subTlvs"] = {}
 DocsisTlvs["23"]["subTlvs"]["12"]["subTlvs"]["06"] = {}
 DocsisTlvs["23"]["subTlvs"]["12"]["subTlvs"]["06"]["description"] = "PcIPv6DestAddress"
 DocsisTlvs["23"]["subTlvs"]["12"]["subTlvs"]["06"]["hex"] = "06"
-DocsisTlvs["23"]["subTlvs"]["12"]["subTlvs"]["06"]["datatype"] = "(encode_ip6)"
+DocsisTlvs["23"]["subTlvs"]["12"]["subTlvs"]["06"]["datatype"] = "encode_ip"
 DocsisTlvs["23"]["subTlvs"]["12"]["subTlvs"]["06"]["subTlvs"] = {}
 
 DocsisTlvs["23"]["subTlvs"]["12"]["subTlvs"]["07"] = {}
@@ -5801,7 +5801,7 @@ DocsisTlvs["38"]["subTlvs"] = {}
 DocsisTlvs["38"]["subTlvs"]["01"] = {}
 DocsisTlvs["38"]["subTlvs"]["01"]["description"] = "SnmpV3TrapRxIP"
 DocsisTlvs["38"]["subTlvs"]["01"]["hex"] = "01"
-DocsisTlvs["38"]["subTlvs"]["01"]["datatype"] = "(encode_ip)"
+DocsisTlvs["38"]["subTlvs"]["01"]["datatype"] = "encode_ip"
 DocsisTlvs["38"]["subTlvs"]["01"]["subTlvs"] = {}
 
 DocsisTlvs["38"]["subTlvs"]["02"] = {}
@@ -5843,7 +5843,7 @@ DocsisTlvs["38"]["subTlvs"]["07"]["subTlvs"] = {}
 DocsisTlvs["38"]["subTlvs"]["08"] = {}
 DocsisTlvs["38"]["subTlvs"]["08"]["description"] = "SnmpV3TrapRxIP6"
 DocsisTlvs["38"]["subTlvs"]["08"]["hex"] = "08"
-DocsisTlvs["38"]["subTlvs"]["08"]["datatype"] = "(encode_ip6)"
+DocsisTlvs["38"]["subTlvs"]["08"]["datatype"] = "encode_ip"
 DocsisTlvs["38"]["subTlvs"]["08"]["subTlvs"] = {}
 
 DocsisTlvs["39"] = {}
@@ -5921,7 +5921,7 @@ DocsisTlvs["41"]["subTlvs"]["03"]["subTlvs"] = {}
 DocsisTlvs["41"]["subTlvs"]["10"] = {}
 DocsisTlvs["41"]["subTlvs"]["10"]["description"] = "Technicolor thing"
 DocsisTlvs["41"]["subTlvs"]["10"]["hex"] = "0a"
-DocsisTlvs["41"]["subTlvs"]["10"]["datatype"] = "(unknown)"
+DocsisTlvs["41"]["subTlvs"]["10"]["datatype"] = "unknown"
 DocsisTlvs["41"]["subTlvs"]["10"]["subTlvs"] = {}
 
 DocsisTlvs["42"] = {}
@@ -6623,19 +6623,19 @@ DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["04"]["subTlvs"] = {}
 DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["05"] = {}
 DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["05"]["description"] = "Unknown"
 DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["05"]["hex"] = "05"
-DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["05"]["datatype"] = "(unknown)"
+DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["05"]["datatype"] = "unknown"
 DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["05"]["subTlvs"] = {}
 
 DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["06"] = {}
 DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["06"]["description"] = "Unknown"
 DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["06"]["hex"] = "06"
-DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["06"]["datatype"] = "(unknown)"
+DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["06"]["datatype"] = "unknown"
 DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["06"]["subTlvs"] = {}
 
 DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["07"] = {}
 DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["07"]["description"] = "Unknown"
 DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["07"]["hex"] = "07"
-DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["07"]["datatype"] = "(unknown)"
+DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["07"]["datatype"] = "unknown"
 DocsisTlvs["43"]["subTlvs"]["09"]["subTlvs"]["07"]["subTlvs"] = {}
 
 DocsisTlvs["43"]["subTlvs"]["10"] = {}
@@ -6739,13 +6739,13 @@ DocsisTlvs["43"]["subTlvs"]["12"]["subTlvs"]["04"]["subTlvs"] = {}
 DocsisTlvs["43"]["subTlvs"]["65"] = {}
 DocsisTlvs["43"]["subTlvs"]["65"]["description"] = "dunno"
 DocsisTlvs["43"]["subTlvs"]["65"]["hex"] = "41"
-DocsisTlvs["43"]["subTlvs"]["65"]["datatype"] = "(unknown)"
+DocsisTlvs["43"]["subTlvs"]["65"]["datatype"] = "unknown"
 DocsisTlvs["43"]["subTlvs"]["65"]["subTlvs"] = {}
 
 DocsisTlvs["43"]["subTlvs"]["161"] = {}
 DocsisTlvs["43"]["subTlvs"]["161"]["description"] = "vendor specif"
 DocsisTlvs["43"]["subTlvs"]["161"]["hex"] = "a1"
-DocsisTlvs["43"]["subTlvs"]["161"]["datatype"] = "(unknown)"
+DocsisTlvs["43"]["subTlvs"]["161"]["datatype"] = "unknown"
 DocsisTlvs["43"]["subTlvs"]["161"]["subTlvs"] = {}
 
 DocsisTlvs["45"] = {}
@@ -7023,13 +7023,13 @@ DocsisTlvs["57"]["subTlvs"] = {}
 DocsisTlvs["58"] = {}
 DocsisTlvs["58"]["description"] = "SwUpgradeServer6"
 DocsisTlvs["58"]["hex"] = "3a"
-DocsisTlvs["58"]["datatype"] = "(encode_ip6)"
+DocsisTlvs["58"]["datatype"] = "encode_ip"
 DocsisTlvs["58"]["subTlvs"] = {}
 
 DocsisTlvs["59"] = {}
 DocsisTlvs["59"]["description"] = "TFTPProvisionedModemIPv6Address"
 DocsisTlvs["59"]["hex"] = "3b"
-DocsisTlvs["59"]["datatype"] = "(encode_ip6)"
+DocsisTlvs["59"]["datatype"] = "encode_ip"
 DocsisTlvs["59"]["subTlvs"] = {}
 
 DocsisTlvs["60"] = {}
@@ -7083,25 +7083,25 @@ DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["02"]["subTlvs"] = {}
 DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["03"] = {}
 DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["03"]["description"] = "IPv4SourceAddress"
 DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["03"]["hex"] = "03"
-DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["03"]["datatype"] = "(encode_ip)"
+DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["03"]["datatype"] = "encode_ip"
 DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["03"]["subTlvs"] = {}
 
 DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["04"] = {}
 DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["04"]["description"] = "IPv4SourceMask"
 DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["04"]["hex"] = "04"
-DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["04"]["datatype"] = "(encode_ip)"
+DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["04"]["datatype"] = "encode_ip"
 DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["04"]["subTlvs"] = {}
 
 DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["05"] = {}
 DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["05"]["description"] = "IPv4DestinationAddress"
 DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["05"]["hex"] = "05"
-DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["05"]["datatype"] = "(encode_ip)"
+DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["05"]["datatype"] = "encode_ip"
 DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["05"]["subTlvs"] = {}
 
 DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["06"] = {}
 DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["06"]["description"] = "IPv4DestinationMask"
 DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["06"]["hex"] = "06"
-DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["06"]["datatype"] = "(encode_ip)"
+DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["06"]["datatype"] = "encode_ip"
 DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["06"]["subTlvs"] = {}
 
 DocsisTlvs["60"]["subTlvs"]["09"]["subTlvs"]["07"] = {}
@@ -7197,7 +7197,7 @@ DocsisTlvs["60"]["subTlvs"]["12"]["subTlvs"]["03"]["subTlvs"] = {}
 DocsisTlvs["60"]["subTlvs"]["12"]["subTlvs"]["04"] = {}
 DocsisTlvs["60"]["subTlvs"]["12"]["subTlvs"]["04"]["description"] = "IPv6SourceAddress"
 DocsisTlvs["60"]["subTlvs"]["12"]["subTlvs"]["04"]["hex"] = "04"
-DocsisTlvs["60"]["subTlvs"]["12"]["subTlvs"]["04"]["datatype"] = "(encode_ip6)"
+DocsisTlvs["60"]["subTlvs"]["12"]["subTlvs"]["04"]["datatype"] = "encode_ip"
 DocsisTlvs["60"]["subTlvs"]["12"]["subTlvs"]["04"]["subTlvs"] = {}
 
 DocsisTlvs["60"]["subTlvs"]["12"]["subTlvs"]["05"] = {}
@@ -7209,7 +7209,7 @@ DocsisTlvs["60"]["subTlvs"]["12"]["subTlvs"]["05"]["subTlvs"] = {}
 DocsisTlvs["60"]["subTlvs"]["12"]["subTlvs"]["06"] = {}
 DocsisTlvs["60"]["subTlvs"]["12"]["subTlvs"]["06"]["description"] = "IPv6DestinationAddress"
 DocsisTlvs["60"]["subTlvs"]["12"]["subTlvs"]["06"]["hex"] = "06"
-DocsisTlvs["60"]["subTlvs"]["12"]["subTlvs"]["06"]["datatype"] = "(encode_ip6)"
+DocsisTlvs["60"]["subTlvs"]["12"]["subTlvs"]["06"]["datatype"] = "encode_ip"
 DocsisTlvs["60"]["subTlvs"]["12"]["subTlvs"]["06"]["subTlvs"] = {}
 
 DocsisTlvs["60"]["subTlvs"]["12"]["subTlvs"]["07"] = {}
@@ -8301,7 +8301,7 @@ DocsisTlvs["69"]["subTlvs"]["02"]["subTlvs"] = {}
 DocsisTlvs["69"]["subTlvs"]["101"] = {}
 DocsisTlvs["69"]["subTlvs"]["101"]["description"] = "Technicolor thing"
 DocsisTlvs["69"]["subTlvs"]["101"]["hex"] = "65"
-DocsisTlvs["69"]["subTlvs"]["101"]["datatype"] = "(unknown)"
+DocsisTlvs["69"]["subTlvs"]["101"]["datatype"] = "unknown"
 DocsisTlvs["69"]["subTlvs"]["101"]["subTlvs"] = {}
 
 DocsisTlvs["70"] = {}
@@ -8657,7 +8657,7 @@ DocsisTlvs["84"]["subTlvs"] = {}
 DocsisTlvs["93"] = {}
 DocsisTlvs["93"]["description"] = "Upstream Enhanced HQoS ASF"
 DocsisTlvs["93"]["hex"] = "5d"
-DocsisTlvs["93"]["datatype"] = "(unknown)"
+DocsisTlvs["93"]["datatype"] = "unknown"
 DocsisTlvs["93"]["subTlvs"] = {}
 
 DocsisTlvs["97"] = {}

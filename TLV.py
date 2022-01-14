@@ -78,6 +78,8 @@ class TLV:
 			return int(to_little(self.value), 16) #you should never see this, but I am leaving it here for big-endian hassles.
 		elif self.datatype == "strzero":
 			return codecs.decode(self.value[:-2], "hex").decode()
+		elif self.datatype == "string":
+			return codecs.decode(self.value[:-2], "hex").decode()
 		elif self.datatype == "hexstr":
 			return "0x" + self.value
 		elif self.datatype == "snmp_object":
@@ -90,6 +92,16 @@ class TLV:
 			else:
 				#return
 				return(mibs[m.oid]["description"]+ " " + m.dataType + " Index:" + m.index + " " + m.value)
+		elif self.datatype == "unknown":
+			return "0x" + self.value
+		elif self.datatype == "md5":
+			return  self.value
+		elif self.datatype == "special":
+			return  self.value
+		elif self.datatype == "encode_ip":
+			return  self.value
+		elif self.datatype == "encode_ip6":
+			return  self.value
 		else:
 			print("Write a decoder for " + self.datatype)
 			return tvalue

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import binascii
 import codecs
 import sys
@@ -5,6 +6,7 @@ from TLV import TLV
 from docsisTlvs import DocsisTlvs
 from MTATlvs import MTATlvs
 from mib import mib
+import json
 
 class cmConfig(object):
 	def __init__(self ):
@@ -88,62 +90,22 @@ class cmConfig(object):
 			f = open(self.configFilePath, "wb")
 			f.write(binascii.unhexlify(stuff))
 			f.close
-		
+def jsonThis(tlvs):
+	outs = {}
+	for t in tlvs:
+		if len(t.subTLVs) == 0:
+			outs[t.tag] = str(t.getValue()) + " (" + t.datatype + ")"
+		else:
+			outs[t.tag] = jsonThis(t.subTLVs)
+	return outs	
+	
 if __name__ == '__main__':
 	cm = cmConfig()
 	cm.generateStringFromFile(sys.argv[1])
-	if sys.argv[2] == "MTA":
-		cm.tags = MTATlvs
+	if len(sys.argv) > 2:
+		if sys.argv[2] == "MTA":
+			cm.tags = MTATlvs
 	#print(cm.tlv_string)
 	cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
-	#cm.configFilePath = "cm2.cfg"
-	#print(cm.tlv_string.upper())
-	#print()
-	#cm.encode()
-	#print("########")
-	for t in cm.tlvs:
-		if t.datatype in ["uchar", "uint", "ushort", "hexstr"]:
-			if t.tag == "18":
-				bb = t.getValue()
-				print(bb)
-				t.setValue(bb + 1)
-			# print("before")
-			#print(t.value)
-			#t.setValue(bb)
-			# print("after")
-			#print(t.value)
-		else:
-			if t.datatype not in  ["snmp_object", "aggregate"]:
-				print("Write a decoder for " + t.datatype)
-		#print(t.tag)
-		#if t.tag == "11":
-			#before = t.value
-			#m = t.getValue()
-			#print(m.oid + " " + m.value + " " + m.dataType)
-			#print(before.upper())
-			#print(m.encode().upper())
-		#if "datatype" in DocsisTlvs[t.tag].keys():
-		#	print(DocsisTlvs[t.tag]["datatype"])
-		#if DocsisTlvs[t.tag]["datatype"] == "(decode_snmp_object)":
-		#print(t.datatype)
-		# t.getValue()
-		#print(t.getValue())
-		#for tt in t.subTLVs:
-			#print("  " + tt.tag)
-			#print("  " + tt.datatype)
-			#if tt.datatype in ["uchar", "uint", "ushort", "hexstr", "strzero"]:
-				#bb = tt.getValue()
-				# print("before")
-				#print(tt.value)
-				#tt.setValue(bb)
-				# print("after")
-				#print(tt.value)
-			#else:
-				#if tt.datatype  not in  ["snmp_object", "aggregate"]:
-					#print("Write a decoder for " + tt.datatype)
-			#if "datatype" in DocsisTlvs[t.tag]["subTlvs"][tt.tag].keys():
-			#	print("  " + DocsisTlvs[t.tag]["subTlvs"][tt.tag]["datatype"])
-			# print("  " + str(tt.getValue()))
-			#tt.getValue()
-		#	print("  " + tt.decodedValue(DocsisTlvs[t.tag]["subTlvs"]))
-	cm.encode()
+	oots = jsonThis(cm.tlvs)
+	print(json.dumps(oots, ))
