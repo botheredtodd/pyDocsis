@@ -4,6 +4,9 @@ mibs["1.3.6.1.2.1.1.4"] = {}
 mibs["1.3.6.1.2.1.1.4"]["description"] = "sysContact"
 mibs["1.3.6.1.2.1.1.4"]["indexes"] = 1
 
+mibs["1.3.6.1.2.1.69.1.6.2.1.5"] = {}
+mibs["1.3.6.1.2.1.69.1.6.2.1.5"]["description"] = "docsDevFilterLLCProtocol"
+mibs["1.3.6.1.2.1.69.1.6.2.1.5"]["indexes"] = 1
 
 mibs["1.3.6.1.2.1.140.1.1.6"] = {}
 mibs["1.3.6.1.2.1.140.1.1.6"]["description"] = "pktcMtaDevEnabled"

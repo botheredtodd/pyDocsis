@@ -108,4 +108,4 @@ if __name__ == '__main__':
 	#print(cm.tlv_string)
 	cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
 	oots = jsonThis(cm.tlvs)
-	print(json.dumps(oots, ))
+	print(json.dumps(oots, indent = 4))
