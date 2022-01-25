@@ -8649,10 +8649,28 @@ DocsisTlvs["83"]["datatype"] = "unknown"
 DocsisTlvs["83"]["subTlvs"] = {}
 
 DocsisTlvs["84"] = {}
-DocsisTlvs["84"]["description"] = "unknown"
+DocsisTlvs["84"]["description"] = "DiplexerBandEdge"
 DocsisTlvs["84"]["hex"] = "54"
-DocsisTlvs["84"]["datatype"] = "unknown"
+DocsisTlvs["84"]["datatype"] = "aggregate"
 DocsisTlvs["84"]["subTlvs"] = {}
+
+DocsisTlvs["84"]["subTlvs"]["01"] = {}
+DocsisTlvs["84"]["subTlvs"]["01"]["description"] = "DiplexerUpstreamUpperBandEdge"
+DocsisTlvs["84"]["subTlvs"]["01"]["hex"] = "01"
+DocsisTlvs["84"]["subTlvs"]["01"]["datatype"] = "uchar"
+DocsisTlvs["84"]["subTlvs"]["01"]["subTlvs"] = {}
+
+DocsisTlvs["84"]["subTlvs"]["02"] = {}
+DocsisTlvs["84"]["subTlvs"]["02"]["description"] = "DiplexerDownstreamLowerBandEdge"
+DocsisTlvs["84"]["subTlvs"]["02"]["hex"] = "02"
+DocsisTlvs["84"]["subTlvs"]["02"]["datatype"] = "uchar"
+DocsisTlvs["84"]["subTlvs"]["02"]["subTlvs"] = {}
+
+DocsisTlvs["84"]["subTlvs"]["03"] = {}
+DocsisTlvs["84"]["subTlvs"]["03"]["description"] = "DiplexerDownstreamUpperBandEdge"
+DocsisTlvs["84"]["subTlvs"]["03"]["hex"] = "03"
+DocsisTlvs["84"]["subTlvs"]["03"]["datatype"] = "uchar"
+DocsisTlvs["84"]["subTlvs"]["03"]["subTlvs"] = {}
 
 DocsisTlvs["93"] = {}
 DocsisTlvs["93"]["description"] = "Upstream Enhanced HQoS ASF"

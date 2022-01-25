@@ -102,10 +102,12 @@ def jsonThis(tlvs):
 if __name__ == '__main__':
 	cm = cmConfig()
 	cm.generateStringFromFile(sys.argv[1])
+	#print(cm.tlv_string)
 	if len(sys.argv) > 2:
 		if sys.argv[2] == "MTA":
 			cm.tags = MTATlvs
 	#print(cm.tlv_string)
 	cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
 	oots = jsonThis(cm.tlvs)
+	print(json.dumps(oots, indent = 4))
 	print(json.dumps(oots, indent = 4))
