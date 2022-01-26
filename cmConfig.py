@@ -85,7 +85,9 @@ class cmConfig(object):
 		for tag in self.tlvs:
 			stuff += tag.encodeForFile()
 		#stuff = stuff.encode('UTF-8')
-		#print(stuff)
+		print(len(stuff))
+		if (len(stuff)/2) % 2 == 1:
+			stuff += "00"
 		if self.configFilePath != "":
 			f = open(self.configFilePath, "wb")
 			f.write(binascii.unhexlify(stuff))
@@ -108,6 +110,11 @@ if __name__ == '__main__':
 			cm.tags = MTATlvs
 	#print(cm.tlv_string)
 	cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
-	oots = jsonThis(cm.tlvs)
-	print(json.dumps(oots, indent = 4))
-	print(json.dumps(oots, indent = 4))
+	#oots = jsonThis(cm.tlvs)
+	#print(json.dumps(oots, indent = 4))
+	cm.configFilePath += ".new"
+	for tlv in cm.tlvs:
+		if tlv.tag == "18":
+			tlv.setValue("3")
+	cm.encode()
+	

@@ -343,5 +343,4 @@ mibs[""]["values"] = []
 
 """
 
-for mib in mibs:
-	print('docsisMibs.append(MIBDefinitions(oid: "' + mib + '", indexes: ' + str(mibs[mib]["indexes"])  + ', description: "' + mibs[mib]["description"] + '", values: ["' + '","'.join(mibs[mib]["values"]) + '"]))')
+
