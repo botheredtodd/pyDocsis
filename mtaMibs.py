@@ -3,6 +3,7 @@ mibs = {}
 mibs["1.3.6.1.2.1.1.4"] = {}
 mibs["1.3.6.1.2.1.1.4"]["description"] = "sysContact"
 mibs["1.3.6.1.2.1.1.4"]["indexes"] = 1
+mibs["1.3.6.1.2.1.1.4"]["values"] = []
 
 
 mibs["1.3.6.1.2.1.140.1.1.6"] = {}
@@ -23,10 +24,13 @@ mibs["1.3.6.1.2.1.2.2.1.7"]["values"] = ["up", "down", "testing"]
 mibs["1.3.6.1.6.3.18.1.1.1.2"] = {}
 mibs["1.3.6.1.6.3.18.1.1.1.2"]["description"] = "snmpCommunityName"
 mibs["1.3.6.1.6.3.18.1.1.1.2"]["indexes"] = 1
+mibs["1.3.6.1.6.3.18.1.1.1.2"]["values"] = []
+
 
 mibs["1.3.6.1.6.3.18.1.1.1.3"] = {}
 mibs["1.3.6.1.6.3.18.1.1.1.3"]["description"] = "snmpCommunitySecurityName"
 mibs["1.3.6.1.6.3.18.1.1.1.3"]["indexes"] = 1
+mibs["1.3.6.1.6.3.18.1.1.1.3"]["values"] = []
 
 mibs["1.3.6.1.6.3.18.1.1.1.7"] = {}
 mibs["1.3.6.1.6.3.18.1.1.1.7"]["description"] = "snmpCommunityStorageType"
@@ -41,10 +45,12 @@ mibs["1.3.6.1.6.3.18.1.1.1.8"]["values"] = ["active", "notInService", "notReady"
 mibs["1.3.6.1.6.3.16.1.5.2.1.6"] = {}
 mibs["1.3.6.1.6.3.16.1.5.2.1.6"]["description"] = "vacmViewTreeFamilyStatus"
 mibs["1.3.6.1.6.3.16.1.5.2.1.6"]["indexes"] = 2
+mibs["1.3.6.1.6.3.16.1.5.2.1.6"]["values"] = []
 
 mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.3.1.1.2"] = {}
 mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.3.1.1.2"]["description"] = "pktcEUERSTDMValue"
 mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.3.1.1.2"]["indexes"] = 1
+mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.3.1.1.2"]["values"] = []
 
 #mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"] = {}
 #mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"]["description"] = "pktcEUERSTAppAdminStat"
@@ -125,6 +131,7 @@ mibs["1.3.6.1.4.1.4115.11.1.71"]["values"] = []
 mibs["1.3.6.1.4.1.4115.1.3.3.1.3.3.13"] = {}
 mibs["1.3.6.1.4.1.4115.1.3.3.1.3.3.13"]["description"] = "arrisMtaDevPwrSupplyOverTempAlarmThreshold"
 mibs["1.3.6.1.4.1.4115.1.3.3.1.3.3.13"]["indexes"] = 1
+mibs["1.3.6.1.4.1.4115.1.3.3.1.3.3.13"]["values"] = []
 
 mibs["1.3.6.1.4.1.4115.1.3.3.1.3.3.12"] = {}
 mibs["1.3.6.1.4.1.4115.1.3.3.1.3.3.12"]["description"] = "arrisMtaDevPwrSupplyOverTempAlarmControl"
@@ -332,3 +339,6 @@ mibs[""]["values"] = []
 1.3.6.1.4.1.4491.2.2.6.2.1.2.3.1.1.1
 
 """
+
+for mib in mibs:
+	print('docsisMibs.append(MIBDefinitions(oid: "' + mib + '", indexes: ' + str(mibs[mib]["indexes"])  + ', description: "' + mibs[mib]["description"] + '", values: ["' + '","'.join(mibs[mib]["values"]) + '"]))')
