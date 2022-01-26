@@ -108,8 +108,6 @@ if __name__ == '__main__':
 			cm.tags = MTATlvs
 	#print(cm.tlv_string)
 	cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
-	for tlv in cm.tlvs:
-		if tlv.tag == "11":
-			print(str(tlv.getValue()) + " (" + tlv.datatype + ")")
-	#oots = jsonThis(cm.tlvs)
-	#print(json.dumps(oots, indent=4))
+	oots = jsonThis(cm.tlvs)
+	print(json.dumps(oots, indent = 4))
+	print(json.dumps(oots, indent = 4))
