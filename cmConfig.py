@@ -113,8 +113,19 @@ if __name__ == '__main__':
 	#oots = jsonThis(cm.tlvs)
 	#print(json.dumps(oots, indent = 4))
 	cm.configFilePath += ".new"
+	newtlvs = []
 	for tlv in cm.tlvs:
 		if tlv.tag == "18":
 			tlv.setValue("3")
+		if tlv.tag == "11":
+			if "1.3.6.1.4.1.4115.1.3.1.1.2.3.5" in tlv.getValue():
+				print("found it")
+				print(tlv.getValue())
+			else:
+				print(tlv.getValue().split(" ")[0])
+				newtlvs.append(tlv)
+		else:
+			newtlvs.append(tlv)
+	cm.tlvs = newtlvs
 	cm.encode()
 	
