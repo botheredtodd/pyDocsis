@@ -105,11 +105,21 @@ class TLV:
 		else:
 			print("Write a decoder for " + self.datatype)
 			return tvalue
-	def setValue(self, value):
+	def setValue(self, value, oid = ""):
 		if self.datatype in ["uchar", "ushort", "uint"]:
 			self.value = padHex(str(hex(int(value))), self.datatype)
 		elif self.datatype == "hexstr":
 			self.value =  value.replace('0x', '').upper()
+		elif self.datatype == "snmp_object":
+			m = mib()
+			m.decode(self.value)
+			if oid != "":
+				m.oid = oid
+			if value != "":
+				m.value = value
+			print(m.encode())
+			self.value = m.encode()
+			
 		elif self.datatype == "strzero":
 			#print(self.value)
 			newval = ""

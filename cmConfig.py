@@ -118,9 +118,12 @@ if __name__ == '__main__':
 		if tlv.tag == "18":
 			tlv.setValue("3")
 		if tlv.tag == "11":
-			if "1.3.6.1.4.1.4115.1.3.1.1.2.3.5" in tlv.getValue():
+			if "1.3.6.1.4.4413" in tlv.getValue():
 				print("found it")
 				print(tlv.getValue())
+				tlv.setValue(binascii.hexlify(tlv.getValue().split(" ")[3].encode("ascii")).decode(), tlv.getValue().split(" ")[0].replace("4.4413", "4.1.4413"))
+				print(tlv.getValue())
+				newtlvs.append(tlv)
 			else:
 				print(tlv.getValue().split(" ")[0])
 				newtlvs.append(tlv)
