@@ -50,6 +50,7 @@ class TLV:
 		tlv_string = ''
 		htag = tags[self.tag]["hex"]
 		tvalue = self.value
+		print(tvalue)
 		for st in self.subTLVs:
 			tvalue += st.encodeForFile(tags[self.tag]["subTlvs"])
 		if divmod(len(tvalue), 2)[1] == 1:

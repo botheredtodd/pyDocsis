@@ -7,6 +7,7 @@ from docsisTlvs import DocsisTlvs
 from MTATlvs import MTATlvs
 from mib import mib
 import json
+import hashlib
 
 class cmConfig(object):
 	def __init__(self ):
@@ -14,6 +15,7 @@ class cmConfig(object):
 		self.configFilePath = ""
 		self.tlv_string = ""
 		self.tags = DocsisTlvs
+		self.hashme = []
 	
 	def generateStringFromFile(self, file = ""):
 		if file != "":
@@ -82,16 +84,38 @@ class cmConfig(object):
 		return tlvs
 	def encode(self):
 		stuff = '' #'0x'
+		lastTLV = TLV()
 		for tag in self.tlvs:
-			stuff += tag.encodeForFile()
+			if tag.tag not in ["06","07","255"]:
+				if tag.tag != "00":
+					stuff += tag.encodeForFile()
+			elif tag.tag in ["06","07"]:
+				self.hashme.append(tag.tag)
+			else:
+				lastTLV = tag
 		#stuff = stuff.encode('UTF-8')
-		print(len(stuff))
-		if (len(stuff)/2) % 2 == 1:
-			stuff += "00"
+		exts = ""
+		if '06' in self.hashme:
+			newval = hashlib.md5(binascii.unhexlify(stuff))
+			print(newval.hexdigest())
+			nextTLV = TLV(tag="06", datatype = "md5", value = newval.hexdigest())
+			exts += nextTLV.encodeForFile()
+		#if '07' in self.hashme:
+		#	newval = hashlib.md5(binascii.unhexlify(stuff))
+		#	nextTLV = TLV(tag="06", datatype = "md5", value =newval.hexdigest())
+		#	exts += nextTLV.encodeForFile()
+		
+		stuff += exts	
+		stuff += lastTLV.encodeForFile()
+		
+		#while (len(stuff)/2) % 4 == 0:
+		#	stuff += "00"
+		print(stuff)
 		if self.configFilePath != "":
 			f = open(self.configFilePath, "wb")
 			f.write(binascii.unhexlify(stuff))
 			f.close
+	
 def jsonThis(tlvs):
 	outs = {}
 	for t in tlvs:
@@ -104,7 +128,7 @@ def jsonThis(tlvs):
 if __name__ == '__main__':
 	cm = cmConfig()
 	cm.generateStringFromFile(sys.argv[1])
-	#print(cm.tlv_string)
+	print(cm.tlv_string)
 	if len(sys.argv) > 2:
 		if sys.argv[2] == "MTA":
 			cm.tags = MTATlvs
@@ -113,22 +137,29 @@ if __name__ == '__main__':
 	#oots = jsonThis(cm.tlvs)
 	#print(json.dumps(oots, indent = 4))
 	cm.configFilePath += ".new"
-	newtlvs = []
+	#newtlvs = []
 	for tlv in cm.tlvs:
-		if tlv.tag == "18":
-			tlv.setValue("3")
-		if tlv.tag == "11":
-			if "1.3.6.1.4.4413" in tlv.getValue():
-				print("found it")
-				print(tlv.getValue())
-				tlv.setValue(binascii.hexlify(tlv.getValue().split(" ")[3].encode("ascii")).decode(), tlv.getValue().split(" ")[0].replace("4.4413", "4.1.4413"))
-				print(tlv.getValue())
-				newtlvs.append(tlv)
-			else:
-				print(tlv.getValue().split(" ")[0])
-				newtlvs.append(tlv)
+		if tlv.tag == "06":
+			print(tlv.getValue())
+		if tlv.tag == "07":
+			print(tlv.getValue())	
 		else:
-			newtlvs.append(tlv)
-	cm.tlvs = newtlvs
+			print(tlv.tag)
+			print(tlv.getValue())
+	# 	if tlv.tag == "18":
+	# 		tlv.setValue("3")
+	# 	if tlv.tag == "11":
+	# 		if "1.3.6.1.4.4413" in tlv.getValue():
+	# 			print("found it")
+	# 			print(tlv.getValue())
+	# 			tlv.setValue(binascii.hexlify(tlv.getValue().split(" ")[3].encode("ascii")).decode(), tlv.getValue().split(" ")[0].replace("4.4413", "4.1.4413"))
+	# 			print(tlv.getValue())
+	# 			newtlvs.append(tlv)
+	# 		else:
+	# 			print(tlv.getValue().split(" ")[0])
+	# 			newtlvs.append(tlv)
+	# 	else:
+	# 		newtlvs.append(tlv)
+	#cm.tlvs = newtlvs
 	cm.encode()
-	
+	# 
