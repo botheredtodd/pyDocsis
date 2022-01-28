@@ -83,6 +83,7 @@ class cmConfig(object):
 				raise ValueError(msg)
 		return tlvs
 	def encode(self):
+		oldTLV7 = TLV(tag="07", datatype = "md5", value = "")
 		stuff = '' #'0x'
 		lastTLV = TLV()
 		for tag in self.tlvs:
@@ -91,6 +92,8 @@ class cmConfig(object):
 					stuff += tag.encodeForFile()
 			elif tag.tag in ["06","07"]:
 				self.hashme.append(tag.tag)
+				if tlv.tag == "07":
+					oldTLV7.setValue(tlv.getValue())
 			else:
 				lastTLV = tag
 		#stuff = stuff.encode('UTF-8')
@@ -101,16 +104,17 @@ class cmConfig(object):
 			nextTLV = TLV(tag="06", datatype = "md5", value = newval.hexdigest())
 			exts += nextTLV.encodeForFile()
 		if '07' in self.hashme:
-			newval = hashlib.md5(binascii.unhexlify(stuff))
-			nextTLV = TLV(tag="07", datatype = "md5", value = newval.hexdigest())
-			exts += nextTLV.encodeForFile()
+		#	newval = hashlib.md5(binascii.unhexlify(stuff))
+		#	nextTLV = TLV(tag="07", datatype = "md5", value = newval.hexdigest())
+		
+			exts += oldTLV7.encodeForFile()
 		
 		stuff += exts	
 		stuff += lastTLV.encodeForFile()
 		
 		#while (len(stuff)/2) % 4 == 0:
 		#	stuff += "00"
-		print(stuff)
+		#print(stuff)
 		if self.configFilePath != "":
 			f = open(self.configFilePath, "wb")
 			f.write(binascii.unhexlify(stuff))
@@ -128,7 +132,7 @@ def jsonThis(tlvs):
 if __name__ == '__main__':
 	cm = cmConfig()
 	cm.generateStringFromFile(sys.argv[1])
-	print(cm.tlv_string)
+	#print(cm.tlv_string)
 	if len(sys.argv) > 2:
 		if sys.argv[2] == "MTA":
 			cm.tags = MTATlvs
@@ -143,11 +147,13 @@ if __name__ == '__main__':
 			print(tlv.getValue())
 		if tlv.tag == "07":
 			print(tlv.getValue())	
-		else:
-			print(tlv.tag)
-			print(tlv.getValue())
-	# 	if tlv.tag == "18":
-	# 		tlv.setValue("3")
+		#else:
+		#	print(tlv.tag)
+		#	print(tlv.getValue())
+		if tlv.tag in ["24","25"]:
+			for st in tlv.subTLVs:
+				 if st.tag == "08":
+					 st.setValue(1000000)
 	# 	if tlv.tag == "11":
 	# 		if "1.3.6.1.4.4413" in tlv.getValue():
 	# 			print("found it")
