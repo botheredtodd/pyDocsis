@@ -1,14 +1,10 @@
 pyDOCSIS: A tool for doing things to DOCSIS configs with python
 =========
 
-A python version/update of https://github.com/rlaager/docsis.
+A few python libraries for reading, modifying, and creating DOCSIS files.
 
-TLV stuff started with https://github.com/timgabets/pytlv and built out from there with a lot of frustration and RFCs (the former because of the latter)
+It *mostly* works! Mibs need some more testing and TLV7 assumes that your CMTS is going to strip out that value and replace it with something else. See te Docs folder for examples.
 
-Look in the Docs folder for examples.
 
-#todo
-
-- [ ] so many things...
 
 # Your code has been rated at -3.41/10 :)
