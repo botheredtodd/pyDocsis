@@ -150,10 +150,10 @@ if __name__ == '__main__':
 		#else:
 		#	print(tlv.tag)
 		#	print(tlv.getValue())
-		if tlv.tag in ["24","25"]:
-			for st in tlv.subTLVs:
-				 if st.tag == "08":
-					 st.setValue(1000000)
+		#if tlv.tag in ["24","25"]:
+		#	for st in tlv.subTLVs:
+		#		 if st.tag == "08":
+		#			 st.setValue(1000000)
 	# 	if tlv.tag == "11":
 	# 		if "1.3.6.1.4.4413" in tlv.getValue():
 	# 			print("found it")
@@ -167,5 +167,5 @@ if __name__ == '__main__':
 	# 	else:
 	# 		newtlvs.append(tlv)
 	#cm.tlvs = newtlvs
-	cm.encode()
+	#cm.encode()
 	# 

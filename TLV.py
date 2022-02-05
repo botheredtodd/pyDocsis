@@ -86,7 +86,7 @@ class TLV:
 		elif self.datatype == "snmp_object":
 			m = mib()
 			m.decode(self.value)
-			#return m
+			return m
 			if m.oid not in mibs.keys():
 				#return
 				return(m.oid + " " + m.dataType + " Index:" + m.index + " " + m.value)

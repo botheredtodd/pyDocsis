@@ -126,16 +126,16 @@ if __name__ == '__main__':
 	cm = mtaConfig()
 	cm.generateStringFromFile(sys.argv[1])
 	cm.tags = MTATlvs
-	#print(cm.tlv_string)
+	print(cm.tlv_string)
 	cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
-	cm.hash()
+	#cm.hash()
 	#cm.configFilePath = "cm2.cfg"
 	#print(cm.tlv_string.upper())
 	#print()
 	#cm.encode()
 	#print("########")
-	#for t in cm.tlvs:
-		#t.getValue()
+	for t in cm.tlvs:
+		t.getValue()
 		#if t.datatype in ["uchar", "uint", "ushort", "hexstr"]:
 		#	if t.tag == "18":
 		#		bb = t.getValue()
@@ -150,10 +150,10 @@ if __name__ == '__main__':
 		#	if t.datatype not in  ["snmp_object", "aggregate"]:
 		#		print("Write a decoder for " + t.datatype)
 		#print(t.tag)
-		#if t.tag == "11":
+		if t.tag == "11" or t.tag =="64":
 			#before = t.value
-			#m = t.getValue()
-			#print(m.oid + " " + m.value + " " + m.dataType)
+			m = t.getValue()
+			print(m.oid + " " + m.value + " " + m.dataType)
 			#print(before.upper())
 			#print(m.encode().upper())
 		#if "datatype" in DocsisTlvs[t.tag].keys():
@@ -163,8 +163,10 @@ if __name__ == '__main__':
 		# 	if bob != None:
 		# 		print(t.getValue())
 
-		#else:
-		#	print(t.datatype)
+		else:
+			print(t.tag)
+			print(t.datatype)
+			print(t.getValue())
 		# t.getValue()
 		#print(t.getValue())
 		#for tt in t.subTLVs:
