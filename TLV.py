@@ -59,6 +59,7 @@ class TLV:
 			print(divmod(len(tvalue), 2))
 			raise ValueError('Invalid value length - the length must be even')
 		tlvlen = str(hex(int(len(tvalue) / 2)))[2:]
+		
 		if len(tlvlen) == 1:
 			tlvlen = "0" + tlvlen
 		if len(tlvlen) == 3:
@@ -113,7 +114,7 @@ class TLV:
 			self.value =  value.replace('0x', '').upper()
 		elif self.datatype == "snmp_object":
 			m = mib()
-			m.decode(self.value)
+			m.decode(value)
 			if oid != "":
 				m.oid = oid
 			if value != "":

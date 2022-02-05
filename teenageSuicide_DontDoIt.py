@@ -1,6 +1,7 @@
 from MTATlvs import MTATlvs
 from mtaConfig import mtaConfig
 import sys 
+import binascii
 
 cm = mtaConfig()
 cm.generateStringFromFile(sys.argv[1])
@@ -13,14 +14,18 @@ for t in cm.tlvs:
 	if t.tag =="64":
 		newstring = ""
 		m = t.getValue()
+		print(m.dataType)
 		for line in m.value.split('\n'):
 			print("##### " + line + " #####")
 			newstring += line 
 			newstring + "\n"
-			if line == '"[2-8]11" : RETURN(#0)':
-				newstring += '"988" : RETURN\n'
-			elif ')S" : MAKE-CALL("sip:" #1 =domain =dialPhone)' in line:
-				newstring += '"(988)" : MAKE-CALL(sip: #1 =domain =dialPhone)\n'
-		t.setValue(newstring)
+			#if line == '"[2-8]11" : RETURN(#0)':
+			#	newstring += '"988" : RETURN\n'
+			#elif ')S" : MAKE-CALL("sip:" #1 =domain =dialPhone)' in line:
+			#	newstring += '"(988)" : MAKE-CALL(sip: #1 =domain =dialPhone)\n'
+		
+		m.value = binascii.hexlify(newstring.encode()).decode('UTF-8')[:]
+		print(m.value)
+		t.setValue(m.encode())
 cm.configFilePath += ".new"
 cm.encode()

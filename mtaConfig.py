@@ -98,7 +98,7 @@ class mtaConfig(object):
 		for tag in self.tlvs:
 			stuff += tag.encodeForFile()
 		#stuff = stuff.encode('UTF-8')
-		#print(stuff)
+		print(stuff)
 		if self.configFilePath != "":
 			f = open(self.configFilePath, "wb")
 			f.write(binascii.unhexlify(stuff))
