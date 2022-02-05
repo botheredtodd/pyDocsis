@@ -15,11 +15,12 @@ for t in cm.tlvs:
 		m = t.getValue()
 		for line in m.value.split('\n'):
 			print("##### " + line + " #####")
-			newstring.append(line + "\n")
+			newstring += line 
+			newstring + "\n"
 			if line == '"[2-8]11" : RETURN(#0)':
-				newstring.append('"988" : RETURN\n')
+				newstring += '"988" : RETURN\n'
 			elif ')S" : MAKE-CALL("sip:" #1 =domain =dialPhone)' in line:
-				newstring.append('"(988)" : MAKE-CALL(sip: #1 =domain =dialPhone)\n')
-	t.setValue(newstring)
+				newstring += '"(988)" : MAKE-CALL(sip: #1 =domain =dialPhone)\n'
+		t.setValue(newstring)
 cm.configFilePath += ".new"
 cm.encode()
