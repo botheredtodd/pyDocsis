@@ -124,6 +124,7 @@ class mib:
 				del hex_list[0]
 				snmpdata = ""
 				strDataType = str(datatype)
+				sentit = False
 				while len(hex_list) > 0:
 					if str(datatype) in oidDataTypes.keys():
 						strDataType = oidDataTypes[str(datatype)]
@@ -193,8 +194,11 @@ class mib:
 							#print("Is " + str(int(working, 16)) + " a number?")
 							snmpdata = str(int(working, 16))
 					else:
-						print("OID is : " + self.oid)
-						print("What is the datatype for mibby thingie " + str(datatype))
+						if sentit == False:
+							print("OID is : " + self.oid)
+							print("What is the datatype for mibby thingie " + str(datatype))
+							sentit = True
+						
 						snmpdata += str(hex_list[0])
 					del hex_list[0]
 				self.dataType = strDataType

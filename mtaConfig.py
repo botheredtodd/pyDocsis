@@ -126,10 +126,10 @@ if __name__ == '__main__':
 	cm = mtaConfig()
 	cm.generateStringFromFile(sys.argv[1])
 	cm.tags = MTATlvs
-	print(cm.tlv_string)
+	#print(cm.tlv_string)
 	cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
 	#cm.hash()
-	#cm.configFilePath = "cm2.cfg"
+	cm.configFilePath += ".new"
 	#print(cm.tlv_string.upper())
 	#print()
 	#cm.encode()
@@ -187,4 +187,4 @@ if __name__ == '__main__':
 			# print("  " + str(tt.getValue()))
 			#tt.getValue()
 		#	print("  " + tt.decodedValue(DocsisTlvs[t.tag]["subTlvs"]))
-	#cm.encode()
+	cm.encode()
