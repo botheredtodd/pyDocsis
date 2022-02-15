@@ -13,6 +13,8 @@ for tlv in cm.tlvs:
 	if tlv.tag != "11":
 		newCM.tlvs.append(tlv)
 	else:
+		print("Figure out if this mib has info you need to steal, and then steal it")
+		print("If this mib needs to be in the new config, build it from scratch with the new info, otherwise just move along")
 		thisMIb = tlv.getValue()
 		#thisMIb.decode(thisMIb.value)
 		thisMIb.index = thisMIb.oid.split(".")[-1]
