@@ -88,6 +88,8 @@ class mib:
 			noIdea = [noIdea, hex_list[0]]
 		del hex_list[0] 
 		oidlength = hex_list[0]
+		#print(oidlength)
+		#print(totalLength)
 		del hex_list[0] 
 		#print(hex_list)
 		x = int(hex_list[0] / 40)
@@ -114,8 +116,9 @@ class mib:
 				try:
 					self.index += str(binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')).decode())
 				except:
-					self.index += " " + str(hex_list[0])
+					self.index += "X" + str(hex_list[0])
 			self.oid = OID_str
+			#print(self.oid)
 			if oidlength == 0:
 				del hex_list[0]
 				datatype = hex_list[0]

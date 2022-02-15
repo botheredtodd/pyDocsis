@@ -55,10 +55,13 @@ class cmConfig(object):
 						value_start_position = i+tag_length+2
 						value_end_position = i+tag_length+2+value_length*2
 	
-						if value_end_position > len(tlv_string) and hv != "ff" and tag != "00" and tag != "107" and tag != "61" and tag != "97" and tag != "101" and tag != "35" and tag != "10" and tag != "106" and tag != "116" and tag != "52" and tag != "48" and tag != "51" and tag != "54" and tag != "102"  and tag != "83" and tag != "118" and tag != "67" and tag != "80":
+						if value_end_position > len(tlv_string) and hv != "ff" and tag != "00":
 							raise ValueError('Parse error: tag ' + tag + ' declared data of length ' + str(value_length) + ', but actual data length is ' + str(int(len(tlv_string[value_start_position-1:-1])/2)))
 						else:
+							
 							value = tlv_string[value_start_position:value_end_position]
+							#if tag == "11":
+							#	print(value)
 							if len(tags[tag]["subTlvs"].keys()) > 0:
 								#print(tag)
 								#print("down")
@@ -68,6 +71,8 @@ class cmConfig(object):
 								tlvs.append(TLV(tag = tag, subTLVs = subts, datatype = tags[tag]["datatype"]))
 								#tlvs.append(parsed_data)
 							else:
+								#if tag == "11":
+								#	print(value)
 								#if "str" in tags[tag]["datatype"]:	
 								#	if "encode_strzero" in tags[tag]["datatype"]:
 								#		value = value[:-2]
@@ -143,10 +148,10 @@ if __name__ == '__main__':
 	cm.configFilePath += ".new"
 	#newtlvs = []
 	for tlv in cm.tlvs:
-		if tlv.tag == "06":
-			print(tlv.getValue())
-		if tlv.tag == "07":
-			print(tlv.getValue())	
+		# if tlv.tag == "06":
+		# 	print(tlv.getValue())
+		# if tlv.tag == "07":
+		# 	print(tlv.getValue())	
 		#else:
 		#	print(tlv.tag)
 		#	print(tlv.getValue())
@@ -154,10 +159,10 @@ if __name__ == '__main__':
 		#	for st in tlv.subTLVs:
 		#		 if st.tag == "08":
 		#			 st.setValue(1000000)
-	# 	if tlv.tag == "11":
+		if tlv.tag == "11":
 	# 		if "1.3.6.1.4.4413" in tlv.getValue():
 	# 			print("found it")
-	# 			print(tlv.getValue())
+			print(tlv.getValue())
 	# 			tlv.setValue(binascii.hexlify(tlv.getValue().split(" ")[3].encode("ascii")).decode(), tlv.getValue().split(" ")[0].replace("4.4413", "4.1.4413"))
 	# 			print(tlv.getValue())
 	# 			newtlvs.append(tlv)
