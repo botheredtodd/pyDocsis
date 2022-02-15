@@ -28,13 +28,13 @@ for t in cm.tlvs:
 			newstring += "0A"
 			#newstring + "\r\n"
 			if line == '<10> "[2-8]11" : RETURN(#0)':
-				newstring += '<10> "988" : RETURN'
+				newstring += '”(988)” : RETURN(#0)''
 				newstring += "0D"
 				newstring += "0A"
-			elif ')S" : MAKE-CALL("sip:" #1 =domain =dialPhone)' in line:
-				newstring += '"(988)" : MAKE-CALL(sip: #1 =domain =dialPhone)'
-				newstring += "0D"
-				newstring += "0A"
+			# elif ')S" : MAKE-CALL("sip:" #1 =domain =dialPhone)' in line:
+			# 	newstring += '"(988)" : MAKE-CALL(sip: #1 =domain =dialPhone)'
+			# 	newstring += "0D"
+			# 	newstring += "0A"
 		#m.value = ""
 		#print(newstring)
 		m.value = newstring[:-2] #drop the last two bytes, which are a CRLF.
