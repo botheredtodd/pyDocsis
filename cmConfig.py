@@ -97,8 +97,8 @@ class cmConfig(object):
 					stuff += tag.encodeForFile()
 			elif tag.tag in ["06","07"]:
 				self.hashme.append(tag.tag)
-				if tlv.tag == "07":
-					oldTLV7.setValue(tlv.getValue())
+				if tag.tag == "07":
+					oldTLV7.setValue(tag.getValue())
 			else:
 				lastTLV = tag
 		#stuff = stuff.encode('UTF-8')
