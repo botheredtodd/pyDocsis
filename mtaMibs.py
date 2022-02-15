@@ -5,9 +5,30 @@ mibs["1.3.6.1.2.1.1.4"]["description"] = "sysContact"
 mibs["1.3.6.1.2.1.1.4"]["indexes"] = 1
 mibs["1.3.6.1.2.1.1.4"]["values"] = []
 
+mibs["1.3.6.1.2.1.69.1.6.2.1.1"] = {}
+mibs["1.3.6.1.2.1.69.1.6.2.1.1"]["description"] = "docsDevFilterIpIndex"
+mibs["1.3.6.1.2.1.69.1.6.2.1.1"]["indexes"] = 1
+mibs["1.3.6.1.2.1.69.1.6.2.1.1"]["values"] = []
+
+mibs["1.3.6.1.2.1.69.1.6.2.1.2"] = {}
+mibs["1.3.6.1.2.1.69.1.6.2.1.2"]["description"] = "docsDevFilterIpStatus"
+mibs["1.3.6.1.2.1.69.1.6.2.1.2"]["indexes"] = 1
+mibs["1.3.6.1.2.1.69.1.6.2.1.2"]["values"] = []
+
+mibs["1.3.6.1.2.1.69.1.6.2.1.3"] = {}
+mibs["1.3.6.1.2.1.69.1.6.2.1.3"]["description"] = "docsDevFilterIpControl"
+mibs["1.3.6.1.2.1.69.1.6.2.1.3"]["indexes"] = 1
+mibs["1.3.6.1.2.1.69.1.6.2.1.3"]["values"] = []
+
+mibs["1.3.6.1.2.1.69.1.6.2.1.4"] = {}
+mibs["1.3.6.1.2.1.69.1.6.2.1.4"]["description"] = "docsDevFilterIpIfIndex"
+mibs["1.3.6.1.2.1.69.1.6.2.1.4"]["indexes"] = 1
+mibs["1.3.6.1.2.1.69.1.6.2.1.4"]["values"] = []
+
 mibs["1.3.6.1.2.1.69.1.6.2.1.5"] = {}
 mibs["1.3.6.1.2.1.69.1.6.2.1.5"]["description"] = "docsDevFilterLLCProtocol"
 mibs["1.3.6.1.2.1.69.1.6.2.1.5"]["indexes"] = 1
+mibs["1.3.6.1.2.1.69.1.6.2.1.5"]["values"] = []
 
 mibs["1.3.6.1.2.1.140.1.1.6"] = {}
 mibs["1.3.6.1.2.1.140.1.1.6"]["description"] = "pktcMtaDevEnabled"
