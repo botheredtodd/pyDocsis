@@ -11,6 +11,10 @@ cm.tlvs = cm.parse()
 newCM.configFilePath = cm.configFilePath + ".new"
 for tlv in cm.tlvs:
 	if tlv.tag != "11":
+		if tlv.tag in ["24","25"]:
+			for st in tlv.subTLVs:
+				 if st.tag == "08":
+					 st.setValue(1000000)
 		newCM.tlvs.append(tlv)
 	else:
 		#print("Figure out if this mib has info you need to steal, and then steal it")
