@@ -21,6 +21,7 @@ for tlv in cm.tlvs:
 		#thisMIb.oid = ".".join(thisMIb.oid.split(".")[:-1])
 		print(thisMIb.oid)
 		print(thisMIb.index)
+		print(thisMIb.dataType)
 		print(thisMIb.value)
 		print("##############")
 		if thisMIb.oid.startswith("1.3.6.1.2.1.69.1.6.4.1"):

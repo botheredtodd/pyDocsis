@@ -109,10 +109,10 @@ class cmConfig(object):
 			nextTLV = TLV(tag="06", datatype = "md5", value = newval.hexdigest())
 			exts += nextTLV.encodeForFile()
 		if '07' in self.hashme:
-		#	newval = hashlib.md5(binascii.unhexlify(stuff))
-		#	nextTLV = TLV(tag="07", datatype = "md5", value = newval.hexdigest())
-		
-			exts += oldTLV7.encodeForFile()
+			newval = hashlib.md5(binascii.unhexlify(stuff))
+			nextTLV = TLV(tag="07", datatype = "md5", value = newval.hexdigest())
+			exts += nextTLV.encodeForFile()
+			#exts += oldTLV7.encodeForFile()
 		
 		stuff += exts	
 		stuff += lastTLV.encodeForFile()
