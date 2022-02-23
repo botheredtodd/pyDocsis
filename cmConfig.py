@@ -88,7 +88,7 @@ class cmConfig(object):
 				raise ValueError(msg)
 		return tlvs
 	def encode(self):
-		#oldTLV7 = TLV(tag="07", datatype = "md5", value = "")
+		oldTLV7 = TLV(tag="07", datatype = "md5", value = "")
 		stuff = '' #'0x'
 		lastTLV = TLV()
 		for tag in self.tlvs:
