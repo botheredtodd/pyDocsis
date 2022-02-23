@@ -88,7 +88,7 @@ class cmConfig(object):
 				raise ValueError(msg)
 		return tlvs
 	def encode(self):
-		oldTLV7 = TLV(tag="07", datatype = "md5", value = "")
+		#oldTLV7 = TLV(tag="07", datatype = "md5", value = "")
 		stuff = '' #'0x'
 		lastTLV = TLV()
 		for tag in self.tlvs:
@@ -105,7 +105,7 @@ class cmConfig(object):
 		exts = ""
 		if '06' in self.hashme:
 			newval = hashlib.md5(binascii.unhexlify(stuff))
-			print(newval.hexdigest())
+			#print(newval.hexdigest())
 			nextTLV = TLV(tag="06", datatype = "md5", value = newval.hexdigest())
 			exts += nextTLV.encodeForFile()
 		if '07' in self.hashme:
