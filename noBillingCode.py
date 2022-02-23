@@ -32,4 +32,4 @@ for tlv in cm.tlvs:
 		elif thisMIb.oid.startswith("1.3.6.1.4.1.2082.5.1.1.1"):
 			if thisMIb.index in ["0"]:
 				newCM.tlvs.append(tlv)
-#newCM.encode()
+newCM.encode()
