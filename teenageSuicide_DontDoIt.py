@@ -28,7 +28,7 @@ for t in cm.tlvs:
 			newstring += "0A"
 			#newstring + "\r\n"
 			if line == '<10> "[2-8]11" : RETURN(#0)':
-				newstring += '”988” : RETURN(#0)''
+				newstring += '”988” : RETURN(#0)'
 				newstring += "0D"
 				newstring += "0A"
 			# elif ')S" : MAKE-CALL("sip:" #1 =domain =dialPhone)' in line:
@@ -42,4 +42,4 @@ for t in cm.tlvs:
 		#m = t.getValue()
 		#print(t.value)
 cm.configFilePath += ".new" #rename so you don't overwrite the original file
-#cm.encode()
+cm.encode()
