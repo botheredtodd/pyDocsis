@@ -8,5 +8,5 @@ setup(
     license='LGPL-3.0 license',
     author='Todd Balsley',
     author_email='',
-    description=''
+    description='A library for working with docsis files'
 )
