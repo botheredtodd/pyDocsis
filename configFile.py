@@ -1,8 +1,7 @@
 from mtaConfig import mtaConfig
-from cmConfig import cmConfig
+from pyDocsis.cmConfig import cmConfig
 import binascii
-import codecs
-import sys
+
 
 class configFile(object):
 	def __init__(self ):

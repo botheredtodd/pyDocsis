@@ -1,8 +1,6 @@
-from docsisTlvs import DocsisTlvs
 #from mtaConfig import mtaConfig as cmConfig
-from cmConfig import cmConfig
-import sys 
-import binascii
+from pyDocsis.cmConfig import cmConfig
+import sys
 
 cm = cmConfig()
 newCM = cmConfig()
