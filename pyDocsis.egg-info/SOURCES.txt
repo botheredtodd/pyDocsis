@@ -1,0 +1,6 @@
+setup.py
+pyDocsis.egg-info/PKG-INFO
+pyDocsis.egg-info/SOURCES.txt
+pyDocsis.egg-info/dependency_links.txt
+pyDocsis.egg-info/top_level.txt
+pydocsis/__init__.py
