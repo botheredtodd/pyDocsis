@@ -1,3 +1,6 @@
+"""
+stack up a bunch of TLVs and send it to a cable modem
+"""
 import binascii
 from pydocsis.TLV import TLV
 from docsisTlvs import DocsisTlvs
@@ -5,6 +8,10 @@ import hashlib
 
 
 class CmConfig(object):
+    """
+A config file for a cable modem.
+    """
+
     def __init__(self):
         self.tlvs = []
         self.configFilePath = ""
@@ -13,6 +20,11 @@ class CmConfig(object):
         self.hashme = []
 
     def generate_string_from_file(self, file=""):
+        """
+
+        :param file: filename to import
+        :type file: basestring
+        """
         if file != "":
             self.configFilePath = file
         if self.configFilePath != "":
@@ -88,6 +100,10 @@ class CmConfig(object):
         return tlvs
 
     def encode(self):
+        """
+Writes out the config in binary to self.configFilePath. This should be a working config file, unless you filled it full
+of bad values.
+        """
         oldTLV7 = TLV(tag="07", datatype="md5", value="")
         stuff = ''  # '0x'
         lastTLV = TLV()
@@ -127,6 +143,13 @@ class CmConfig(object):
 
 
 def json_this(tlvs):
+    """
+I don't think I am using this for anything. It _should_ convert a cm config, or at least it's list of TLVs, into JSON
+    :param tlvs: list of TLVs
+    :type tlvs: [TLV]
+    :return: a disct that can be easily converted to json
+    :rtype: {}
+    """
     outs = {}
     for t in tlvs:
         if len(t.subTLVs) == 0:

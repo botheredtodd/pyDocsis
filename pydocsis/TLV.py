@@ -1,5 +1,5 @@
 import codecs
-from pydocsis.mib import mib
+from pydocsis.mib import MIB
 import binascii
 from pydocsis.docsisTlvs import DocsisTlvs
 # from pydocsis.mtaMibs import mibs
@@ -106,7 +106,7 @@ class TLV:
         elif self.datatype == "hexstr":
             return "0x" + self.value
         elif self.datatype == "snmp_object":
-            m = mib()
+            m = MIB()
             m.decode(self.value)
             return m
             # if m.oid not in mibs.keys():
@@ -135,7 +135,7 @@ class TLV:
         elif self.datatype == "hexstr":
             self.value = value.replace('0x', '').upper()
         elif self.datatype == "snmp_object":
-            m = mib()
+            m = MIB()
             m.decode(value)
             if oid != "":
                 m.oid = oid

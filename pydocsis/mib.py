@@ -1,25 +1,30 @@
-import codecs
+"""
+Mibs! So useful, and annoying!
+"""
+# import codecs
 import binascii
 from pydocsis.mtaMibs import mibs
-import hashlib
+
+# import hashlib
 
 # import asn1
 
 
-oidDataTypes = {}
-oidDataTypes["103"] = "HexString"
-oidDataTypes["66"] = "UInt32"
-oidDataTypes["64"] = "IPAddress"
-oidDataTypes["6"] = "objectIdentifier"
-oidDataTypes["5"] = "Null"
-oidDataTypes["4"] = "HexString"
-oidDataTypes["3"] = "BitString"
-oidDataTypes["2"] = "Integer32"
-oidDataTypes["1"] = "Boolean"
+oidDataTypes = {"103": "HexString", "66": "UInt32", "64": "IPAddress", "6": "objectIdentifier", "5": "Null",
+                "4": "HexString", "3": "BitString", "2": "Integer32", "1": "Boolean"}
 
 
-## The following two functions are stolen from https://github.com/AstralVX/oidhex_to_dot
+# The following two functions are stolen from https://github.com/AstralVX/oidhex_to_dot
+
+
 def encode_variable_length_quantity(v: int) -> list:
+    """
+
+    :param v: The integer value you want to hex into a mib
+    :type v: int
+    :return: list of bytes, I think
+    :rtype: list
+    """
     # Break it up in groups of 7 bits starting from the lowest significant bit
     # For all the other groups of 7 bits than lowest one, set the MSB to 1
     m = 0x00
@@ -32,7 +37,7 @@ def encode_variable_length_quantity(v: int) -> list:
     return output
 
 
-def encode_oid_string(oid_str: str) -> tuple:
+def encode_oid_string(oid_str: str):
     a = [int(x) for x in oid_str.split('.')]
     oid = [a[0] * 40 + a[1]]  # First two items are coded by a1*40+a2
     # A rest is Variable-length_quantity
@@ -45,7 +50,7 @@ def encode_oid_string(oid_str: str) -> tuple:
     return oid
 
 
-class mib:
+class MIB:
     def __init__(self):
         # storing these as strings
         self.oid = ""
@@ -54,16 +59,17 @@ class mib:
         self.dataType = ""
         self.isHashed = False
 
-    def decode(self, hexJunk):
+    def decode(self, hex_junk):
         """
-        based on panda_inline4's comment at https://stackoverflow.com/questions/49653398/converting-oid-of-public-key-etc-in-hex-data-to-the-dot-format
+        based on panda_inline4's comment at
+        https://stackoverflow.com/questions/49653398/converting-oid-of-public-key-etc-in-hex-data-to-the-dot-format
 
         """
         # decodes the mib stuff from the config file.
         hex_list = []
         OID_str = ''
-        for char in range(0, len(hexJunk), 2):
-            hex_list.append(hexJunk[char] + hexJunk[char + 1])
+        for char in range(0, len(hex_junk), 2):
+            hex_list.append(hex_junk[char] + hex_junk[char + 1])
 
         for element in range(len(hex_list)):
             hex_list[element] = int(hex_list[element], 16)
@@ -100,7 +106,7 @@ class mib:
         y = int(hex_list[0] % 40)
         if x > 2:
             y += (x - 2) * 40
-            x = 2;
+            x = 2
         OID_str += str(x) + '.' + str(y)
         del hex_list[0]
         oidlength -= 1
