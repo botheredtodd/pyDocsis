@@ -1,9 +1,6 @@
-#!/usr/bin/env python3
 import binascii
-import sys
 from pydocsis.TLV import TLV
 from docsisTlvs import DocsisTlvs
-from pydocsis.MTATlvs import MTATlvs
 import hashlib
 
 
@@ -24,7 +21,7 @@ class CmConfig(object):
             self.tlv_string = binascii.hexlify(content).decode('UTF-8')[:]
         else:
             raise ValueError("Cannot turn a file into a string if there is no file.")
-	
+
     def parse(self, tlv_string="", tags=None):
         """stolen from https://github.com/timgabets/pytlv and modified"""
         if tags is None:
@@ -129,53 +126,11 @@ class CmConfig(object):
             f.close()
 
 
-def jsonThis(tlvs):
+def json_this(tlvs):
     outs = {}
     for t in tlvs:
         if len(t.subTLVs) == 0:
             outs[t.tag] = str(t.get_value()) + " (" + t.datatype + ")"
         else:
-            outs[t.tag] = jsonThis(t.subTLVs)
+            outs[t.tag] = json_this(t.subTLVs)
     return outs
-
-
-if __name__ == '__main__':
-    cm = CmConfig()
-    cm.generate_string_from_file(sys.argv[1])
-    # print(cm.tlv_string)
-    if len(sys.argv) > 2:
-        if sys.argv[2] == "MTA":
-            cm.tags = MTATlvs
-    # print(cm.tlv_string)
-    cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
-    # oots = jsonThis(cm.tlvs)
-    # print(json.dumps(oots, indent = 4))
-    cm.configFilePath += ".new"
-    # newtlvs = []
-    for tlv in cm.tlvs:
-        # if tlv.tag == "06":
-        # 	print(tlv.getValue())
-        # if tlv.tag == "07":
-        # 	print(tlv.getValue())
-        # else:
-        #	print(tlv.tag)
-        #	print(tlv.getValue())
-        # if tlv.tag in ["24","25"]:
-        #	for st in tlv.subTLVs:
-        #		 if st.tag == "08":
-        #			 st.setValue(1000000)
-        if tlv.tag == "11":
-            # 		if "1.3.6.1.4.4413" in tlv.getValue():
-            # 			print("found it")
-            print(tlv.get_value())
-# 			tlv.setValue(binascii.hexlify(tlv.getValue().split(" ")[3].encode("ascii")).decode(), tlv.getValue().split(" ")[0].replace("4.4413", "4.1.4413"))
-# 			print(tlv.getValue())
-# 			newtlvs.append(tlv)
-# 		else:
-# 			print(tlv.getValue().split(" ")[0])
-# 			newtlvs.append(tlv)
-# 	else:
-# 		newtlvs.append(tlv)
-# cm.tlvs = newtlvs
-# cm.encode()
-#
