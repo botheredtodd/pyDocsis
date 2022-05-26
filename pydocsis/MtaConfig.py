@@ -1,14 +1,14 @@
 import binascii
-import codecs
+# import codecs
 import sys
-from TLV import TLV
-from docsisTlvs import DocsisTlvs
-from MTATlvs import MTATlvs
-from mib import mib
+from pydocsis.TLV import TLV
+# from docsisTlvs import DocsisTlvs
+from pydocsis.MTATlvs import MTATlvs
+# from mib import mib
 import hashlib
 
 
-class mtaConfig(object):
+class MtaConfig(object):
     def __init__(self):
         self.tlvs = []
         self.configFilePath = ""
@@ -16,7 +16,7 @@ class mtaConfig(object):
         self.tags = MTATlvs
         self.content = None
 
-    def generateStringFromFile(self, file=""):
+    def generate_string_from_file(self, file=""):
         if file != "":
             self.configFilePath = file
         if self.configFilePath != "":
@@ -26,10 +26,12 @@ class mtaConfig(object):
         else:
             raise ValueError("Cannot turn a file into a string if there is no file.")
 
-    def parse(self, tlv_string="", tags={}):
+    def parse(self, tlv_string="", tags=None):
         """
         stolen from https://github.com/timgabets/pytlv and modified
         """
+        if tags is None:
+            tags = {}
         tlvs = []
         if len(tlv_string) == 0:
             tlv_string = self.tlv_string
@@ -49,6 +51,7 @@ class mtaConfig(object):
                     # if hv == "fe":
                     #	print("Maybe done with MTA")
                     #	return tlvs
+                    value_length = 0
                     try:
                         if tag == "64":
                             value_length = int(tlv_string[i + tag_length:i + tag_length + 4], 16)
@@ -101,37 +104,37 @@ class mtaConfig(object):
     def encode(self):
         stuff = ''  # '0x'
         for tag in self.tlvs:
-            stuff += tag.encodeForFile()
+            stuff += tag.encode_for_file()
         # stuff = stuff.encode('UTF-8')
         print(stuff)
         if self.configFilePath != "":
             f = open(self.configFilePath, "wb")
             f.write(binascii.unhexlify(stuff))
-            f.close
+            f.close()
 
     def hash(self):
         stuff = ''  # '0x'
         for tag in self.tlvs:
             if MTATlvs[tag.tag]["datatype"] == "snmp_object":
-                bob = tag.getValue()
+                bob = tag.get_value()
                 if tag.tag == "64":
                     print("here")
                 if "pktcMtaDevProvConfigHash" in bob:
                     print("Already hashed, it would be great if you got: ")
-                    print(tag.getValue())
+                    print(tag.get_value())
                 else:
-                    stuff += tag.encodeForFile()
+                    stuff += tag.encode_for_file()
                 # print(len(stuff))
             else:
-                stuff += tag.encodeForFile()
+                stuff += tag.encode_for_file()
             # print(len(stuff))
         # print(stuff)
         print(hashlib.sha1(binascii.unhexlify(stuff)).hexdigest())
 
 
 if __name__ == '__main__':
-    cm = mtaConfig()
-    cm.generateStringFromFile(sys.argv[1])
+    cm = MtaConfig()
+    cm.generate_string_from_file(sys.argv[1])
     cm.tags = MTATlvs
     # print(cm.tlv_string)
     cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
@@ -142,7 +145,7 @@ if __name__ == '__main__':
     # cm.encode()
     # print("########")
     for t in cm.tlvs:
-        t.getValue()
+        t.get_value()
         # if t.datatype in ["uchar", "uint", "ushort", "hexstr"]:
         #	if t.tag == "18":
         #		bb = t.getValue()
@@ -159,7 +162,7 @@ if __name__ == '__main__':
         # print(t.tag)
         if t.tag == "11" or t.tag == "64":
             # before = t.value
-            m = t.getValue()
+            m = t.get_value()
             print(m.oid + " " + m.value + " " + m.dataType)
         # print(before.upper())
         # print(m.encode().upper())
@@ -173,7 +176,7 @@ if __name__ == '__main__':
         else:
             print(t.tag)
             print(t.datatype)
-            print(t.getValue())
+            print(t.get_value())
     # t.getValue()
     # print(t.getValue())
     # for tt in t.subTLVs:

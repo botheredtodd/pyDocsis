@@ -60,7 +60,7 @@ class TLV:
         else:
             self.subTLVs = []
 
-    def encodeForFile(self, tags=None):
+    def encode_for_file(self, tags=None):
         if tags is None:
             tags = {}
         if tags == {}:
@@ -70,7 +70,7 @@ class TLV:
         tvalue = self.value
         print(tvalue)
         for st in self.subTLVs:
-            tvalue += st.encodeForFile(tags[self.tag]["subTlvs"])
+            tvalue += st.encode_for_file(tags[self.tag]["subTlvs"])
         if divmod(len(tvalue), 2)[1] == 1:
             print(htag)
             print(tvalue)
@@ -85,7 +85,7 @@ class TLV:
         tlv_string += tlv_string + htag.upper() + tlvlen + tvalue.upper()
         return tlv_string
 
-    def getValue(self):
+    def get_value(self):
         tvalue = self.value
         if self.datatype == "aggregate":
             return
@@ -129,7 +129,7 @@ class TLV:
             print("Write a decoder for " + self.datatype)
             return tvalue
 
-    def setValue(self, value, oid=""):
+    def set_value(self, value, oid=""):
         if self.datatype in ["uchar", "ushort", "uint"]:
             self.value = pad_hex(str(hex(int(value))), self.datatype)
         elif self.datatype == "hexstr":
@@ -153,4 +153,3 @@ class TLV:
 
             newval += "00"
             self.value = newval
-

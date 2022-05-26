@@ -1,6 +1,6 @@
 import codecs
 import binascii
-from mtaMibs import mibs
+from pydocsis.mtaMibs import mibs
 import hashlib
 
 # import asn1

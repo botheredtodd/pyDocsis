@@ -8,14 +8,11 @@ MTATlvs["00"]["hex"] = "00"
 MTATlvs["00"]["datatype"] = "special"
 MTATlvs["00"]["subTlvs"] = {}
 
-
 MTATlvs["11"] = {}
 MTATlvs["11"]["description"] = "SnmpMibObject"
 MTATlvs["11"]["hex"] = "0b"
 MTATlvs["11"]["datatype"] = "snmp_object"
 MTATlvs["11"]["subTlvs"] = {}
-
-
 
 MTATlvs["38"] = {}
 MTATlvs["38"]["description"] = "SnmpV3TrapReceiver"
@@ -71,16 +68,11 @@ MTATlvs["38"]["subTlvs"]["08"]["hex"] = "08"
 MTATlvs["38"]["subTlvs"]["08"]["datatype"] = "(encode_ip6)"
 MTATlvs["38"]["subTlvs"]["08"]["subTlvs"] = {}
 
-
-
 MTATlvs["64"] = {}
 MTATlvs["64"]["description"] = "snmp_object"
 MTATlvs["64"]["hex"] = "40"
 MTATlvs["64"]["datatype"] = "snmp_object"
 MTATlvs["64"]["subTlvs"] = {}
-
-
-
 
 MTATlvs["254"] = {}
 MTATlvs["254"]["description"] = "MtaConfigDelimiter"
@@ -94,28 +86,30 @@ MTATlvs["255"]["datatype"] = "special"
 MTATlvs["255"]["subTlvs"] = {}
 MTATlvs["255"]['hex'] = "ff"
 
-
-
-
 if __name__ == '__main__':
-	def printSubTLVS(tlv, parent):
-		for key in tlv:
-			if tlv[key]["datatype"] == "aggregate":
-				print("var tlv" + parent + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + tlv[key]["datatype"] + ", description: \"" + tlv[key]["description"] + "\")")
-			else:
-				print("let tlv" + parent + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + tlv[key]["datatype"] + ", description: \"" + tlv[key]["description"] + "\")")
-			printSubTLVS(tlv[key]["subTlvs"], parent + key)
-			print("tlv" + parent + ".subTLVs.append(tlv" + parent + key  + ")")
+    def print_sub_tlvs(tlv, parent):
+        for key in tlv:
+            if tlv[key]["datatype"] == "aggregate":
+                print("var tlv" + parent + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + tlv[key][
+                    "datatype"] + ", description: \"" + tlv[key]["description"] + "\")")
+            else:
+                print("let tlv" + parent + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + tlv[key][
+                    "datatype"] + ", description: \"" + tlv[key]["description"] + "\")")
+            print_sub_tlvs(tlv[key]["subTlvs"], parent + key)
+            print("tlv" + parent + ".subTLVs.append(tlv" + parent + key + ")")
 
-	endbits = "let DOCSIS :[TLVDefinitions] = [\n"
-	#fp = open("outs.json", 'w')
-	#json.dump(MTATlvs, fp)
-	for key in MTATlvs.keys():
-		endbits += "tlv" + key + ",\n"
-		if MTATlvs[key]["datatype"] == "aggregate":
-			print("var tlv" + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + MTATlvs[key]["datatype"] + ", description: \"" + MTATlvs[key]["description"] + "\")")
-		else:
-			print("let tlv"  + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + MTATlvs[key]["datatype"] + ", description: \"" + MTATlvs[key]["description"] + "\")")
-		printSubTLVS(MTATlvs[key]["subTlvs"], key)
-	endbits += "]"
-	print(endbits)
+
+    endbits = "let DOCSIS :[TLVDefinitions] = [\n"
+    # fp = open("outs.json", 'w')
+    # json.dump(MTATlvs, fp)
+    for key in MTATlvs.keys():
+        endbits += "tlv" + key + ",\n"
+        if MTATlvs[key]["datatype"] == "aggregate":
+            print("var tlv" + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + MTATlvs[key][
+                "datatype"] + ", description: \"" + MTATlvs[key]["description"] + "\")")
+        else:
+            print("let tlv" + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + MTATlvs[key][
+                "datatype"] + ", description: \"" + MTATlvs[key]["description"] + "\")")
+        print_sub_tlvs(MTATlvs[key]["subTlvs"], key)
+    endbits += "]"
+    print(endbits)

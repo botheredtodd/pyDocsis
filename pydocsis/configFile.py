@@ -1,9 +1,10 @@
-from pyDocsis.mtaConfig import mtaConfig
-from pyDocsis.cmConfig import cmConfig
+from pydocsis.MtaConfig import MtaConfig
+from pydocsis.cmConfig import CmConfig
+from pydocsis.docsisTlvs import DocsisTlvs
 import binascii
 
 
-class configFile(object):
+class ConfigFile(object):
     def __init__(self):
         self.tlvs = []
         self.configFilePath = ""
@@ -11,7 +12,7 @@ class configFile(object):
         self.tags = DocsisTlvs
         self.hashme = []
 
-    def generateStringFromFile(self, file=""):
+    def generate_string_from_file(self, file=""):
         if file != "":
             self.configFilePath = file
         if self.configFilePath != "":
@@ -21,14 +22,14 @@ class configFile(object):
         else:
             raise ValueError("Cannot turn a file into a string if there is no file.")
 
-    def getConfig(self):
+    def get_config(self):
         if self.tlv_string.startswith("fe0101"):
-            bob = mtaConfig()
+            bob = MtaConfig()
             bob.configFilePath = self.configFilePath
             bob.tlv_string = self.tlv_string
             return bob
         else:
-            bob = cmConfig()
+            bob = CmConfig()
             bob.configFilePath = self.configFilePath
             bob.tlv_string = self.tlv_string
             return bob

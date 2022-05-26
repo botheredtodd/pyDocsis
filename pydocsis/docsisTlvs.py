@@ -8997,13 +8997,13 @@ DocsisTlvs["255"]['hex'] = "ff"
 
 
 if __name__ == '__main__':
-	def printSubTLVS(tlv, parent):
+	def print_sub_tlvs(tlv, parent):
 		for key in tlv:
 			if tlv[key]["datatype"] == "aggregate":
 				print("var tlv" + parent + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + tlv[key]["datatype"] + ", description: \"" + tlv[key]["description"] + "\")")
 			else:
 				print("let tlv" + parent + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + tlv[key]["datatype"] + ", description: \"" + tlv[key]["description"] + "\")")
-			printSubTLVS(tlv[key]["subTlvs"], parent + key)
+			print_sub_tlvs(tlv[key]["subTlvs"], parent + key)
 			print("tlv" + parent + ".subTLVs.append(tlv" + parent + key  + ")")
 
 	endbits = "let DOCSIS :[TLVDefinitions] = [\n"
@@ -9015,6 +9015,6 @@ if __name__ == '__main__':
 			print("var tlv" + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + DocsisTlvs[key]["datatype"] + ", description: \"" + DocsisTlvs[key]["description"] + "\")")
 		else:
 			print("let tlv"  + key + " = TLVDefinitions(tag: " + key + ", dataType: ." + DocsisTlvs[key]["datatype"] + ", description: \"" + DocsisTlvs[key]["description"] + "\")")
-		printSubTLVS(DocsisTlvs[key]["subTlvs"], key)
+		print_sub_tlvs(DocsisTlvs[key]["subTlvs"], key)
 	endbits += "]"
 	print(endbits)
