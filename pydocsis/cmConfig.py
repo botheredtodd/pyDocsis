@@ -21,7 +21,7 @@ A config file for a cable modem.
 
     def generate_string_from_file(self, file=""):
         """
-
+        loads the bytes form the file as a string...because this is all string trickery
         :param file: filename to import
         :type file: basestring
         """
