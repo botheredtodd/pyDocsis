@@ -3,4 +3,12 @@ pyDocsis.egg-info/PKG-INFO
 pyDocsis.egg-info/SOURCES.txt
 pyDocsis.egg-info/dependency_links.txt
 pyDocsis.egg-info/top_level.txt
+pydocsis/MTATlvs.py
+pydocsis/MtaConfig.py
+pydocsis/TLV.py
 pydocsis/__init__.py
+pydocsis/cmConfig.py
+pydocsis/configFile.py
+pydocsis/docsisTlvs.py
+pydocsis/mib.py
+pydocsis/mtaMibs.py
