@@ -3,7 +3,7 @@ stack up a bunch of TLVs and send it to a cable modem
 """
 import binascii
 from pydocsis.TLV import TLV
-from docsisTlvs import DocsisTlvs
+from pydocsis.docsisTlvs import DocsisTlvs
 import hashlib
 
 
@@ -97,6 +97,7 @@ A config file for a cable modem.
                 print(tlvs)
                 msg = 'Unknown tag found: ' + tlv_string[i:i + 10]
                 raise ValueError(msg)
+        self.tlvs = tlvs
         return tlvs
 
     def encode(self):
@@ -127,14 +128,14 @@ of bad values.
         if '07' in self.hashme:
             newval = hashlib.md5(binascii.unhexlify(stuff))
             nextTLV = TLV(tag="07", datatype="md5", value=newval.hexdigest())
-            exts += nextTLV.encode_for_file()
-        # exts += oldTLV7.encodeForFile()
+            #exts += nextTLV.encode_for_file()
+            exts += oldTLV7.encode_for_file()
 
         stuff += exts
         stuff += lastTLV.encode_for_file()
 
-        # while (len(stuff)/2) % 4 == 0:
-        #    stuff += "00"
+        while (len(stuff) / 2) % 4 != 0:
+            stuff += "00"
         # print(stuff)
         if self.configFilePath != "":
             f = open(self.configFilePath, "wb")

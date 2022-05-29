@@ -7,6 +7,6 @@ setup(
     url='https://github.com/botheredtodd/pyDocsis',
     license='LGPL-3.0 license',
     author='Todd Balsley',
-    author_email='',
+    author_email='todd.balsley@cox.com',
     description='A library for working with docsis files'
 )
