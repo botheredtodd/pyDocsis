@@ -35,7 +35,15 @@ A config file for a cable modem.
             raise ValueError("Cannot turn a file into a string if there is no file.")
 
     def parse(self, tlv_string="", tags=None):
-        """stolen from https://github.com/timgabets/pytlv and modified"""
+        """
+        stolen from https://github.com/timgabets/pytlv and modified
+
+        :param tv_string: A string of the hex in the file
+        :type tlvs: basestring
+        :param tags: the tlv disctionary thing, as a dict
+        :type tags: dict
+
+        """
         if tags is None:
             tags = {}
         tlvs = []
