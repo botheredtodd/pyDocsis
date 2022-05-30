@@ -40,7 +40,8 @@ class ConfigFile(object):
         """
         if self.tlv_string == "":
             if self.configFilePath == "":
-                return False
+                raise ValueError("Cannot turn a file into a string if there is no file.")
+                # return False
             self.generate_string_from_file()
         if self.tlv_string.startswith("fe0101"):
             bob = MtaConfig()
