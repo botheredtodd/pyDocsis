@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pydocsis.mib &#8212; pydocsis 0.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pydocsis.mib</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Mibs! So useful, and annoying!</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># import codecs</span>
+<span class="kn">import</span> <span class="nn">binascii</span>
+<span class="kn">from</span> <span class="nn">pydocsis.mtaMibs</span> <span class="kn">import</span> <span class="n">mibs</span>
+
+<span class="c1"># import hashlib</span>
+
+<span class="c1"># import asn1</span>
+
+
+<span class="n">oidDataTypes</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;103&quot;</span><span class="p">:</span> <span class="s2">&quot;HexString&quot;</span><span class="p">,</span> <span class="s2">&quot;66&quot;</span><span class="p">:</span> <span class="s2">&quot;UInt32&quot;</span><span class="p">,</span> <span class="s2">&quot;64&quot;</span><span class="p">:</span> <span class="s2">&quot;IPAddress&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">:</span> <span class="s2">&quot;objectIdentifier&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">:</span> <span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="s2">&quot;HexString&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="s2">&quot;BitString&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="s2">&quot;Integer32&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;Boolean&quot;</span><span class="p">}</span>
+
+
+<span class="c1"># The following two functions are stolen from https://github.com/AstralVX/oidhex_to_dot</span>
+
+
+<div class="viewcode-block" id="encode_variable_length_quantity"><a class="viewcode-back" href="../../pydocsis.html#pydocsis.mib.encode_variable_length_quantity">[docs]</a><span class="k">def</span> <span class="nf">encode_variable_length_quantity</span><span class="p">(</span><span class="n">v</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param v: The integer value you want to hex into a mib</span>
+<span class="sd">    :type v: int</span>
+<span class="sd">    :return: list of bytes, I think</span>
+<span class="sd">    :rtype: list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Break it up in groups of 7 bits starting from the lowest significant bit</span>
+    <span class="c1"># For all the other groups of 7 bits than lowest one, set the MSB to 1</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="mh">0x00</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">v</span> <span class="o">&gt;=</span> <span class="mh">0x80</span><span class="p">:</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">v</span> <span class="o">&amp;</span> <span class="mh">0x7f</span><span class="p">)</span> <span class="o">|</span> <span class="n">m</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v</span> <span class="o">&gt;&gt;</span> <span class="mi">7</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="mh">0x80</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">v</span> <span class="o">|</span> <span class="n">m</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span></div>
+
+
+<div class="viewcode-block" id="encode_oid_string"><a class="viewcode-back" href="../../pydocsis.html#pydocsis.mib.encode_oid_string">[docs]</a><span class="k">def</span> <span class="nf">encode_oid_string</span><span class="p">(</span><span class="n">oid_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">oid_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)]</span>
+    <span class="n">oid</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">40</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>  <span class="c1"># First two items are coded by a1*40+a2</span>
+    <span class="c1"># A rest is Variable-length_quantity</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+        <span class="n">oid</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">encode_variable_length_quantity</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">oid</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">oid</span><span class="p">))</span>  <span class="c1"># Add a Length</span>
+
+    <span class="c1"># Yeah, we seem to be using pid type 0x30</span>
+    <span class="c1"># oid.insert(0, 0x30) # Add a Type (0x06 for Object Identifier)</span>
+    <span class="k">return</span> <span class="n">oid</span></div>
+
+
+<div class="viewcode-block" id="MIB"><a class="viewcode-back" href="../../pydocsis.html#pydocsis.mib.MIB">[docs]</a><span class="k">class</span> <span class="nc">MIB</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># storing these as strings</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">oid</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataType</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isHashed</span> <span class="o">=</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="MIB.decode"><a class="viewcode-back" href="../../pydocsis.html#pydocsis.mib.MIB.decode">[docs]</a>    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hex_junk</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        based on panda_inline4&#39;s comment at</span>
+<span class="sd">        https://stackoverflow.com/questions/49653398/converting-oid-of-public-key-etc-in-hex-data-to-the-dot-format</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># decodes the mib stuff from the config file.</span>
+        <span class="n">hex_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">OID_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">hex_junk</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="n">hex_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hex_junk</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">+</span> <span class="n">hex_junk</span><span class="p">[</span><span class="n">char</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hex_list</span><span class="p">)):</span>
+            <span class="n">hex_list</span><span class="p">[</span><span class="n">element</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="n">element</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="c1"># decoder = asn1.Decoder()</span>
+        <span class="c1"># decoder.start(hex_list)</span>
+        <span class="c1"># tag, value = decoder.read()</span>
+        <span class="c1"># print(tag)</span>
+        <span class="c1"># print(value)</span>
+
+        <span class="k">if</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">48</span><span class="p">:</span>  <span class="c1"># this has been 48 for all of the ones I tested</span>
+            <span class="n">OID_str</span> <span class="o">+=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">del</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># oid tag</span>
+        <span class="n">totalLength</span> <span class="o">=</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hex_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">254</span><span class="p">:</span>
+            <span class="c1"># print(len(hex_list))</span>
+            <span class="k">del</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">ttoL</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0x&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">totalLength</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0x&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="c1"># print(ttoL)</span>
+            <span class="c1"># print(&quot;Length might just be &quot; + str(int(ttoL, 16)))</span>
+            <span class="n">totalLength</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ttoL</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># -- length of oid</span>
+        <span class="n">noIdea</span> <span class="o">=</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># this *may* always be 6 for our uses, or 103,6 for tlv 64</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hex_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">254</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">noIdea</span> <span class="o">=</span> <span class="p">[</span><span class="n">noIdea</span><span class="p">,</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">del</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">oidlength</span> <span class="o">=</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># print(oidlength)</span>
+        <span class="c1"># print(totalLength)</span>
+        <span class="k">del</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># print(hex_list)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">40</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="mi">40</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">+=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">40</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">OID_str</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">oidlength</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">in_index</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">hex_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">oidlength</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="p">((</span><span class="n">val</span> <span class="o">&lt;&lt;</span> <span class="mi">7</span><span class="p">)</span> <span class="o">|</span> <span class="p">((</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mh">0x7F</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">in_index</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mh">0x80</span><span class="p">)</span> <span class="o">!=</span> <span class="mh">0x80</span><span class="p">:</span>
+                    <span class="n">OID_str</span> <span class="o">+=</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+                    <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">if</span> <span class="n">OID_str</span> <span class="ow">in</span> <span class="n">mibs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">in_index</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># print(binascii.unhexlify(str(hex(hex_list[0])).replace(&#39;0x&#39;, &#39;&#39;)))</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0x&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">+=</span> <span class="s2">&quot;X&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">oid</span> <span class="o">=</span> <span class="n">OID_str</span>
+            <span class="c1"># print(self.oid)</span>
+            <span class="k">if</span> <span class="n">oidlength</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">datatype</span> <span class="o">=</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">del</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">datalength</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">16</span><span class="p">)</span>
+                <span class="k">del</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">snmpdata</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="n">strDataType</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datatype</span><span class="p">)</span>
+                <span class="n">sentit</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">hex_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">datatype</span><span class="p">)</span> <span class="ow">in</span> <span class="n">oidDataTypes</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">strDataType</span> <span class="o">=</span> <span class="n">oidDataTypes</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datatype</span><span class="p">)]</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">dataType</span> <span class="o">=</span> <span class="n">strDataType</span>
+                        <span class="k">if</span> <span class="n">oidDataTypes</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datatype</span><span class="p">)]</span> <span class="o">==</span> <span class="s2">&quot;IPAddress&quot;</span><span class="p">:</span>
+                            <span class="n">snmpdata</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hex_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                                <span class="n">snmpdata</span> <span class="o">+=</span> <span class="s2">&quot;.&quot;</span>
+                        <span class="k">elif</span> <span class="n">oidDataTypes</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datatype</span><span class="p">)]</span> <span class="o">==</span> <span class="s2">&quot;HexString&quot;</span><span class="p">:</span>
+                            <span class="n">working</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">hex_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">oid</span> <span class="o">==</span> <span class="s2">&quot;1.3.6.1.2.1.140.1.2.11&quot;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">oid</span> <span class="o">==</span> <span class="s2">&quot;1.3.6.1.4.1.4115.11.1.52&quot;</span><span class="p">:</span>
+                                    <span class="n">snmpdata</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0x&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="c1"># print(binascii.unhexlify(str(hex(hex_list[0])).replace(&#39;0x&#39;, &#39;&#39;)))</span>
+                                    <span class="k">try</span><span class="p">:</span>
+                                        <span class="n">snmpdata</span> <span class="o">+=</span> <span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0x&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+                                    <span class="k">except</span><span class="p">:</span>
+                                        <span class="k">if</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">13</span><span class="p">:</span>
+                                            <span class="n">snmpdata</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                        <span class="k">elif</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+                                            <span class="n">snmpdata</span> <span class="o">+=</span> <span class="s2">&quot;&quot;</span>
+                                        <span class="k">elif</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">15</span><span class="p">:</span>
+                                            <span class="n">snmpdata</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span>
+                                        <span class="k">else</span><span class="p">:</span>
+                                            <span class="n">snmpdata</span> <span class="o">+=</span> <span class="s2">&quot;&lt;&gt;&quot;</span>
+                                        <span class="c1"># print(hex_list[0])</span>
+                                <span class="c1"># tmp = str(hex(hex_list[0]))[2:]</span>
+                                <span class="c1"># if len(tmp) % 2 == 1:</span>
+                                <span class="c1">#	tmp = &quot;0&quot; + tmp</span>
+                                <span class="c1"># working += tmp</span>
+                                <span class="k">del</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                            <span class="k">try</span><span class="p">:</span>
+                                <span class="n">snmpdata</span> <span class="o">+=</span> <span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0x&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+                            <span class="k">except</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">oid</span> <span class="o">==</span> <span class="s2">&quot;1.3.6.1.2.1.140.1.2.11&quot;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">oid</span> <span class="o">==</span> <span class="s2">&quot;1.3.6.1.4.1.4115.11.1.52&quot;</span><span class="p">:</span>
+                                    <span class="n">snmpdata</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0x&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                                <span class="k">elif</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">13</span><span class="p">:</span>
+                                    <span class="n">snmpdata</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                <span class="k">elif</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+                                    <span class="n">snmpdata</span> <span class="o">+=</span> <span class="s2">&quot;&quot;</span>
+                                <span class="k">elif</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">15</span><span class="p">:</span>
+                                    <span class="n">snmpdata</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="n">snmpdata</span> <span class="o">+=</span> <span class="s2">&quot;&lt;&gt;&quot;</span>
+                            <span class="c1"># print(hex(hex_list[0]))</span>
+                        <span class="c1"># working += str(hex(hex_list[0]))[2:]</span>
+                        <span class="c1"># if len(working) % 2 == 1:</span>
+                        <span class="c1"># working = &quot;0&quot; + working</span>
+                        <span class="c1"># snmpdata = binascii.unhexlify(working.replace(&#39;0x&#39;, &#39;&#39;)).decode())</span>
+                        <span class="k">elif</span> <span class="n">oidDataTypes</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datatype</span><span class="p">)]</span> <span class="o">==</span> <span class="s2">&quot;Integer32&quot;</span><span class="p">:</span>
+                            <span class="n">working</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">hex_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                                <span class="n">working</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]))[</span><span class="mi">2</span><span class="p">:]</span>
+                                <span class="k">del</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                            <span class="c1"># print(working)</span>
+                            <span class="n">working</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]))[</span><span class="mi">2</span><span class="p">:]</span>
+                            <span class="c1"># print(&quot;Is &quot; + str(int(working, 16)) + &quot; a number?&quot;)</span>
+                            <span class="n">snmpdata</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">working</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+                        <span class="k">elif</span> <span class="n">oidDataTypes</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datatype</span><span class="p">)]</span> <span class="o">==</span> <span class="s2">&quot;UInt32&quot;</span><span class="p">:</span>
+                            <span class="n">working</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">hex_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                                <span class="n">working</span> <span class="o">+=</span> <span class="nb">hex</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">2</span><span class="p">:]</span>
+                                <span class="k">del</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                            <span class="c1"># print(working)</span>
+                            <span class="n">working</span> <span class="o">+=</span> <span class="nb">hex</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">2</span><span class="p">:]</span>
+                            <span class="c1"># print(&quot;Is &quot; + str(int(working, 16)) + &quot; a number?&quot;)</span>
+                            <span class="n">snmpdata</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">working</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">sentit</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OID is : &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">oid</span><span class="p">)</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;What is the datatype for mibby thingie &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">datatype</span><span class="p">))</span>
+                            <span class="n">sentit</span> <span class="o">=</span> <span class="kc">True</span>
+
+                        <span class="n">snmpdata</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="k">del</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dataType</span> <span class="o">=</span> <span class="n">strDataType</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">snmpdata</span>
+                <span class="n">OID_str</span> <span class="o">+=</span> <span class="s2">&quot; Data Type: &quot;</span> <span class="o">+</span> <span class="n">strDataType</span> <span class="o">+</span> <span class="s2">&quot; Length: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">datalength</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; Value: &quot;</span> <span class="o">+</span> <span class="n">snmpdata</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">hex_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    <span class="c1"># print the OID in dot notation.</span>
+    <span class="c1"># print(OID_str)</span>
+    <span class="c1"># if in_index == False:</span>
+    <span class="c1">#	print(&quot;Not found:&quot; + self.oid)</span>
+<div class="viewcode-block" id="MIB.encode"><a class="viewcode-back" href="../../pydocsis.html#pydocsis.mib.MIB.encode">[docs]</a>    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">outBlob</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataType</span> <span class="o">==</span> <span class="s2">&quot;HexString&quot;</span><span class="p">:</span>
+            <span class="n">datalen</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)))[</span><span class="mi">2</span><span class="p">:]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">datalen</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">datalen</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">+</span> <span class="n">datalen</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">datalen</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">datalen</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">+</span> <span class="n">datalen</span>
+            <span class="n">outBlob</span> <span class="o">=</span> <span class="n">outBlob</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+            <span class="n">outBlob</span> <span class="o">=</span> <span class="n">datalen</span> <span class="o">+</span> <span class="n">outBlob</span>
+            <span class="n">outBlob</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="mi">4</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">+</span> <span class="n">outBlob</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataType</span> <span class="o">==</span> <span class="s2">&quot;IPAddress&quot;</span><span class="p">:</span>
+            <span class="n">datalen</span> <span class="o">=</span> <span class="s2">&quot;04&quot;</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
+                <span class="c1"># print(s)</span>
+                <span class="n">addr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">)))[</span><span class="mi">2</span><span class="p">:]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">addr</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">+</span> <span class="n">addr</span>
+                <span class="n">outBlob</span> <span class="o">+=</span> <span class="n">addr</span>
+            <span class="c1"># if len(outBlob) % 2 == 1:</span>
+            <span class="c1"># outBlob = &quot;0&quot; + outBlob</span>
+            <span class="n">outBlob</span> <span class="o">=</span> <span class="n">datalen</span> <span class="o">+</span> <span class="n">outBlob</span>
+            <span class="n">outBlob</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="mi">64</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">+</span> <span class="n">outBlob</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataType</span> <span class="o">==</span> <span class="s2">&quot;UInt32&quot;</span><span class="p">:</span>
+            <span class="n">outBlob</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">outBlob</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">outBlob</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">+</span> <span class="n">outBlob</span>
+            <span class="n">datalen</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">outBlob</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">outBlob</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">datalen</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">+</span> <span class="n">outBlob</span>
+            <span class="n">outBlob</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="mi">66</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">+</span> <span class="n">outBlob</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataType</span> <span class="o">==</span> <span class="s2">&quot;Integer32&quot;</span><span class="p">:</span>
+            <span class="n">outBlob</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)))[</span><span class="mi">2</span><span class="p">:]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">outBlob</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">outBlob</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">+</span> <span class="n">outBlob</span>
+            <span class="n">datalen</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">outBlob</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+            <span class="n">outBlob</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">datalen</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">+</span> <span class="n">outBlob</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">outBlob</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">outBlob</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">+</span> <span class="n">outBlob</span>
+            <span class="n">outBlob</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="mi">2</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">+</span> <span class="n">outBlob</span>
+        <span class="n">oidBlob</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">by</span> <span class="ow">in</span> <span class="n">encode_oid_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oid</span><span class="p">):</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">by</span><span class="p">)))[</span><span class="mi">2</span><span class="p">:]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">+</span> <span class="n">val</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0x&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">divmod</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">),</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># Padding</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;0</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="n">oidBlob</span> <span class="o">+=</span> <span class="n">result</span>
+        <span class="n">outBlob</span> <span class="o">=</span> <span class="n">oidBlob</span> <span class="o">+</span> <span class="n">outBlob</span>
+        <span class="n">outBlob</span> <span class="o">=</span> <span class="s2">&quot;06&quot;</span> <span class="o">+</span> <span class="n">outBlob</span>  <span class="c1"># OBJECT IDENTIFIER data type</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">outBlob</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">512</span><span class="p">:</span>
+            <span class="n">outBlob</span> <span class="o">=</span> <span class="s2">&quot;67&quot;</span> <span class="o">+</span> <span class="n">outBlob</span>
+        <span class="n">outBlob</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">outBlob</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)))[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">+</span> <span class="n">outBlob</span>
+        <span class="k">if</span> <span class="nb">divmod</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">outBlob</span><span class="p">),</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># Padding</span>
+            <span class="n">outBlob</span> <span class="o">=</span> <span class="s1">&#39;0</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">outBlob</span><span class="p">)</span>
+        <span class="n">outBlob</span> <span class="o">=</span> <span class="s2">&quot;30&quot;</span> <span class="o">+</span> <span class="n">outBlob</span>  <span class="c1"># because reasons...</span>
+
+        <span class="k">return</span> <span class="n">outBlob</span></div></div>
+
+
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">pydocsis</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Todd Balsley.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

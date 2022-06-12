@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pydocsis.cmConfig &#8212; pydocsis 0.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pydocsis.cmConfig</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">stack up a bunch of TLVs and send it to a cable modem</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">binascii</span>
+<span class="kn">from</span> <span class="nn">pydocsis.TLV</span> <span class="kn">import</span> <span class="n">TLV</span>
+<span class="kn">from</span> <span class="nn">pydocsis.docsisTlvs</span> <span class="kn">import</span> <span class="n">DocsisTlvs</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+
+
+<div class="viewcode-block" id="CmConfig"><a class="viewcode-back" href="../../pydocsis.html#pydocsis.cmConfig.CmConfig">[docs]</a><span class="k">class</span> <span class="nc">CmConfig</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A config file for a cable modem.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tlvs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">configFilePath</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tlv_string</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tags</span> <span class="o">=</span> <span class="n">DocsisTlvs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hashme</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="CmConfig.generate_string_from_file"><a class="viewcode-back" href="../../pydocsis.html#pydocsis.cmConfig.CmConfig.generate_string_from_file">[docs]</a>    <span class="k">def</span> <span class="nf">generate_string_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        loads the bytes form the file as a string...because this is all string trickery</span>
+<span class="sd">        :param file: filename to import</span>
+<span class="sd">        :type file: basestring</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">file</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">configFilePath</span> <span class="o">=</span> <span class="n">file</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">configFilePath</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configFilePath</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tlv_string</span> <span class="o">=</span> <span class="n">binascii</span><span class="o">.</span><span class="n">hexlify</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)[:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot turn a file into a string if there is no file.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CmConfig.parse"><a class="viewcode-back" href="../../pydocsis.html#pydocsis.cmConfig.CmConfig.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tlv_string</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        stolen from https://github.com/timgabets/pytlv and modified</span>
+
+<span class="sd">        :param tv_string: A string of the hex in the file</span>
+<span class="sd">        :type tlvs: basestring</span>
+<span class="sd">        :param tags: the tlv disctionary thing, as a dict</span>
+<span class="sd">        :type tags: dict</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">tags</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">tags</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">tlvs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tlv_string</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">tlv_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tlv_string</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">tlv_string</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tags</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loading keys from docsis file&quot;</span><span class="p">)</span>
+            <span class="n">tags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">tlv_string</span><span class="p">):</span>
+            <span class="n">tag_found</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">tag_length</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">tags</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">hv</span> <span class="o">=</span> <span class="n">tags</span><span class="p">[</span><span class="n">tag</span><span class="p">][</span><span class="s2">&quot;hex&quot;</span><span class="p">]</span>  <span class="c1"># hex(int(tag)).replace(&#39;0x&#39;, &#39;&#39;)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">hv</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">+</span> <span class="n">hv</span>
+                <span class="k">if</span> <span class="n">tlv_string</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">tag_length</span><span class="p">]</span> <span class="o">==</span> <span class="n">hv</span><span class="p">:</span>
+                    <span class="n">value_length</span> <span class="o">=</span> <span class="mi">0</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">tlv_string</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">tag_length</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">tag_length</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                            <span class="n">value_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tlv_string</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">tag_length</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">tag_length</span> <span class="o">+</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Parse error: tag &#39;</span> <span class="o">+</span> <span class="n">tag</span> <span class="o">+</span> <span class="s1">&#39; has incorrect data length&#39;</span><span class="p">)</span>
+
+                    <span class="n">value_start_position</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">tag_length</span> <span class="o">+</span> <span class="mi">2</span>
+                    <span class="n">value_end_position</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">tag_length</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">value_length</span> <span class="o">*</span> <span class="mi">2</span>
+
+                    <span class="k">if</span> <span class="n">value_end_position</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">tlv_string</span><span class="p">)</span> <span class="ow">and</span> <span class="n">hv</span> <span class="o">!=</span> <span class="s2">&quot;ff&quot;</span> <span class="ow">and</span> <span class="n">tag</span> <span class="o">!=</span> <span class="s2">&quot;00&quot;</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Parse error: tag &#39;</span> <span class="o">+</span> <span class="n">tag</span> <span class="o">+</span> <span class="s1">&#39; declared data of length &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+                            <span class="n">value_length</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;, but actual data length is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+                            <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tlv_string</span><span class="p">[</span><span class="n">value_start_position</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)))</span>
+                    <span class="k">else</span><span class="p">:</span>
+
+                        <span class="n">value</span> <span class="o">=</span> <span class="n">tlv_string</span><span class="p">[</span><span class="n">value_start_position</span><span class="p">:</span><span class="n">value_end_position</span><span class="p">]</span>
+                        <span class="c1"># if tag == &quot;11&quot;:</span>
+                        <span class="c1">#    print(value)</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tags</span><span class="p">[</span><span class="n">tag</span><span class="p">][</span><span class="s2">&quot;subTlvs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="c1"># print(tag)</span>
+                            <span class="c1"># print(&quot;down&quot;)</span>
+                            <span class="n">subts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">tags</span><span class="p">[</span><span class="n">tag</span><span class="p">][</span><span class="s2">&quot;subTlvs&quot;</span><span class="p">])</span>
+                            <span class="c1"># print(&quot;up&quot;)</span>
+                            <span class="n">parsed_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">tag</span><span class="p">,</span> <span class="n">subts</span><span class="p">]</span>
+                            <span class="n">tlvs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TLV</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">,</span> <span class="n">subTLVs</span><span class="o">=</span><span class="n">subts</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="n">tags</span><span class="p">[</span><span class="n">tag</span><span class="p">][</span><span class="s2">&quot;datatype&quot;</span><span class="p">]))</span>
+                        <span class="c1"># tlvs.append(parsed_data)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="c1"># if tag == &quot;11&quot;:</span>
+                            <span class="c1">#    print(value)</span>
+                            <span class="c1"># if &quot;str&quot; in tags[tag][&quot;datatype&quot;]:</span>
+                            <span class="c1">#    if &quot;encode_strzero&quot; in tags[tag][&quot;datatype&quot;]:</span>
+                            <span class="c1">#        value = value[:-2]</span>
+                            <span class="c1">#    value = codecs.decode(value, &quot;hex&quot;)</span>
+                            <span class="c1"># parsed_data = [tag,  tags[tag][&quot;description&quot;], tags[tag][&quot;datatype&quot;] , value]</span>
+                            <span class="n">tlvs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TLV</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="n">tags</span><span class="p">[</span><span class="n">tag</span><span class="p">][</span><span class="s2">&quot;datatype&quot;</span><span class="p">]))</span>
+                        <span class="n">i</span> <span class="o">=</span> <span class="n">value_end_position</span>
+                    <span class="n">tag_found</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">tag_found</span><span class="p">:</span>
+                <span class="c1"># print(i)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">tlvs</span><span class="p">)</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Unknown tag found: &#39;</span> <span class="o">+</span> <span class="n">tlv_string</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">10</span><span class="p">]</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tlvs</span> <span class="o">=</span> <span class="n">tlvs</span>
+        <span class="k">return</span> <span class="n">tlvs</span></div>
+
+<div class="viewcode-block" id="CmConfig.encode"><a class="viewcode-back" href="../../pydocsis.html#pydocsis.cmConfig.CmConfig.encode">[docs]</a>    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Writes out the config in binary to self.configFilePath. This should be a working config file, unless you filled it full</span>
+<span class="sd">of bad values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">oldTLV7</span> <span class="o">=</span> <span class="n">TLV</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="s2">&quot;07&quot;</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s2">&quot;md5&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">stuff</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>  <span class="c1"># &#39;0x&#39;</span>
+        <span class="n">lastTLV</span> <span class="o">=</span> <span class="n">TLV</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tlvs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">tag</span><span class="o">.</span><span class="n">tag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;06&quot;</span><span class="p">,</span> <span class="s2">&quot;07&quot;</span><span class="p">,</span> <span class="s2">&quot;255&quot;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">tag</span><span class="o">.</span><span class="n">tag</span> <span class="o">!=</span> <span class="s2">&quot;00&quot;</span><span class="p">:</span>
+                    <span class="n">stuff</span> <span class="o">+=</span> <span class="n">tag</span><span class="o">.</span><span class="n">encode_for_file</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">tag</span><span class="o">.</span><span class="n">tag</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;06&quot;</span><span class="p">,</span> <span class="s2">&quot;07&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">hashme</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">tag</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;07&quot;</span><span class="p">:</span>
+                    <span class="n">oldTLV7</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">get_value</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">lastTLV</span> <span class="o">=</span> <span class="n">tag</span>
+        <span class="c1"># stuff = stuff.encode(&#39;UTF-8&#39;)</span>
+        <span class="n">exts</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">if</span> <span class="s1">&#39;06&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashme</span><span class="p">:</span>
+            <span class="n">newval</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">stuff</span><span class="p">))</span>
+            <span class="c1"># print(newval.hexdigest())</span>
+            <span class="n">nextTLV</span> <span class="o">=</span> <span class="n">TLV</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="s2">&quot;06&quot;</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s2">&quot;md5&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">newval</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">())</span>
+            <span class="n">exts</span> <span class="o">+=</span> <span class="n">nextTLV</span><span class="o">.</span><span class="n">encode_for_file</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s1">&#39;07&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashme</span><span class="p">:</span>
+            <span class="n">newval</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">stuff</span><span class="p">))</span>
+            <span class="n">nextTLV</span> <span class="o">=</span> <span class="n">TLV</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="s2">&quot;07&quot;</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s2">&quot;md5&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">newval</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">())</span>
+            <span class="c1">#exts += nextTLV.encode_for_file()</span>
+            <span class="n">exts</span> <span class="o">+=</span> <span class="n">oldTLV7</span><span class="o">.</span><span class="n">encode_for_file</span><span class="p">()</span>
+
+        <span class="n">stuff</span> <span class="o">+=</span> <span class="n">exts</span>
+        <span class="n">stuff</span> <span class="o">+=</span> <span class="n">lastTLV</span><span class="o">.</span><span class="n">encode_for_file</span><span class="p">()</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stuff</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">stuff</span> <span class="o">+=</span> <span class="s2">&quot;00&quot;</span>
+        <span class="c1"># print(stuff)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">configFilePath</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configFilePath</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">stuff</span><span class="p">))</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="json_this"><a class="viewcode-back" href="../../pydocsis.html#pydocsis.cmConfig.json_this">[docs]</a><span class="k">def</span> <span class="nf">json_this</span><span class="p">(</span><span class="n">tlvs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">I don&#39;t think I am using this for anything. It _should_ convert a cm config, or at least it&#39;s list of TLVs, into JSON</span>
+<span class="sd">    :param tlvs: list of TLVs</span>
+<span class="sd">    :type tlvs: [TLV]</span>
+<span class="sd">    :return: a disct that can be easily converted to json</span>
+<span class="sd">    :rtype: {}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">outs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tlvs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">subTLVs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">outs</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">tag</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">get_value</span><span class="p">())</span> <span class="o">+</span> <span class="s2">&quot; (&quot;</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">datatype</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">outs</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">tag</span><span class="p">]</span> <span class="o">=</span> <span class="n">json_this</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">subTLVs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">outs</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">pydocsis</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Todd Balsley.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
