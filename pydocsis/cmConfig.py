@@ -139,8 +139,8 @@ of bad values.
             newval = hashlib.md5(binascii.unhexlify(stuff))
             enc_res = hmac.new(ekey, newval, hashlib.md5)
             nextTLV = TLV(tag="07", datatype="md5", value=enc_res.hexdigest())
-            #exts += nextTLV.encode_for_file()
-            exts += oldTLV7.encode_for_file()
+            exts += nextTLV.encode_for_file()
+            #exts += oldTLV7.encode_for_file()
 
         stuff += exts
         stuff += lastTLV.encode_for_file()
