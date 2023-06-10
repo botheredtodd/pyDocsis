@@ -5,6 +5,7 @@ import binascii
 from pydocsis.TLV import TLV
 from pydocsis.docsisTlvs import DocsisTlvs
 import hashlib
+import hmac
 
 
 class CmConfig(object):
@@ -134,8 +135,10 @@ of bad values.
             nextTLV = TLV(tag="06", datatype="md5", value=newval.hexdigest())
             exts += nextTLV.encode_for_file()
         if '07' in self.hashme:
+            ekey 0xdeadbeef
             newval = hashlib.md5(binascii.unhexlify(stuff))
-            nextTLV = TLV(tag="07", datatype="md5", value=newval.hexdigest())
+            enc_res = hmac.new(ekey, newval, hashlib.md5)
+            nextTLV = TLV(tag="07", datatype="md5", value=enc_res.hexdigest())
             #exts += nextTLV.encode_for_file()
             exts += oldTLV7.encode_for_file()
 
