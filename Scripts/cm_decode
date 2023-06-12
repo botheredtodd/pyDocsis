@@ -1,6 +1,14 @@
+#!/usr/bin/env python3
 from pydocsis.cmConfig import CmConfig, json_this
 import os
 import sys
+import json
 
 if len(sys.argv) != 2:
-	raise("no file specified")
+    print("no file specified")
+    sys.exit(1)
+cmConfig = CmConfig()
+cmConfig.generate_string_from_file(sys.argv[1])
+cmConfig.parse()
+print(json.dumps(json_this(cmConfig.tlvs), indent=4))
+

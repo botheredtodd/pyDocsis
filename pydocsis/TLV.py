@@ -59,6 +59,10 @@ class TLV:
             self.subTLVs = args["subTLVs"]
         else:
             self.subTLVs = []
+        if "description" in args.keys():
+            self.description = args["description"]
+        else:
+            self.description = ""
 
     def encode_for_file(self, tags=None):
         if tags is None:

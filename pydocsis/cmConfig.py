@@ -50,7 +50,7 @@ A config file for a cable modem.
         tlvs = []
         if len(tlv_string) == 0:
             tlv_string = self.tlv_string
-            print(tlv_string)
+            # print(tlv_string)
         i = 0
         if len(tags.keys()) == 0:
             print("Loading keys from docsis file")
@@ -88,7 +88,7 @@ A config file for a cable modem.
                             subts = self.parse(value, tags[tag]["subTlvs"])
                             # print("up")
                             parsed_data = [tag, subts]
-                            tlvs.append(TLV(tag=tag, subTLVs=subts, datatype=tags[tag]["datatype"]))
+                            tlvs.append(TLV(tag=tag, subTLVs=subts, datatype=tags[tag]["datatype"], description=tags[tag]["description"]))
                         # tlvs.append(parsed_data)
                         else:
                             # if tag == "11":
@@ -98,12 +98,12 @@ A config file for a cable modem.
                             #        value = value[:-2]
                             #    value = codecs.decode(value, "hex")
                             # parsed_data = [tag,  tags[tag]["description"], tags[tag]["datatype"] , value]
-                            tlvs.append(TLV(tag=tag, value=value, datatype=tags[tag]["datatype"]))
+                            tlvs.append(TLV(tag=tag, value=value, datatype=tags[tag]["datatype"], description=tags[tag]["description"]))
                         i = value_end_position
                     tag_found = True
             if not tag_found:
                 # print(i)
-                print(tlvs)
+                # print(tlvs)
                 msg = 'Unknown tag found: ' + tlv_string[i:i + 10]
                 raise ValueError(msg)
         self.tlvs = tlvs
@@ -135,7 +135,7 @@ of bad values.
             nextTLV = TLV(tag="06", datatype="md5", value=newval.hexdigest())
             exts += nextTLV.encode_for_file()
         if '07' in self.hashme:
-            ekey 0xdeadbeef
+            ekey = 0xdeadbeef
             newval = hashlib.md5(binascii.unhexlify(stuff))
             enc_res = hmac.new(ekey, newval, hashlib.md5)
             nextTLV = TLV(tag="07", datatype="md5", value=enc_res.hexdigest())
@@ -165,7 +165,7 @@ I don't think I am using this for anything. It _should_ convert a cm config, or 
     outs = {}
     for t in tlvs:
         if len(t.subTLVs) == 0:
-            outs[t.tag] = str(t.get_value()) + " (" + t.datatype + ")"
+            outs[t.tag] = str(t.get_value()) + " (" + t.datatype + ") " + t.description
         else:
             outs[t.tag] = json_this(t.subTLVs)
     return outs
