@@ -58,6 +58,10 @@ class MIB:
         self.value = ""
         self.dataType = ""
         self.isHashed = False
+    
+    def toJSON(self):
+        return {"oid": self.oid, "index": self.index, "value": self.vale, "datatype": self.datatype}
+        
 
     def decode(self, hex_junk):
         """

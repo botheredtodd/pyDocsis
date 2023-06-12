@@ -65,7 +65,13 @@ class TLV:
             self.description = ""
     def toJSON(self):
         retval = {}
-        if len(self.subTLVs) == 0:
+        if self.datatype == "snmp_object":
+            retval[self.tag] = {}
+            retval[self.tag]["value"] = str(self.get_value().toJSON())
+            retval[self.tag]["datatype"] = self.datatype 
+            retval[self.tag]["description"] = t.description
+            
+        elif len(self.subTLVs) == 0:
             retval[self.tag] = {}
             retval[self.tag]["value"] = str(self.get_value())
             retval[self.tag]["datatype"] = self.datatype 
