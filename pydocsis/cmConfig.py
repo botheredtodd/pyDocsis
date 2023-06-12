@@ -159,14 +159,14 @@ of bad values.
             if tag.tag not in ["06", "07", "255"]:
                 if tag.tag != "00":
                     stuff += tag.encode_for_file()
-                    retval.append(tag.toJSON)
+                    retval.append(tag.toJSON())
             elif tag.tag in ["06"]:
                 newval = hashlib.md5(binascii.unhexlify(stuff))
                 # print(newval.hexdigest())
-                if newval.hexdigest() == tag.get_value:
-                    retval.append("TLV6 is correct")
+                if newval.hexdigest() == tag.get_value():
+                    retval.append({"MIC": "TLV6 is correct"})
             else:
-                retval.append("TLV6 is incorrect")
+                retval.append({"MIC": "TLV6 is incorrect"})
         return retval
             
 			

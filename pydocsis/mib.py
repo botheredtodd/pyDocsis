@@ -60,7 +60,7 @@ class MIB:
         self.isHashed = False
     
     def toJSON(self):
-        return {"oid": self.oid, "index": self.index, "value": self.vale, "datatype": self.datatype}
+        return {"oid": self.oid, "index": self.index, "value": self.value, "datatype": self.dataType}
         
 
     def decode(self, hex_junk):
