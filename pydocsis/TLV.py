@@ -65,7 +65,7 @@ class TLV:
             self.description = ""
     def toJSON(self):
         retval = {}
-        if self.datatype == "snmp_object":
+        if self.datatype False: # == "snmp_object":
             retval[self.tag] = {}
             retval[self.tag]["value"] = str(self.get_value().toJSON())
             retval[self.tag]["datatype"] = self.datatype 
