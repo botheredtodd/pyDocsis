@@ -153,9 +153,9 @@ of bad values.
             f.write(binascii.unhexlify(stuff))
             f.close()
     def toJSON(self):
-		stuff = ''
-		retval = []
-		for tag in self.tlvs:
+        stuff = ''
+        retval = []
+        for tag in self.tlvs:
             if tag.tag not in ["06", "07", "255"]:
                 if tag.tag != "00":
                     stuff += tag.encode_for_file()
@@ -164,12 +164,10 @@ of bad values.
                 newval = hashlib.md5(binascii.unhexlify(stuff))
                 # print(newval.hexdigest())
                 if newval.hexdigest() == tag.get_value:
-					retval.append("TLV6 is correct")
-				else:
-					retval.append("TLV6 is incorrect")
-                
+                    retval.append("TLV6 is correct")
             else:
-                lastTLV = tag
+                retval.append("TLV6 is incorrect")
+        return retval
             
 			
 

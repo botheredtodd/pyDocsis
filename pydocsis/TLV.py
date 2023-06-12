@@ -67,7 +67,7 @@ class TLV:
         retval = {}
         if len(self.subTLVs) == 0:
             retval[self.tag] = {}
-            retval[self.tag]["value"] = str(self.get_value()
+            retval[self.tag]["value"] = str(self.get_value())
             retval[self.tag]["datatype"] = self.datatype 
             retval[self.tag]["description"] = t.description
         else:
