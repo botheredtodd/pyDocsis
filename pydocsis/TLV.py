@@ -63,7 +63,20 @@ class TLV:
             self.description = args["description"]
         else:
             self.description = ""
-
+    def toJSON(self):
+        retval = {}
+        if len(self.subTLVs) == 0:
+            retval[self.tag] = {}
+            retval[self.tag]["value"] = str(self.get_value()
+            retval[self.tag]["datatype"] = self.datatype 
+            retval[self.tag]["description"] = t.description
+        else:
+            retval[self.tag] = {}
+            retval[self.tag]["description"] = t.description
+            retval[self.tag]["subTLVs"] = []
+            for st in self.subTLVs:
+                retval[self.tag]["subTLVs"].append(st.toJSON)
+        return retval
     def encode_for_file(self, tags=None):
         if tags is None:
             tags = {}

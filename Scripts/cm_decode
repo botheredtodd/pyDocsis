@@ -10,5 +10,5 @@ if len(sys.argv) != 2:
 cmConfig = CmConfig()
 cmConfig.generate_string_from_file(sys.argv[1])
 cmConfig.parse()
-print(json.dumps(json_this(cmConfig.tlvs), indent=4))
+print(json.dumps(cmConfig.toJSON), indent=4)
 
