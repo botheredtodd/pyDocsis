@@ -1,0 +1,6 @@
+from pydocsis.cmConfig import CmConfig, json_this
+import os
+import sys
+
+if len(sys.argv) != 2:
+	raise("no file specified")
