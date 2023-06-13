@@ -117,7 +117,7 @@ mibs["1.3.6.1.6.3.16.1.5.2.1.6"]["description"] = "vacmViewTreeFamilyStatus"
 mibs["1.3.6.1.6.3.16.1.5.2.1.6"]["indexes"] = 2
 mibs["1.3.6.1.6.3.16.1.5.2.1.6"]["values"] = []
 
-#TODO: fix the following CM mibs descriptions
+#TODO: fix the CM mibs descriptions
 
 mibs["1.3.6.1.4.1.1166.1.19.3.5.7.0"] = {}
 mibs["1.3.6.1.4.1.1166.1.19.3.5.7.0"]['description'] = "cableModemCmStatusValue"
