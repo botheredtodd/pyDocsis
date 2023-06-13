@@ -71,6 +71,23 @@ mibs["1.3.6.1.6.3.16.1.5.2.1.6"]["description"] = "vacmViewTreeFamilyStatus"
 mibs["1.3.6.1.6.3.16.1.5.2.1.6"]["indexes"] = 2
 mibs["1.3.6.1.6.3.16.1.5.2.1.6"]["values"] = []
 
+#TODO: fix the following CM mibs descriptions
+
+mibs["1.3.6.1.4.1.1166.1.19.3.5.7.0"] = {}
+mibs["1.3.6.1.4.1.1166.1.19.3.5.7.0"]['description'] = "cableModemCmStatusValue"
+mibs["1.3.6.1.4.1.1166.1.19.3.5.7.0"]['indexes'] = 1
+mibs["1.3.6.1.4.1.1166.1.19.3.5.7.0"]['values'] = []
+
+mibs['1.3.6.1.4.1.1166.1.19.3.5.8.0'] = {}
+mibs['1.3.6.1.4.1.1166.1.19.3.5.8.0']['description'] = "cableModemCmStatusTxPower"
+mibs['1.3.6.1.4.1.1166.1.19.3.5.8.0']['indexes'] = 1
+mibs['1.3.6.1.4.1.1166.1.19.3.5.8.0']['values'] = []
+
+mibs['1.3.6.1.4.1.1166.1.200.2.36'] = {}
+mibs['1.3.6.1.4.1.1166.1.200.2.36']['description'] = "cableModemCmStatusTxPower"
+mibs['1.3.6.1.4.1.1166.1.200.2.36']['indexes'] = 1
+mibs['1.3.6.1.4.1.1166.1.200.2.36']['values'] = []
+
 mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.3.1.1.2"] = {}
 mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.3.1.1.2"]["description"] = "pktcEUERSTDMValue"
 mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.3.1.1.2"]["indexes"] = 1

@@ -61,7 +61,7 @@ class MIB:
         self.description = ""
     
     def toJSON(self):
-        return {"oid": self.oid, "index": self.index, "value": self.value, "datatype": self.dataType, "description = self.description}
+        return {"oid": self.oid, "index": self.index, "value": self.value, "datatype": self.dataType, "description": self.description}
         
 
     def decode(self, hex_junk):
@@ -134,6 +134,8 @@ class MIB:
                 except:
                     self.index += "X" + str(hex_list[0])
             self.oid = OID_str
+            if OID_str in mibs.keys():
+                    self.description = mibs[OID_str]["description"]
             # print(self.oid)
             if oidlength == 0:
                 del hex_list[0]
