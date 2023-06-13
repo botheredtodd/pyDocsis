@@ -165,8 +165,8 @@ of bad values.
                 # print(newval.hexdigest())
                 if newval.hexdigest() == tag.get_value():
                     retval.append({"MIC": "TLV6 is correct"})
-            else:
-                retval.append({"MIC": "TLV6 is incorrect"})
+                else:
+                    retval.append({"MIC": "TLV6 is incorrect"})
         return retval
             
 			
