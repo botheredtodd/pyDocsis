@@ -58,9 +58,10 @@ class MIB:
         self.value = ""
         self.dataType = ""
         self.isHashed = False
+        self.description = ""
     
     def toJSON(self):
-        return {"oid": self.oid, "index": self.index, "value": self.value, "datatype": self.dataType}
+        return {"oid": self.oid, "index": self.index, "value": self.value, "datatype": self.dataType, "description = self.description}
         
 
     def decode(self, hex_junk):
@@ -125,6 +126,7 @@ class MIB:
                     val = 0
                 if OID_str in mibs.keys():
                     in_index = True
+                    self.description = mibs[OID_str]["description"]
             else:
                 # print(binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')))
                 try:
