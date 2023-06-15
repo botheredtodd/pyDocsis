@@ -5,6 +5,42 @@ mibs["1.3.6.1.2.1.1.4"]["description"] = "sysContact"
 mibs["1.3.6.1.2.1.1.4"]["indexes"] = 1
 mibs["1.3.6.1.2.1.1.4"]["values"] = []
 
+mibs['1.3.6.1.2.1.69.1.2.1.2.1'] = {}
+mibs['1.3.6.1.2.1.69.1.2.1.2.1']['description'] = 'docsDevSwFilename'
+mibs['1.3.6.1.2.1.69.1.2.1.2.1']['values'] = []
+mibs['1.3.6.1.2.1.69.1.2.1.2.1']['indexes'] = 1
+
+mibs['1.3.6.1.2.1.69.1.2.1.2.2'] = {}
+mibs['1.3.6.1.2.1.69.1.2.1.2.2']['description'] = 'docsDevSwFilename'
+mibs['1.3.6.1.2.1.69.1.2.1.2.2']['values'] = []
+mibs['1.3.6.1.2.1.69.1.2.1.2.2']['indexes'] = 1
+
+mibs['1.3.6.1.2.1.69.1.2.1.2.3'] = {}
+mibs['1.3.6.1.2.1.69.1.2.1.2.3']['description'] = 'docsDevSwFilename'
+mibs['1.3.6.1.2.1.69.1.2.1.2.3']['values'] = []
+mibs['1.3.6.1.2.1.69.1.2.1.2.3']['indexes'] = 1
+
+mibs['1.3.6.1.2.1.69.1.2.1.2.4'] = {}
+mibs['1.3.6.1.2.1.69.1.2.1.2.4']['description'] = 'docsDevSwFilename'
+mibs['1.3.6.1.2.1.69.1.2.1.2.4']['values'] = []
+mibs['1.3.6.1.2.1.69.1.2.1.2.4']['indexes'] = 1
+
+
+mibs['1.3.6.1.2.1.69.1.2.1.2.15'] = {}
+mibs['1.3.6.1.2.1.69.1.2.1.2.15']['description'] = 'docsDevSwFilename'
+mibs['1.3.6.1.2.1.69.1.2.1.2.15']['values'] = []
+mibs['1.3.6.1.2.1.69.1.2.1.2.15']['indexes'] = 1
+
+mibs['1.3.6.1.2.1.69.1.2.1.3.1'] = {}
+mibs['1.3.6.1.2.1.69.1.2.1.3.1']['description'] = 'docsDevSwAdminStatus'
+mibs['1.3.6.1.2.1.69.1.2.1.3.1']['values'] = []
+mibs['1.3.6.1.2.1.69.1.2.1.3.1']['indexes'] = 1
+
+mibs['1.3.6.1.2.1.69.1.2.1.3.2'] = {}
+mibs['1.3.6.1.2.1.69.1.2.1.3.2']['description'] = 'docsDevSwAdminStatus'
+mibs['1.3.6.1.2.1.69.1.2.1.3.2']['values'] = []
+mibs['1.3.6.1.2.1.69.1.2.1.3.2']['indexes'] = 1
+
 mibs['1.3.6.1.2.1.69.1.6.4.1.2.1'] = {}
 mibs['1.3.6.1.2.1.69.1.6.4.1.2.1']['description'] = 'docsDevFilterIpDestAddr'
 mibs['1.3.6.1.2.1.69.1.6.4.1.2.1']['values'] = []
@@ -162,6 +198,10 @@ mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.3.1.1.2"]["values"] = []
 #mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"]["description"] = "pktcEUERSTAppAdminStat"
 #mibs["1.3.6.1.4.1.4491.2.2.8.2.1.1.2.1.5"]["indexes"] = 2
 
+mibs['1.3.6.1.4.1.4115.1.3.1.1.2.3.5.5'] = {}
+mibs['1.3.6.1.4.1.4115.1.3.1.1.2.3.5.5']['description'] = "cableModemCmStatusTxPower"
+mibs['1.3.6.1.4.1.4115.1.3.1.1.2.3.5.5']['indexes'] = 1
+mibs['1.3.6.1.4.1.4115.1.3.1.1.2.3.5.5']['values'] = []
 
 mibs["1.3.6.1.4.1.4115.1.3.3.1.1.1.4.3"] = {}
 mibs["1.3.6.1.4.1.4115.1.3.3.1.1.1.4.3"]["description"] = "arrisMtaVqmEnable"
@@ -268,6 +308,16 @@ mibs["1.3.6.1.4.1.4115.1.3.3.1.2.4.3.1.24"] = {}
 mibs["1.3.6.1.4.1.4115.1.3.3.1.2.4.3.1.24"]["description"] = "arrisMtaDevEndPntDialingMethod"
 mibs["1.3.6.1.4.1.4115.1.3.3.1.2.4.3.1.24"]["indexes"] = 1
 mibs["1.3.6.1.4.1.4115.1.3.3.1.2.4.3.1.24"]["values"] = ["tone", "pulse", "toneAndPulse", "pulseWithDTMFRelay", "toneAndPulseWithDTMFRelay"]
+
+mibs['1.3.6.1.4.1.4115.1.3.4.1.2.3.0'] = {}
+mibs['1.3.6.1.4.1.4115.1.3.4.1.2.3.0']['description'] = 'arrisMtaDevEndPntDialingMethod'
+mibs['1.3.6.1.4.1.4115.1.3.4.1.2.3.0']['values'] = ['tone', 'pulse', 'toneAndPulse', 'pulseWithDTMFRelay', 'toneAndPulseWithDTMFRelay']
+mibs['1.3.6.1.4.1.4115.1.3.4.1.2.3.0']['indexes'] = 0
+
+mibs['1.3.6.1.4.1.4115.10.1.24.0'] = {}
+mibs['1.3.6.1.4.1.4115.10.1.24.0']['description'] = 'arrisMtaDevEndPntDialingMethod'
+mibs['1.3.6.1.4.1.4115.10.1.24.0']['values'] = ['tone', 'pulse', 'toneAndPulse', 'pulseWithDTMFRelay', 'toneAndPulseWithDTMFRelay']
+mibs['1.3.6.1.4.1.4115.10.1.24.0']['indexes'] = 0
 
 mibs["1.3.6.1.4.1.4491.2.2.6.2.1.2.3.1.1"] = {}
 mibs["1.3.6.1.4.1.4491.2.2.6.2.1.2.3.1.1"]["description"] = "pktcEnNcsEndPntLVMgmtPolicy"
@@ -468,14 +518,14 @@ mibs[""]["values"] = []
 """
 
 """
- "value": "{'oid': '1.3.6.1.2.1.69.1.2.1.2.1', 'index': '', 'value': '172.16.0.0', 'datatype': 'IPAddress', 'description': ''}",
-            "value": "{'oid': '1.3.6.1.2.1.69.1.2.1.2.15', 'index': '', 'value': '100.126.249.75', 'datatype': 'IPAddress', 'description': ''}",
-            "value": "{'oid': '1.3.6.1.2.1.69.1.2.1.2.2', 'index': '', 'value': '172.16.0.0', 'datatype': 'IPAddress', 'description': ''}",
-            "value": "{'oid': '1.3.6.1.2.1.69.1.2.1.2.3', 'index': '', 'value': '100.126.0.0', 'datatype': 'IPAddress', 'description': ''}",
-            "value": "{'oid': '1.3.6.1.2.1.69.1.2.1.2.4', 'index': '', 'value': '100.126.0.0', 'datatype': 'IPAddress', 'description': ''}",
-            "value": "{'oid': '1.3.6.1.2.1.69.1.2.1.3.1', 'index': '', 'value': '255.240.0.0', 'datatype': 'IPAddress', 'description': ''}",
+
+            "value": "{'oid': '', 'index': '', 'value': '100.126.249.75', 'datatype': 'IPAddress', 'description': ''}",
+            "value": "{'oid': '', 'index': '', 'value': '172.16.0.0', 'datatype': 'IPAddress', 'description': ''}",
+            "value": "{'oid': '', 'index': '', 'value': '100.126.0.0', 'datatype': 'IPAddress', 'description': ''}",
+            "value": "{'oid': '', 'index': '', 'value': '100.126.0.0', 'datatype': 'IPAddress', 'description': ''}",
+            "value": "{'oid': '', 'index': '', 'value': '255.240.0.0', 'datatype': 'IPAddress', 'description': ''}",
             "value": "{'oid': '1.3.6.1.2.1.69.1.2.1.3.15', 'index': '', 'value': '255.255.255.255', 'datatype': 'IPAddress', 'description': ''}",
-            "value": "{'oid': '1.3.6.1.2.1.69.1.2.1.3.2', 'index': '', 'value': '255.240.0.0', 'datatype': 'IPAddress', 'description': ''}",
+            "value": "{'oid': '', 'index': '', 'value': '255.240.0.0', 'datatype': 'IPAddress', 'description': ''}",
             "value": "{'oid': '1.3.6.1.2.1.69.1.2.1.3.3', 'index': '', 'value': '255.240.0.0', 'datatype': 'IPAddress', 'description': ''}",
             "value": "{'oid': '1.3.6.1.2.1.69.1.2.1.3.4', 'index': '', 'value': '255.240.0.0', 'datatype': 'IPAddress', 'description': ''}",
             "value": "{'oid': '1.3.6.1.2.1.69.1.2.1.4.1', 'index': '', 'value': 'yiWjoabcydLogVAs', 'datatype': 'HexString', 'description': ''}",
@@ -611,8 +661,7 @@ mibs[""]["values"] = []
             "value": "{'oid': '1.3.6.1.4.1.4115.1.3.1.1.2.3.15.0', 'index': '', 'value': '<><><><>', 'datatype': 'HexString', 'description': ''}",
             "value": "{'oid': '1.3.6.1.4.1.4115.1.3.1.1.2.3.18.0', 'index': '', 'value': '12', 'datatype': 'UInt32', 'description': ''}",
             "value": "{'oid': '1.3.6.1.4.1.4115.1.3.1.1.2.3.25.0', 'index': '', 'value': '1', 'datatype': 'Integer32', 'description': ''}",
-            "value": "{'oid': '1.3.6.1.4.1.4115.1.3.1.1.2.3.5.5', 'index': '', 'value': '<><><>H\\n<>Af', 'datatype': 'HexString', 'description': ''}",
-            "value": "{'oid': '1.3.6.1.4.1.4115.1.3.4.1.2.3.0', 'index': '', 'value': '<><><>H\\n<>Af', 'datatype': 'HexString', 'description': ''}",
-            "value": "{'oid': '1.3.6.1.4.1.4115.10.1.24.0', 'index': '', 'value': '3', 'datatype': 'Integer32', 'description': ''}",
+
+
 
 """
