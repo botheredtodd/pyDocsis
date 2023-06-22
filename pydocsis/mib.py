@@ -3,8 +3,8 @@ Mibs! So useful, and annoying!
 """
 # import codecs
 import binascii
-from pydocsis.mtaMibs import mibs
-
+import json
+import os
 # import hashlib
 
 # import asn1
@@ -61,7 +61,7 @@ class MIB:
         self.description = ""
     
     def toJSON(self):
-        return {"oid": self.oid, "index": self.index, "value": self.value, "datatype": self.dataType, "description": self.description}
+        return {"oid": self.oid, "value": self.value, "datatype": self.dataType, "description": self.description}
         
 
     def decode(self, hex_junk):
@@ -71,8 +71,9 @@ class MIB:
 
         """
         # decodes the mib stuff from the config file.
+        mibs = json.load(open(os.path.expanduser('~/.mibs.json')))
         hex_list = []
-        OID_str = ''
+        OID_str = '.'
         for char in range(0, len(hex_junk), 2):
             hex_list.append(hex_junk[char] + hex_junk[char + 1])
 
@@ -124,18 +125,19 @@ class MIB:
                 if (hex_list[0] & 0x80) != 0x80:
                     OID_str += "." + str(val)
                     val = 0
-                if OID_str in mibs.keys():
-                    in_index = True
-                    self.description = mibs[OID_str]["description"]
+                # if len([x for x in mibs.keys() if x.startswith(OID_str)]) == 1:
+                #     in_index = True
+                #     self.description = mibs[OID_str]["name"]
             else:
                 # print(binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')))
                 try:
                     self.index += str(binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')).decode())
                 except:
-                    self.index += "X" + str(hex_list[0])
+                    self.index += str(hex_list[0])
             self.oid = OID_str
-            if OID_str in mibs.keys():
-                    self.description = mibs[OID_str]["description"]
+            if len([x for x in mibs.keys() if x.startswith(OID_str)]) == 1:
+                    # in_index = True
+                    self.description = mibs[OID_str]["name"]
             # print(self.oid)
             if oidlength == 0:
                 del hex_list[0]
@@ -157,7 +159,7 @@ class MIB:
                         elif oidDataTypes[str(datatype)] == "HexString":
                             working = ""
                             while len(hex_list) > 1:
-                                if self.oid == "1.3.6.1.2.1.140.1.2.11" or self.oid == "1.3.6.1.4.1.4115.11.1.52":
+                                if self.oid == ".1.3.6.1.2.1.140.1.2.11" or self.oid == ".1.3.6.1.4.1.4115.11.1.52":
                                     snmpdata += str(hex(hex_list[0])).replace('0x', '')
                                 else:
                                     # print(binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')))

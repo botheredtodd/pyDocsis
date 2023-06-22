@@ -91,7 +91,7 @@ class TLV:
         tlv_string = ''
         htag = tags[self.tag]["hex"]
         tvalue = self.value
-        print(tvalue)
+        # print(tvalue)
         for st in self.subTLVs:
             tvalue += st.encode_for_file(tags[self.tag]["subTlvs"])
         if divmod(len(tvalue), 2)[1] == 1:
@@ -164,7 +164,7 @@ class TLV:
                 m.oid = oid
             if value != "":
                 m.value = value
-            print(m.encode())
+            # print(m.encode())
             self.value = m.encode()
 
         elif self.datatype == "strzero":

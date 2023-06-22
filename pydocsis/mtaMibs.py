@@ -166,7 +166,7 @@ mibs['1.3.6.1.4.1.1166.1.19.3.5.8.0']['indexes'] = 1
 mibs['1.3.6.1.4.1.1166.1.19.3.5.8.0']['values'] = []
 
 mibs['1.3.6.1.4.1.1166.1.200.2.36'] = {}
-mibs['1.3.6.1.4.1.1166.1.200.2.36']['description'] = "cableModemCmStatusTxPower"
+mibs['1.3.6.1.4.1.g.1.200.2.36']['description'] = "cableModemCmStatusTxPower"
 mibs['1.3.6.1.4.1.1166.1.200.2.36']['indexes'] = 1
 mibs['1.3.6.1.4.1.1166.1.200.2.36']['values'] = []
 
