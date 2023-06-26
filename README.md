@@ -16,3 +16,8 @@ Mibs are stored in ~/.mibs.json. If you want to update the list of mibs, run `mi
 ## Decoding a DOCSIS config
 
 Running the command cm_decode will decode a DOCSIS config file. It will print out the decoded config to the screen. You should use the -o flag to output the config to a file in a future version.
+
+
+# Stealings
+
+mib-json-builder.py is stolen from python-snmp-mib-browser (https://github.com/markkuleinio/python-snmp-mib-browser) and was forked with permission.

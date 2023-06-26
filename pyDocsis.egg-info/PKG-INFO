@@ -1,10 +1,8 @@
-Metadata-Version: 1.0
+Metadata-Version: 2.1
 Name: pyDocsis
-Version: 0.1
+Version: 0.3.20
 Summary: A library for working with docsis files
 Home-page: https://github.com/botheredtodd/pyDocsis
 Author: Todd Balsley
 Author-email: todd.balsley@cox.com
 License: LGPL-3.0 license
-Description: UNKNOWN
-Platform: UNKNOWN
