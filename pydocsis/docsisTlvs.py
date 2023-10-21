@@ -8993,11 +8993,24 @@ DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["01"]["hex"] = "01"
 DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["01"]["datatype"] = "strzero"
 DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["01"]["subTlvs"] = {}
 
+
 DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["02"] = {}
 DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["02"]["description"] = "unknown"
 DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["02"]["hex"] = "02"
 DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["02"]["datatype"] = "strzero"
 DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["02"]["subTlvs"] = {}
+
+DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["02"]["subTlvs"]["01"] = {}
+DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["02"]["subTlvs"]["01"]["description"] = "unknown"
+DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["02"]["subTlvs"]["01"]["hex"] = "01"
+DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["02"]["subTlvs"]["01"]["datatype"] = "unknown"
+DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["02"]["subTlvs"]["01"]["subTlvs"] = {}
+
+DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["02"]["subTlvs"]["02"] = {}
+DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["02"]["subTlvs"]["02"]["description"] = "unknown"
+DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["02"]["subTlvs"]["02"]["hex"] = "02"
+DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["02"]["subTlvs"]["02"]["datatype"] = "unknown"
+DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["02"]["subTlvs"]["02"]["subTlvs"] = {}
 
 DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["03"] = {}
 DocsisTlvs["217"]["subTlvs"]["53"]["subTlvs"]["03"]["description"] = "unknown"
