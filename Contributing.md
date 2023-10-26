@@ -8,9 +8,8 @@ Brag to your boss that you are part of the development team for the open source 
 
 # Needs
 
-- Some way to turn mib files into the oid strings in mtaMibs.py
 - I should rename mtaMibs…
-- I should turn the renamed mtaMibs into a database…thing
+- a better way to handle mibs. The thing I forked is...not ideal
 - There are WAY too many TLVs for one mere mortal to enter. See below…
 - Eventually, I need to make a database thing for the TLVs
 
