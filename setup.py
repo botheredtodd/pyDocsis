@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='pyDocsis',
-    version='0.3.37',
+    version='0.3.38',
     packages=['pydocsis'],
     url='https://github.com/botheredtodd/pyDocsis',
     license='Apache License 2.0',
