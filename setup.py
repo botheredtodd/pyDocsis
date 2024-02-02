@@ -4,6 +4,7 @@ setup(
     name='pyDocsis',
     version='0.3.38',
     packages=['pydocsis'],
+    long_description=open('README.md').read(),
     url='https://github.com/botheredtodd/pyDocsis',
     license='Apache License 2.0',
     author='Todd Balsley',
