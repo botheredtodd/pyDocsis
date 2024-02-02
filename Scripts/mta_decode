@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+from pydocsis.TLV import TLV
+from pydocsis.MTATlvs import MTATlvs
+from pydocsis.MtaConfig import MtaConfig
+import os
+import sys
+import json
+
+if len(sys.argv) != 2:
+    print("no file specified")
+    sys.exit(1)
+
+cm = MtaConfig()
+cm.generate_string_from_file(sys.argv[1])
+cm.tags = MTATlvs
+cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
+bob = cm.toJSON()
+print(json.dumps(bob, indent=4))
+
+# If the TLV 64 details needs to be displayed,
+# please uncomment below code
+print("\n")
+for t in cm.tlvs:
+    t.get_value()
+    if t.tag == "64":
+        m = t.get_value()
+print(m.oid + "\n" + m.value + "\n" + m.dataType)

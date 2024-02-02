@@ -6,7 +6,7 @@ from pydocsis.TLV import TLV
 from pydocsis.MTATlvs import MTATlvs
 # from mib import mib
 import hashlib
-
+import json
 
 class MtaConfig(object):
     def __init__(self):
@@ -131,70 +131,86 @@ class MtaConfig(object):
         # print(stuff)
         print(hashlib.sha1(binascii.unhexlify(stuff)).hexdigest())
 
+    def toJSON(self):
+        stuff = ''
+        retval = []
+        for tag in self.tlvs:
+            if tag.tag not in ["06", "07", "255"]:
+                if tag.tag != "00":
+                    stuff += tag.encode_for_file()
+                    retval.append(tag.toJSON())
+            elif tag.tag in ["06"]:
+                newval = hashlib.md5(binascii.unhexlify(stuff))
+                # print(newval.hexdigest())
+                if newval.hexdigest() == tag.get_value():
+                    retval.append({"MIC": "TLV6 is correct"})
+                else:
+                    retval.append({"MIC": "TLV6 is incorrect"})
+        return retval
 
-if __name__ == '__main__':
-    cm = MtaConfig()
-    cm.generate_string_from_file(sys.argv[1])
-    cm.tags = MTATlvs
-    # print(cm.tlv_string)
-    cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
-    # cm.hash()
-    cm.configFilePath += ".new"
-    # print(cm.tlv_string.upper())
-    # print()
-    # cm.encode()
-    # print("########")
-    for t in cm.tlvs:
-        t.get_value()
-        # if t.datatype in ["uchar", "uint", "ushort", "hexstr"]:
-        #	if t.tag == "18":
-        #		bb = t.getValue()
-        #		print(bb)
-        #		t.setValue(bb + 1)
-        # print("before")
-        # print(t.value)
-        # t.setValue(bb)
-        # print("after")
-        # print(t.value)
-        # else:
-        #	if t.datatype not in  ["snmp_object", "aggregate"]:
-        #		print("Write a decoder for " + t.datatype)
-        # print(t.tag)
-        if t.tag == "11" or t.tag == "64":
-            # before = t.value
-            m = t.get_value()
-            print(m.oid + " " + m.value + " " + m.dataType)
-        # print(before.upper())
-        # print(m.encode().upper())
-        # if "datatype" in DocsisTlvs[t.tag].keys():
-        #	print(DocsisTlvs[t.tag]["datatype"])
-        # if MTATlvs[t.tag]["datatype"] == "snmp_object":
-        # 	bob = t.getValue()
-        # 	if bob != None:
-        # 		print(t.getValue())
-
-        else:
-            print(t.tag)
-            print(t.datatype)
-            print(t.get_value())
-    # t.getValue()
-    # print(t.getValue())
-    # for tt in t.subTLVs:
-    #	print("  " + tt.tag)
-    # print("  " + tt.datatype)
-    # if tt.datatype in ["uchar", "uint", "ushort", "hexstr", "strzero"]:
-    # bb = tt.getValue()
-    # print("before")
-    # print(tt.value)
-    # tt.setValue(bb)
-    # print("after")
-    # print(tt.value)
-    # else:
-    # if tt.datatype  not in  ["snmp_object", "aggregate"]:
-    # print("Write a decoder for " + tt.datatype)
-    # if "datatype" in DocsisTlvs[t.tag]["subTlvs"][tt.tag].keys():
-    #	print("  " + DocsisTlvs[t.tag]["subTlvs"][tt.tag]["datatype"])
-    # print("  " + str(tt.getValue()))
-    # tt.getValue()
-    #	print("  " + tt.decodedValue(DocsisTlvs[t.tag]["subTlvs"]))
-    cm.encode()
+# if __name__ == '__main__':
+#     cm = MtaConfig()
+#     cm.generate_string_from_file(sys.argv[1])
+#     cm.tags = MTATlvs
+#     # print(cm.tlv_string)
+#     cm.tlvs = cm.parse(cm.tlv_string, cm.tags)
+#     # cm.hash()
+#     cm.configFilePath += ".new"
+#     # print(cm.tlv_string.upper())
+#     # print()
+#     # cm.encode()
+#     # print("########")
+#     for t in cm.tlvs:
+#         t.get_value()
+#         # if t.datatype in ["uchar", "uint", "ushort", "hexstr"]:
+#         #	if t.tag == "18":
+#         #		bb = t.getValue()
+#         #		print(bb)
+#         #		t.setValue(bb + 1)
+#         # print("before")
+#         # print(t.value)
+#         # t.setValue(bb)
+#         # print("after")
+#         # print(t.value)
+#         # else:
+#         #	if t.datatype not in  ["snmp_object", "aggregate"]:
+#         #		print("Write a decoder for " + t.datatype)
+#         # print(t.tag)
+#         if t.tag == "11" or t.tag == "64":
+#             # before = t.value
+#             m = t.get_value()
+#             print(m.oid + " " + m.value + " " + m.dataType)
+#         # print(before.upper())
+#         # print(m.encode().upper())
+#         # if "datatype" in DocsisTlvs[t.tag].keys():
+#         #	print(DocsisTlvs[t.tag]["datatype"])
+#         # if MTATlvs[t.tag]["datatype"] == "snmp_object":
+#         # 	bob = t.getValue()
+#         # 	if bob != None:
+#         # 		print(t.getValue())
+#
+#         else:
+#             print(t.tag)
+#             print(t.datatype)
+#             print(t.get_value())
+#     # t.getValue()
+#     # print(t.getValue())
+#     # for tt in t.subTLVs:
+#     #	print("  " + tt.tag)
+#     # print("  " + tt.datatype)
+#     # if tt.datatype in ["uchar", "uint", "ushort", "hexstr", "strzero"]:
+#     # bb = tt.getValue()
+#     # print("before")
+#     # print(tt.value)
+#     # tt.setValue(bb)
+#     # print("after")
+#     # print(tt.value)
+#     # else:
+#     # if tt.datatype  not in  ["snmp_object", "aggregate"]:
+#     # print("Write a decoder for " + tt.datatype)
+#     # if "datatype" in DocsisTlvs[t.tag]["subTlvs"][tt.tag].keys():
+#     #	print("  " + DocsisTlvs[t.tag]["subTlvs"][tt.tag]["datatype"])
+#     # print("  " + str(tt.getValue()))
+#     # tt.getValue()
+#     #	print("  " + tt.decodedValue(DocsisTlvs[t.tag]["subTlvs"]))
+#     cm.encode()
