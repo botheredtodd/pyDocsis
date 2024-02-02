@@ -17,6 +17,7 @@ setup(
     scripts=[
         'Scripts/cm_decode',
         'Scripts/mib-json-builder.py',
+        'Scripts/mta_decode',
     ]
 )
 
