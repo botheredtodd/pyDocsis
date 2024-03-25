@@ -135,9 +135,9 @@ of bad values.
             nextTLV = TLV(tag="06", datatype="md5", value=newval.hexdigest())
             exts += nextTLV.encode_for_file()
         if '07' in self.hashme:
-            ekey = 0xdeadbeef
+            ekey = bytes([0xde, 0xad, 0xbe, 0xef])
             newval = hashlib.md5(binascii.unhexlify(stuff))
-            enc_res = hmac.new(ekey, newval, hashlib.md5)
+            enc_res = hmac.new(ekey, binascii.unhexlify(stuff), hashlib.md5)
             nextTLV = TLV(tag="07", datatype="md5", value=enc_res.hexdigest())
             exts += nextTLV.encode_for_file()
             #exts += oldTLV7.encode_for_file()
