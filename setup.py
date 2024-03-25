@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='pyDocsis',
-    version='0.3.39',
+    version='0.3.40',
     packages=['pydocsis'],
     long_description="pyDocsis: A library for doing things to DOCSIS configs with python.  This library is a work in progress and is not yet ready for production use.  It is being developed by Todd Balsley and Yu X at Cox Communications.",
     url='https://github.com/botheredtodd/pyDocsis',
