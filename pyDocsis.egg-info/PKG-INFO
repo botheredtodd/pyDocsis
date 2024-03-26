@@ -1,8 +1,11 @@
 Metadata-Version: 2.1
 Name: pyDocsis
-Version: 0.3.20
+Version: 0.3.38
 Summary: A library for working with docsis files
 Home-page: https://github.com/botheredtodd/pyDocsis
 Author: Todd Balsley
 Author-email: todd.balsley@cox.com
-License: LGPL-3.0 license
+License: Apache License 2.0
+License-File: LICENSE
+
+pyDocsis: A library for doing things to DOCSIS configs with python.  This library is a work in progress and is not yet ready for production use.  It is being developed by Todd Balsley at Cox Communications.

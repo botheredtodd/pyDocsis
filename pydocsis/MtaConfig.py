@@ -49,8 +49,8 @@ class MtaConfig(object):
                     hv = "0" + hv
                 if tlv_string[i:i + tag_length] == hv:
                     # if hv == "fe":
-                    #	print("Maybe done with MTA")
-                    #	return tlvs
+                    #   print("Maybe done with MTA")
+                    #   return tlvs
                     value_length = 0
                     try:
                         if tag == "64":
@@ -75,7 +75,7 @@ class MtaConfig(object):
                     else:
                         value = tlv_string[value_start_position:value_end_position]
                         # if tag == "64":
-                        #	print(value)
+                        #   print(value)
                         if len(tags[tag]["subTlvs"].keys()) > 0:
                             print(tag)
                             print("down")
@@ -86,9 +86,9 @@ class MtaConfig(object):
                         # tlvs.append(parsed_data)
                         else:
                             # if "str" in tags[tag]["datatype"]:
-                            #	if "encode_strzero" in tags[tag]["datatype"]:
-                            #		value = value[:-2]
-                            #	value = codecs.decode(value, "hex")
+                            #   if "encode_strzero" in tags[tag]["datatype"]:
+                            #       value = value[:-2]
+                            #   value = codecs.decode(value, "hex")
                             # parsed_data = [tag,  tags[tag]["description"], tags[tag]["datatype"] , value]
                             # if tag == "64":
                             tlvs.append(TLV(tag=tag, value=value, datatype=tags[tag]["datatype"]))
