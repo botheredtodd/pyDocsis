@@ -3,6 +3,7 @@ README.md
 setup.py
 Scripts/cm_decode
 Scripts/mib-json-builder.py
+Scripts/mta_decode
 pyDocsis.egg-info/PKG-INFO
 pyDocsis.egg-info/SOURCES.txt
 pyDocsis.egg-info/dependency_links.txt
