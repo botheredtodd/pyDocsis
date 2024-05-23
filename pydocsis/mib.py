@@ -11,7 +11,7 @@ import os
 
 
 oidDataTypes = {"103": "HexString", "66": "UInt32", "64": "IPAddress", "6": "objectIdentifier", "5": "Null",
-                "4": "HexString", "3": "BitString", "2": "Integer32", "1": "Boolean"}
+                "4": "SnmpAdminString", "3": "BitString", "2": "Integer32", "1": "Boolean"}
 
 
 # The following two functions are stolen from https://github.com/AstralVX/oidhex_to_dot
@@ -198,6 +198,43 @@ class MIB:
                         # if len(working) % 2 == 1:
                         # working = "0" + working
                         # snmpdata = binascii.unhexlify(working.replace('0x', '')).decode())
+                        elif oidDataTypes[str(datatype)] == "SnmpAdminString":
+                            working = ""
+                            while len(hex_list) > 1:
+                                if self.oid == ".1.3.6.1.2.1.140.1.2.11" or self.oid == ".1.3.6.1.4.1.4115.11.1.52":
+                                    snmpdata += str(hex(hex_list[0])).replace('0x', '')
+                                else:
+                                    # print(binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')))
+                                    try:
+                                        snmpdata += binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')).decode()
+                                    except:
+                                        if hex_list[0] == 13:
+                                            snmpdata += "\n"
+                                        elif hex_list[0] == 10:
+                                            snmpdata += ""
+                                        elif hex_list[0] == 15:
+                                            snmpdata += "\t"
+                                        else:
+                                            snmpdata += "<>"
+                                        # print(hex_list[0])
+                                # tmp = str(hex(hex_list[0]))[2:]
+                                # if len(tmp) % 2 == 1:
+                                #	tmp = "0" + tmp
+                                # working += tmp
+                                del hex_list[0]
+                            try:
+                                snmpdata += binascii.unhexlify(str(hex(hex_list[0])).replace('0x', '')).decode()
+                            except:
+                                if self.oid == "1.3.6.1.2.1.140.1.2.11" or self.oid == "1.3.6.1.4.1.4115.11.1.52":
+                                    snmpdata += str(hex(hex_list[0])).replace('0x', '')
+                                elif hex_list[0] == 13:
+                                    snmpdata += "\n"
+                                elif hex_list[0] == 10:
+                                    snmpdata += ""
+                                elif hex_list[0] == 15:
+                                    snmpdata += "\t"
+                                else:
+                                    snmpdata += "<>"
                         elif oidDataTypes[str(datatype)] == "Integer32":
                             working = ""
                             while len(hex_list) > 1:
@@ -243,6 +280,20 @@ class MIB:
             if len(datalen) == 3:
                 datalen = "0" + datalen
             outBlob = outBlob + self.value[2:]
+            outBlob = datalen + outBlob
+            outBlob = "0" + str(hex(4))[2:] + outBlob
+        elif self.dataType == "SnmpAdminString":
+            datalen = str(hex(int(len(self.value[2:]) / 2) + 2))[2:]
+            if len(datalen) == 1:
+                datalen = "0" + datalen
+            outBlob = ""
+            for s in self.value:
+                # print(s)
+                addr = str(hex(ord(s)))[2:]
+                if len(addr) % 2 == 1:
+                    addr = "0" + addr
+                outBlob += addr
+            outBlob += "0D0A"
             outBlob = datalen + outBlob
             outBlob = "0" + str(hex(4))[2:] + outBlob
         elif self.dataType == "IPAddress":
